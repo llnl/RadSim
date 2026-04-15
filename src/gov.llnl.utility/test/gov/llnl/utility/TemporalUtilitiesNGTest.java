@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for TemporalUtilities.
  */
-strictfp public class TemporalUtilitiesNGTest
+public class TemporalUtilitiesNGTest
 {
-  
+
   public TemporalUtilitiesNGTest()
   {
   }
@@ -30,7 +30,7 @@ strictfp public class TemporalUtilitiesNGTest
   {
     TemporalUtilities instance = new TemporalUtilities();
   }
-  
+
   @BeforeClass
   public static void setUpClass() throws Exception
   {
@@ -87,5 +87,5 @@ strictfp public class TemporalUtilitiesNGTest
     TemporalAmount result = TemporalUtilities.ofSeconds(5.001000000);
     assertEquals(result, expResult);
   }
-  
+
 }

@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixTriangularColumn.
  */
-strictfp public class MatrixTriangularColumnNGTest
+public class MatrixTriangularColumnNGTest
 {
   static final double[][] TRIANGULAR_CONTENTS =
   {
@@ -158,7 +158,7 @@ strictfp public class MatrixTriangularColumnNGTest
     {
       for (int j = 0; j < 5; ++j)
       {
-        Assert.assertEquals(trig.get(i, j), TRIANGULAR_CONTENTS[j][i]);
+        Assert.assertEquals(trig.get(i, j), TRIANGULAR_CONTENTS[j][i], 0.0);
       }
     }
   }

@@ -1,0 +1,54 @@
+<project name="go-ivy" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <target name="-init-ivy" depends="-pre-init">
+    <property file="${user.properties.file}"/>
+    <property file="nbproject/project.properties"/>
+    <property file="nbproject/configs/${config}.properties"/>
+    <property name="ivy.install.version" value="2.5.3"/>
+    <property name="ivy.jar.dir" value="${build.dir}/ivy"/>
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar"/>
+    <property name="dep.dir" value="lib"/>
+    <property name="test.dep.dir" value="${build.dir}/lib"/>
+    <property name="ivy.dist" value="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"/>
+    <available property="have.ivy" file="${ivy.jar.dir}/ivy.jar"/>
+  </target>
+
+  <target depends="-init-ivy" name="download-ivy" unless="have.ivy">
+    <mkdir dir="${ivy.jar.dir}"/>
+    <echo message="Ant java version ${ant.java.version}"/>
+    <echo message="installing ivy..."/>
+    <get src="${ivy.dist}"
+         dest="${ivy.jar.file}" usetimestamp="true"/>
+  </target>
+
+  <target name="install-ivy" depends="download-ivy" description="--> install ivy">
+    <path id="ivy.lib.path">
+      <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+    </path>
+    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+  </target>
+
+  <!-- use user setting if set in toplevel .netbeans.properties -->
+  <target name="ivy-settings" depends="install-ivy" description="--> setup ivy" if="ivy.settings">
+    <echo message="Settings ${ivy.settings}" />
+    <ivy:settings file="${ivy.settings}"/>
+  </target>
+
+  <target depends="install-ivy,ivy-settings" name="resolve" description="Retrieve build dependencies with ivy">
+    <ivy:retrieve conf="deps" pattern="lib/[artifact](-[classifier]).[ext]"/>
+  </target>
+
+  <target depends="install-ivy,ivy-settings,resolve" name="resolve-test" description="Retrieve test dependencies with Ivy">
+    <ivy:retrieve conf="test" pattern="build/lib/[artifact](-[classifier]).[ext]"/>
+  </target>
+
+  <target depends="install-ivy,ivy-settings,resolve-test" name="resolve-coverage" description="Retrieve coverage dependencies with Ivy">
+    <ivy:retrieve conf="coverage" pattern="build/lib/[artifact](-[classifier]).[ext]"/>
+  </target>
+
+  <target name="clean-ivy" depends="ivy-settings" description="Clean the Ivy installation">
+    <ivy:cleancache/>
+    <delete dir="${ivy.jar.dir}"/>
+  </target>
+
+</project>

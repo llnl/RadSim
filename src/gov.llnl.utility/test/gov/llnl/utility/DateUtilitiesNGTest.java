@@ -15,9 +15,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for DateUtilities.
  */
-strictfp public class DateUtilitiesNGTest
+public class DateUtilitiesNGTest
 {
-  
+
   public DateUtilitiesNGTest()
   {
   }
@@ -26,17 +26,17 @@ strictfp public class DateUtilitiesNGTest
   public void testWithZone()
   {
     String value = "2019-05-15T16:12:04-04:00";
-    assertEquals(DateUtilities.convert(value, Instant::from).atZone(ZoneId.of("-04:00")).toString(), 
+    assertEquals(DateUtilities.convert(value, Instant::from).atZone(ZoneId.of("-04:00")).toString(),
             "2019-05-15T16:12:04-04:00");
-           //012345678901234567890123
-           //          1         2
+    //012345678901234567890123
+    //          1         2
     value = "2019-05-15T16:12:04-04";
     DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(value);
     value = "2019-05-15T16:12:04.00-0400";
-    assertEquals(DateUtilities.convert(value, Instant::from).atZone(ZoneId.of("-04:00")).toString(), 
+    assertEquals(DateUtilities.convert(value, Instant::from).atZone(ZoneId.of("-04:00")).toString(),
             "2019-05-15T16:12:04-04:00");
   }
- 
+
   /**
    * Test of getIso8601 method, of class DateUtilities.
    */
@@ -70,5 +70,5 @@ strictfp public class DateUtilitiesNGTest
 //    Object result = DateUtilities.convert(time, query);
 //    assertEquals(result, expResult);
   }
-  
+
 }

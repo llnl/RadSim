@@ -99,31 +99,6 @@ python build.py jar
 python py/full_simulation_example.py
 ```
 
-### Basic Usage
-
-```python
-import startJVM
-import jpype
-import jpype.imports
-
-# Import RadSim components
-from gov.llnl.rtk.physics import Nuclides, SourceImpl, ActivityUnit
-from gov.llnl.rtk.physics import EmissionCalculator
-from gov.llnl.ensdf.decay import BNLDecayLibrary
-from gov.llnl.rtk.response import DepositionCalculator
-
-# Create a source (Cs-137, 1 μCi)
-Cs137 = SourceImpl.fromActivity(Nuclides.get("Cs137"), 1, ActivityUnit.uCi)
-
-# Calculate emissions
-calculator = EmissionCalculator()
-calculator.setDecayLibrary(BNLDecayLibrary())
-emissions = calculator.apply([Cs137])
-
-# Simulate detector response
-# (See example notebooks for complete workflow)
-```
-
 ## Key Subpackages
 
 - **gov.llnl.rtk**: Core radiation toolkit providing physics models, emission calculation, and detector response

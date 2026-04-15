@@ -37,7 +37,7 @@ class DoubleEncodingImpl extends DoubleEncoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     double result;
     if (field.getter instanceof Function)
@@ -51,7 +51,7 @@ class DoubleEncodingImpl extends DoubleEncoding
       result = ((ToDoubleFunction) field.getter).applyAsDouble(obj);
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3) | 1);
+      ProtoEncoding.encodeTag(baos, field, WIRE_FIXED64);
     ByteBuffer bb = ByteBuffer.allocate(Double.BYTES);
     bb.order(ByteOrder.LITTLE_ENDIAN);
     bb.putDouble(result);

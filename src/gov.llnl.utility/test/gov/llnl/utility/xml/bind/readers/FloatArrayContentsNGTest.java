@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for FloatArrayContents.
  */
-strictfp public class FloatArrayContentsNGTest
+public class FloatArrayContentsNGTest
 {
-  
+
   public FloatArrayContentsNGTest()
   {
   }
@@ -80,5 +80,5 @@ strictfp public class FloatArrayContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

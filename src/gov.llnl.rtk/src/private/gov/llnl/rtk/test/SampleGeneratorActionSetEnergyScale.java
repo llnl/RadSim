@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/test/SampleGeneratorActionSetEnergyScale.java ---
 /*
  * Copyright 2018, Lawrence Livermore National Security, LLC.
  * All rights reserved

@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/EmissionConverter.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -9,7 +10,6 @@ package gov.llnl.rtk.physics;
 import gov.llnl.rtk.data.EnergyScale;
 import gov.llnl.rtk.flux.FluxGroupTrapezoid;
 import gov.llnl.rtk.flux.FluxTrapezoid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

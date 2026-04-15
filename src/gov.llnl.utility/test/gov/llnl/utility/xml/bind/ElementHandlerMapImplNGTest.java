@@ -20,13 +20,12 @@ import org.testng.annotations.Test;
 /**
  * Test code for ElementHandlerMapImpl.
  */
-strictfp public class ElementHandlerMapImplNGTest
+public class ElementHandlerMapImplNGTest
 {
 
   public ElementHandlerMapImplNGTest()
   {
   }
-  
 
   /**
    * Test of newInstance method, of class ElementHandlerMapImpl.
@@ -189,7 +188,6 @@ strictfp public class ElementHandlerMapImplNGTest
     handlerList.firstHandler = firstHandler;
     instance = ElementHandlerMapImpl.newInstance("#SpiritedAwayOST", handlerList);
     instance.createSchemaType(null, db);
-    
 
     // Test BuildSchema - cover else block in process()
     firstParentElementGroup.parent = null;

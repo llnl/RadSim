@@ -475,6 +475,7 @@ public class DoubleArray
    * @param target
    * @param source
    * @param scalar is the scale to apply to the source vector.
+   * @return 
    * @throws IndexOutOfBoundsException if the vectors are different lengths.
    */
   public static double[] addAssignScaled(double[] target, double[] source, double scalar)
@@ -493,6 +494,7 @@ public class DoubleArray
    * @param sourceOffset starting offset in first source
    * @param length number of elements to multiply
    * @param scalar is the scale to apply to the source vector.
+   * @return 
    * @throws IndexOutOfBoundsException if the requested range is outside of the
    * target or source.
    */

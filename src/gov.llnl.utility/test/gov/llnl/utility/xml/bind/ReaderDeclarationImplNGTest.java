@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReaderDeclarationImpl.
  */
-strictfp public class ReaderDeclarationImplNGTest
+public class ReaderDeclarationImplNGTest
 {
 
   public ReaderDeclarationImplNGTest()

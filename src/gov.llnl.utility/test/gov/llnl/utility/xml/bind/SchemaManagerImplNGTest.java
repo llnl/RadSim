@@ -19,9 +19,9 @@ import org.xml.sax.InputSource;
 /**
  * Test code for SchemaManagerImpl.
  */
-strictfp public class SchemaManagerImplNGTest
+public class SchemaManagerImplNGTest
 {
-  
+
   public SchemaManagerImplNGTest()
   {
   }
@@ -145,5 +145,5 @@ strictfp public class SchemaManagerImplNGTest
   {
     // Tested end to end.
   }
-  
+
 }

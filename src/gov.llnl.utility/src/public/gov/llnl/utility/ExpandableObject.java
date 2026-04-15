@@ -8,7 +8,7 @@ package gov.llnl.utility;
 
 import java.io.Serializable;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 /**
  * Implementation of the Expandable. This should be used as a base class or a
@@ -18,7 +18,7 @@ import java.util.TreeMap;
  */
 public class ExpandableObject implements Expandable, Cloneable, Serializable
 {
-  final TreeMap<String, Serializable> attributeMap = new TreeMap<>();
+  final HashMap<String, Serializable> attributeMap = new HashMap<>();
 
   public ExpandableObject()
   {

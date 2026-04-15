@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for Tokenizer.
  */
-strictfp public class TokenizerNGTest
+public class TokenizerNGTest
 {
-  
+
   public TokenizerNGTest()
   {
   }
@@ -28,9 +28,9 @@ strictfp public class TokenizerNGTest
   {
     Tokenizer expResult = new TokenizerImpl("Hello");
     Tokenizer result = Tokenizer.create("Hello");
-    assertEquals(result.matcher("Hello, World!").next().group(), 
+    assertEquals(result.matcher("Hello, World!").next().group(),
             expResult.matcher("Hello, World!").next().group());
-    
+
   }
 
   /**
@@ -41,23 +41,23 @@ strictfp public class TokenizerNGTest
   {
     try
     {
-      throw new TokenException ("Test 1 of TokenException");
+      throw new TokenException("Test 1 of TokenException");
     }
-    catch(TokenException ex)
+    catch (TokenException ex)
     {
       assertEquals(ex.getClass(), TokenException.class);
       assertEquals(ex.getMessage(), "Test 1 of TokenException");
     }
-    
+
     try
     {
-      throw new TokenException ("Test 2 of TokenException", new Exception("Unit testing"));
+      throw new TokenException("Test 2 of TokenException", new Exception("Unit testing"));
     }
-    catch(TokenException ex)
+    catch (TokenException ex)
     {
-        assertEquals(ex.getClass(), TokenException.class);
-        assertEquals(ex.getMessage(), "Test 2 of TokenException");
-        assertEquals(ex.getCause().getMessage(), "Unit testing");
-    }    
-  }  
+      assertEquals(ex.getClass(), TokenException.class);
+      assertEquals(ex.getMessage(), "Test 2 of TokenException");
+      assertEquals(ex.getCause().getMessage(), "Unit testing");
+    }
+  }
 }

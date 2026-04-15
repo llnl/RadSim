@@ -20,9 +20,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for Options.
  */
-strictfp public class OptionsNGTest
+public class OptionsNGTest
 {
-  
+
   public OptionsNGTest()
   {
   }
@@ -66,7 +66,10 @@ strictfp public class OptionsNGTest
   public void testGetNumArguments()
   {
     Options instance = new Options();
-    String[] args = new String[]{"0", "1", "2"};
+    String[] args = new String[]
+    {
+      "0", "1", "2"
+    };
     instance.arguments_ = args;
     int expResult = 3;
     int result = instance.getNumArguments();
@@ -81,7 +84,10 @@ strictfp public class OptionsNGTest
   {
     int num = 1;
     Options instance = new Options();
-    String[] args = new String[]{"0", "1", "2"};
+    String[] args = new String[]
+    {
+      "0", "1", "2"
+    };
     instance.arguments_ = args;
     String expResult = "1";
     String result = instance.getArgument(num);
@@ -95,7 +101,10 @@ strictfp public class OptionsNGTest
   public void testGetArguments()
   {
     Options instance = new Options();
-    String[] args = new String[]{"0", "1", "2"};
+    String[] args = new String[]
+    {
+      "0", "1", "2"
+    };
     instance.arguments_ = args;
     List expResult = Arrays.asList(args);
     List result = instance.getArguments();
@@ -120,9 +129,9 @@ strictfp public class OptionsNGTest
   public void testAddOption_String()
   {
 //     Calls a method that is already unit tested
-     String key = "";
-     Options instance = new Options();
-     instance.addOption(key);
+    String key = "";
+    Options instance = new Options();
+    instance.addOption(key);
   }
 
   /**
@@ -163,29 +172,34 @@ strictfp public class OptionsNGTest
   @Test
   public void testParse_1()
   {
-    String[] argv = new String[]{"a"};
+    String[] argv = new String[]
+    {
+      "a"
+    };
     Options instance = new Options();
     boolean expResult = true;
     boolean result = instance.parse(argv);
     assertEquals(result, expResult);
   }
 
-   /**
+  /**
    * Test of parse method, of class Options.
    */
   @Test
   public void testParse_2()
   {
-    String[] argv = new String[]{"-"};
+    String[] argv = new String[]
+    {
+      "-"
+    };
     Options instance = new Options();
     boolean expResult = true;
     boolean result = instance.parse(argv);
     assertEquals(result, expResult);
   }
-  
+
   /**
-   * Test of isOptionSpecified method, of class Options.
-   * option is not specified
+   * Test of isOptionSpecified method, of class Options. option is not specified
    */
   @Test
   public void testIsOptionSpecified1()
@@ -197,9 +211,8 @@ strictfp public class OptionsNGTest
     assertEquals(result, expResult);
   }
 
-   /**
-   * Test of isOptionSpecified method, of class Options.
-   * option is specified
+  /**
+   * Test of isOptionSpecified method, of class Options. option is specified
    */
   @Test
   public void testIsOptionSpecified2()
@@ -207,20 +220,20 @@ strictfp public class OptionsNGTest
     Options instance = new Options();
     Options.OptionContent keyValue = instance.new OptionContent();
     keyValue.specified = false;
-    
+
     TreeMap<String, Options.OptionContent> tm = new TreeMap<>();
     String key = "k1";
     tm.put(key, keyValue);
-    instance.options_ = tm; 
-   
+    instance.options_ = tm;
+
     boolean expResult = false;
     boolean result = instance.isOptionSpecified(key);
     assertEquals(result, expResult);
   }
-  
-   /**
-   * Test of getOptionValue method, of class Options.
-   * options_ is not initialized
+
+  /**
+   * Test of getOptionValue method, of class Options. options_ is not
+   * initialized
    */
   @Test
   public void testGetOptionValue1()
@@ -231,10 +244,9 @@ strictfp public class OptionsNGTest
     String result = instance.getOptionValue(key);
     assertEquals(result, expResult);
   }
-  
+
   /**
-   * Test of getOptionValue method, of class Options.
-   * options_ is initialized
+   * Test of getOptionValue method, of class Options. options_ is initialized
    */
   @Test
   public void testGetOptionValue2()
@@ -242,15 +254,15 @@ strictfp public class OptionsNGTest
     Options instance = new Options();
     Options.OptionContent keyValue = instance.new OptionContent();
     keyValue.value = "test";
-    
+
     TreeMap<String, Options.OptionContent> tm = new TreeMap<>();
     String key = "k1";
     tm.put(key, keyValue);
-    instance.options_ = tm; 
-    
+    instance.options_ = tm;
+
     String expResult = "test";
     String result = instance.getOptionValue(key);
     assertEquals(result, expResult);
   }
-  
+
 }

@@ -17,21 +17,20 @@ import org.testng.annotations.Test;
 /**
  * Test code for WriterBuilderImpl.
  */
-strictfp public class WriterBuilderImplNGTest
+public class WriterBuilderImplNGTest
 {
-  
+
   public WriterBuilderImplNGTest()
   {
   }
-  
-  
+
   public static class TestWriter extends ObjectWriter
   {
     TestWriter()
     {
       super(0, "test", null);
     }
-    
+
     @Override
     public void attributes(WriterAttributes attributes, Object object) throws WriterException
     {
@@ -41,10 +40,10 @@ strictfp public class WriterBuilderImplNGTest
     public void contents(Object object) throws WriterException
     {
     }
-    
+
   }
-  
-  static  WriterBuilderImpl newInstance()
+
+  static WriterBuilderImpl newInstance()
   {
     TestWriter test = new TestWriter();
     DocumentWriterImpl out = (DocumentWriterImpl) DocumentWriter.create(test);
@@ -52,8 +51,7 @@ strictfp public class WriterBuilderImplNGTest
     WriterBuilderImpl instance = (WriterBuilderImpl) out.getContext().newBuilder(test);
     return instance;
   }
-   
- 
+
   /**
    * Test of element method, of class WriterBuilderImpl.
    */
@@ -224,7 +222,7 @@ strictfp public class WriterBuilderImplNGTest
 //    WriterBuilderImpl result = instance.putInteger(value);
 //    assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of putLong method, of class WriterBuilderImpl.
    */
@@ -270,7 +268,7 @@ strictfp public class WriterBuilderImplNGTest
    */
   @Test
   public void testPutBoolean() throws Exception
-  {    
+  {
 //    WriterBuilderImpl instance = newInstance();
 //    boolean value = false;
 //    WriterBuilderImpl expResult = null;
@@ -290,5 +288,5 @@ strictfp public class WriterBuilderImplNGTest
 //    WriterBuilderImpl result = instance.putFlag(value);
 //    assertEquals(result, expResult);
   }
-  
+
 }

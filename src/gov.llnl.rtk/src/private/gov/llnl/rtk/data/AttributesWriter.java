@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/data/AttributesWriter.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -22,6 +23,8 @@ import java.util.function.Predicate;
  */
 public class AttributesWriter extends ObjectWriter<Expandable>
 {
+  public static final String WRITER_EXCLUDE = "AttributesWriter#exclude"; // Predicate
+
   public AttributesWriter()
   {
     super(Options.NONE, "attributes", RtkPackage.getInstance());
@@ -36,9 +39,7 @@ public class AttributesWriter extends ObjectWriter<Expandable>
   @SuppressWarnings(value = "unchecked")
   public void contents(Expandable object) throws WriterException
   {
-    Predicate<String> exclude = this.getContext().getProperty(SpectrumAttributes.WRITER_EXCLUDE, Predicate.class, null);
-    
-    System.out.println("EXCLUDE "+exclude);
+    Predicate<String> exclude = this.getContext().getProperty(AttributesWriter.WRITER_EXCLUDE, Predicate.class, null);
     WriterBuilder wb = newBuilder();
     for (String keys : object.getAttributes().keySet())
     {
@@ -48,18 +49,18 @@ public class AttributesWriter extends ObjectWriter<Expandable>
       if (tokens.length < 2)
         continue;
       PackageResource pkg = SchemaManager.getInstance().findPackage(tokens[0]);
-      
+
       // Skip tags without a schema
       if (pkg == null)
         continue;
-      
+
       String localName = tokens[1];
       Serializable value = object.getAttribute(keys);
       if (value == null)
         continue;
       if (value instanceof Quantity)
         wb.element(pkg, localName).contents(Quantity.class).put(value);
-        else
+      else
         wb.element(pkg, localName).putContents(value);
     }
   }

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoubleConditional.
  */
-strictfp public class DoubleConditionalNGTest
+public class DoubleConditionalNGTest
 {
   static final double EPS = 1e-6;
 

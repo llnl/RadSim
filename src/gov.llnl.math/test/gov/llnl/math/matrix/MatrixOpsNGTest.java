@@ -22,7 +22,7 @@ import support.MatrixTestReadOnly;
 /**
  * Test code for MatrixOps.
  */
-strictfp public class MatrixOpsNGTest
+public class MatrixOpsNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
   static final int CASES = 10;
@@ -609,14 +609,14 @@ strictfp public class MatrixOpsNGTest
     Matrix out = MatrixOps.sumOfEachRow(matrix);
     for (int i = 0; i < 5; ++i)
     {
-      Assert.assertEquals(out.get(i, 0), DoubleArray.sum(matrix.copyRow(i)));
+      Assert.assertEquals(out.get(i, 0), DoubleArray.sum(matrix.copyRow(i)), 0.0);
     }
 
     matrix = tg.newMatrix(5, 5, MatrixColumnTable::new);
     out = MatrixOps.sumOfEachRow(matrix);
     for (int i = 0; i < 5; ++i)
     {
-      Assert.assertEquals(out.get(i, 0), DoubleArray.sum(matrix.copyRow(i)));
+      Assert.assertEquals(out.get(i, 0), DoubleArray.sum(matrix.copyRow(i)), 0.0);
     }
   }
 

@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/Xray.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved

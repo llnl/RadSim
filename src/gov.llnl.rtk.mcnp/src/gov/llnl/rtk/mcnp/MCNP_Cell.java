@@ -220,7 +220,7 @@ public class MCNP_Cell {
     }
 
     public double getForcedCollisions(MCNP_Particle particle) {
-        return forcedCollisions.getOrDefault(particle, 0.0);
+        return forcedCollisions.getOrDefault(particle, 1.0);
     }
 
     public MCNP_Card getCard() {

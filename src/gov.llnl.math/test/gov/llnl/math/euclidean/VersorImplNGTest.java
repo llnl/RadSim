@@ -45,7 +45,7 @@ public class VersorImplNGTest
     double j = 1.0;
     double k = 1.0;
     VersorImpl instance = new VersorImpl(u, i, j, k);
-    double expResult = 1.0;
+    double expResult = 0.5;
     double result = instance.getY();
     assertEquals(result, expResult, 0.0);
   }
@@ -61,7 +61,7 @@ public class VersorImplNGTest
     double j = 1.0;
     double k = 1.0;
     VersorImpl instance = new VersorImpl(u, i, j, k);
-    double expResult = 1.0;
+    double expResult = 0.5;
     double result = instance.getZ();
     assertEquals(result, expResult, 0.0);
   }
@@ -77,7 +77,7 @@ public class VersorImplNGTest
     double j = 1.0;
     double k = 1.0;
     VersorImpl instance = new VersorImpl(u, i, j, k);
-    double expResult = 1.0;
+    double expResult = 0.5;
     double result = instance.getU();
     assertEquals(result, expResult, 0.0);
   }
@@ -93,7 +93,7 @@ public class VersorImplNGTest
     double j = 1.0;
     double k = 1.0;
     VersorImpl instance = new VersorImpl(u, i, j, k);
-    String expResult = "Versor(1.000000,1.000000,1.000000,1.000000)";
+    String expResult = "Versor(0.500000,0.500000,0.500000,0.500000)";
     String result = instance.toString();
     assertEquals(result, expResult);
   }

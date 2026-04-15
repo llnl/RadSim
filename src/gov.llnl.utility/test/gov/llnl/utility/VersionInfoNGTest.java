@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for VersionInfo.
  */
-strictfp public class VersionInfoNGTest
+public class VersionInfoNGTest
 {
-  
+
   public VersionInfoNGTest()
   {
   }

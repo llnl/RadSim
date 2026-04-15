@@ -46,7 +46,7 @@ public class ComplexNGTest
     assertEquals(c2.map.get("A"), Integer.valueOf(1));
     assertEquals(c2.map.get("B"), Integer.valueOf(2));
   }
-  
+
   @Test
   void testSchema()
   {

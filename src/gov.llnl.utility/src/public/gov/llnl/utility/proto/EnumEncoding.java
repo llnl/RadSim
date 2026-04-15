@@ -14,10 +14,12 @@ import java.util.function.IntFunction;
 import java.util.function.ToIntFunction;
 
 /**
- * Encoding for a Java enum.This needs to be improved to allow for an arbitrary mapping of enums to ordinals.  
- * 
- * Currently produces a RuntimeException if the ordinal does not match a proper enum.
- * 
+ * Encoding for a Java enum.This needs to be improved to allow for an arbitrary
+ * mapping of enums to ordinals.
+ *
+ * Currently produces a RuntimeException if the ordinal does not match a proper
+ * enum.
+ *
  * @author nelson85
  * @param <T>
  */
@@ -36,13 +38,13 @@ public class EnumEncoding<T extends Enum> implements ProtoEncoding<T>
 
       // Use values if we aren't given another lookup table.
       this.values = (T[]) cls.getDeclaredMethod("values").invoke(null);
-      
+
       if (f1 == null)
         f1 = (T t) ->
         {
           return 0;
         };
-      
+
       if (f2 == null)
         f2 = (int i) ->
         {
@@ -67,7 +69,7 @@ public class EnumEncoding<T extends Enum> implements ProtoEncoding<T>
   }
 
   @Override
-  public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs) 
+  public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs)
           throws ProtoException
   {
     int ordinal = Int32Encoding.decodeVInt32(bs);
@@ -76,13 +78,13 @@ public class EnumEncoding<T extends Enum> implements ProtoEncoding<T>
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     T v = (T) ((Function) field.getter).apply(obj);
     if (v == null)
       return;
     int ordinal = this.lambda1.applyAsInt(v);
-    baos.write((field.id << 3));
+    ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     Int32Encoding.encodeVInt32(baos, ordinal);
   }
 

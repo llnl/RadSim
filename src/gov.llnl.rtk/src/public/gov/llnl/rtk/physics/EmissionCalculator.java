@@ -1,3 +1,10 @@
+// --- file: gov/llnl/rtk/physics/EmissionCalculator.java ---
+/*
+ * Copyright 2023, Lawrence Livermore National Security, LLC. 
+ * All rights reserved
+ * 
+ * Terms and conditions are given in "Notice" file.
+ */
 package gov.llnl.rtk.physics;
 
 import java.util.Collections;
@@ -42,7 +49,7 @@ public class EmissionCalculator
       List<DecayTransition> transitions = decayLibrary.getTransitionsFrom(entry.getNuclide());
       for (DecayTransition t : transitions)
       {
-        add(out, t, t.getBranchingRatio() * entry.getActivity()); //Bq -> particles
+        add(out, t, t.getBranchingRatio() * entry.getActivity(PhysicalProperty.ACTIVITY)); //Bq -> particles
       }
     }
 

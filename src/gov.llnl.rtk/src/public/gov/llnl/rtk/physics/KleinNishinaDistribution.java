@@ -1,69 +1,116 @@
-package gov.llnl.rtk.physics;
-
+// --- file: gov/llnl/rtk/physics/KleinNishinaDistribution.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
  * 
  * Terms and conditions are given in "Notice" file.
  */
+package gov.llnl.rtk.physics;
+
 /**
- *
- * @author nelson85
- */
-/**
+ * <b>Klein-Nishina Compton Scattering Distribution</b>
+ * <p>
+ * Implements the Klein-Nishina differential cross section for photon (gamma)
+ * scattering on free electrons, including total and angular cross section
+ * calculations. Supports both {@link Quantity}-based and fast double-based
+ * (unit-configurable) evaluation.
+ * </p>
+ * <h2>Units</h2>
+ * <ul>
+ * <li>All input energies must be in consistent units (see
+ * {@link Evaluator#setInputUnits(Units)}).</li>
+ * <li>All cross sections are returned in SI area units (square meters,
+ * m²).</li>
+ * <li>Angles are in radians.</li>
+ * </ul>
+ * <h2>References</h2>
+ * <ul>
+ * <li>Klein, O. and Nishina, Y. (1929). "Über die Streuung von Strahlung durch
+ * freie Elektronen nach der neuen relativistischen Quantendynamik von Dirac".
+ * Zeitschrift für Physik. 52 (11–12): 853–868.</li>
+ * <li>J.D. Jackson, "Classical Electrodynamics", 3rd Edition, Eq. 13.70.</li>
+ * </ul>
  *
  * @author nelson85
  */
 public class KleinNishinaDistribution implements ScatteringDistribution
 {
-  final static double RE2 = Constants.RADIUS_E.get() * Constants.RADIUS_E.get();
-  final static double KCS = 2 * Math.PI * RE2 * Constants.MEC2.get() * Constants.MEC2.get();
+  private static final double RE2 = Constants.RADIUS_E.get() * Constants.RADIUS_E.get(); // [m²]
+  private static final double MEC2 = Constants.MEC2.get(); // [energy]
+  private static final double KCS = 2 * Math.PI * RE2 * MEC2 * MEC2; // [m² * (energy)²]
 
+  /**
+   * Returns the differential Klein-Nishina cross section for a given incident
+   * and emitted photon energy. Energies must be in the same units (typically
+   * Joules or keV).
+   *
+   * @param energyIncident Incident photon energy (Quantity, must have ENERGY
+   * property)
+   * @param energyEmitted Emitted photon energy (same units as incident)
+   * @return Differential cross section in SI units (square meters, m²)
+   */
   @Override
   public double getCrossSection(Quantity energyIncident, Quantity energyEmitted)
   {
+    energyIncident.require(PhysicalProperty.ENERGY);
+    energyEmitted.require(PhysicalProperty.ENERGY);
     double ei = energyIncident.get();
-    double k = Constants.MEC2.get();
     double ep = energyEmitted.get();
-    // ep must be greater than ei/(1+e/k*(1-cos(pi)) and less than e
-    if (ei < 0 || ep > ei || ep + 2 * ei * ep < k * ei)
-      return 0;
-    double cosT = -1 + k / ep - k / ei;
-    double sinT2 = (1 - cosT * cosT);
-    // Standard Klein-Nisha with proper normalizations 
-    return KCS * (ei / ep + ep / ei - sinT2) / ei / ei;
+    return _getCrossSection(ei, ep);
   }
 
   /**
-   * Compute the total cross section.
+   * Returns the cosine of the Compton scattering angle for a given incident and
+   * emitted photon energy. Energies must be in the same units (typically Joules
+   * or keV).
    *
-   * @param energyIncident is the energy of the initial gamma.
-   * @return is the cross section in SI units
+   * @param energyIncident Incident photon energy (Quantity, must have ENERGY
+   * property)
+   * @param energyEmitted Emitted photon energy (same units as incident)
+   * @return Cosine of the scattering angle (dimensionless), or NaN if out of
+   * physical domain.
+   */
+  @Override
+  public double getCosAngle(Quantity energyIncident, Quantity energyEmitted)
+  {
+    energyIncident.require(PhysicalProperty.ENERGY);
+    energyEmitted.require(PhysicalProperty.ENERGY);
+    return _getCosAngle(energyIncident.get(), energyEmitted.get());
+  }
+
+  /**
+   * Returns the total Klein-Nishina cross section for a given incident photon
+   * energy.
+   *
+   * @param energyIncident Incident photon energy (Quantity, must have ENERGY
+   * property)
+   * @return Total cross section in SI units (square meters, m²)
    */
   public double getTotalCrossSection(Quantity energyIncident)
   {
     double ei = energyIncident.get();
-    double k = Constants.MEC2.get();
-    double x = ei / k;
-    return Math.PI * RE2 * (2 * x * (2 + 8 * x + 9 * x * x + x * x * x) / (1 + 2 * x) / (1 + 2 * x)
-            + (-2 - 2 * x + x * x) * Math.log(1 + 2 * x)) / x / x / x;
+    double x = ei / MEC2;
+    // See Jackson Eq. 13.71 for total cross section
+    return Math.PI * RE2 * (2 * x * (2 + 8 * x + 9 * x * x + x * x * x) / Math.pow(1 + 2 * x, 2)
+            + (-2 - 2 * x + x * x) * Math.log(1 + 2 * x)) / (x * x * x);
   }
 
   /**
-   * Compute the cross section between two angles.
+   * Returns the Klein-Nishina cross section integrated between two scattering
+   * angles.
    *
-   * This will be needed to compute low angle scatter probability.
-   *
-   * @param energyIncident is the energy of the initial gamma.
-   * @param a0 is the minimum scatter angle.
-   * @param a1 is the maximum scatter angle.
-   * @return is the cross section in SI units
+   * @param energyIncident Incident photon energy (Quantity, must have ENERGY
+   * property)
+   * @param a0 Minimum scattering angle (radians)
+   * @param a1 Maximum scattering angle (radians)
+   * @return Integrated cross section in SI units (square meters, m²)
    */
   public double getAngularCrossSection(Quantity energyIncident, double a0, double a1)
   {
     double ei = energyIncident.get();
-    double k = Constants.MEC2.get();
-    double x = ei / k;
+    if (ei <= 0)
+      return 0;
+    double x = ei / MEC2;
     double c0 = x * Math.cos(a0);
     double c1 = x * Math.cos(a1);
     double v0 = ((-2 - 6 * x - 5 * x * x + 2 * (1 + 2 * x) * c0) / 2 / sqr(1 + x - c0)
@@ -73,24 +120,95 @@ public class KleinNishinaDistribution implements ScatteringDistribution
     return Math.PI * RE2 * (v1 - v0);
   }
 
+  /**
+   * <b>Evaluator for fast, unit-configurable Klein-Nishina calculations.</b>
+   * <p>
+   * This evaluator allows efficient computation of cross sections and
+   * scattering angles with explicit control of input energy units. All energies
+   * must be supplied in the units set by {@link #setInputUnits(Units)}. Output
+   * cross sections are always in SI area units (m²).
+   * </p>
+   * <h3>Usage Example</h3>
+   * <pre>
+   * KleinNishinaDistribution.Evaluator eval = new KleinNishinaDistribution().newEvaluator();
+   * eval.setInputUnits(Units.get("keV")); // or Units.get("J"), Units.get("MeV"), etc.
+   * double cs = eval.getCrossSection(500, 200); // energies in keV, result in m²
+   * double cosT = eval.getCosAngle(500, 200);   // energies in keV, result is dimensionless
+   * </pre>
+   *
+   * Javadoc for individual methods are in the base class.
+   *
+   * @return a new evaluator.
+   */
+  @Override
+  public Evaluator newEvaluator()
+  {
+    return new EvaluatorImpl();
+  }
+
+//<editor-fold desc="internal" defaultstate="collapsed">
+  // --- Internal: Core Klein-Nishina formula (energies in same units) ---
+  private double _getCrossSection(double ei, double ep)
+  {
+    // Physical domain: ep_min <= ep <= ei
+    double ep_min = ei / (1 + 2 * ei / MEC2);
+    if (ei < 0 || ep > ei || ep < ep_min)
+      return 0;
+    double cosT = -1 + MEC2 / ep - MEC2 / ei;
+    double sinT2 = 1 - cosT * cosT;
+    return KCS * (ei / ep + ep / ei - sinT2) / (ei * ei);
+  }
+
+  private double _getCosAngle(double ei, double ep)
+  {
+    double ep_min = ei / (1 + 2 * ei / MEC2);
+    if (ei < 0)
+      return 1.0; // Forward direction for unphysical negative energy
+    if (ep > ei || ep < ep_min)
+      return -1.0; // Backward direction for forbidden region
+    return -1 + MEC2 / ep - MEC2 / ei;
+  }
+
   private static double sqr(double x)
   {
     return x * x;
   }
 
-  /**
-   * Get the energy of the scattered photon.
-   *
-   * @param energyIncident is the energy of the initial gamma.
-   * @param theta is the scatter angle.
-   * @return the energy of the scattered photon.
-   */
-  public Quantity getEmitted(Quantity energyIncident, double theta)
+  /* Evaluator implementation.  Javadoc is in the interface. */
+  private class EvaluatorImpl implements Evaluator
   {
-    double ei = energyIncident.get();
-    double k = Constants.MEC2.get();
-    double x = ei / k;
-    return Quantity.of(ei / (1 + x * (1 - Math.cos(theta))), "keV");
-  }
+    private Units units = PhysicalProperty.ENERGY;
+    private double scaleToSI = 1.0;
 
+    @Override
+    public void setInputUnits(Units energy)
+    {
+      energy.require(PhysicalProperty.ENERGY);
+      this.units = energy;
+      this.scaleToSI = units.getValue(); // Converts input to SI (Joules)
+    }
+
+    @Override
+    public Units getInputUnits()
+    {
+      return this.units;
+    }
+
+    @Override
+    public double getCrossSection(double ei, double ep)
+    {
+      double ei_SI = ei * scaleToSI;
+      double ep_SI = ep * scaleToSI;
+      return _getCrossSection(ei_SI, ep_SI);
+    }
+
+    @Override
+    public double getCosAngle(double ei, double ep)
+    {
+      double ei_SI = ei * scaleToSI;
+      double ep_SI = ep * scaleToSI;
+      return _getCosAngle(ei_SI, ep_SI);
+    }
+  }
+//</editor-fold>
 }

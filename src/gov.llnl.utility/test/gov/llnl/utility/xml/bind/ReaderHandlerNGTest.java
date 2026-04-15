@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for ReaderHandler.
  */
-strictfp public class ReaderHandlerNGTest
+public class ReaderHandlerNGTest
 {
 
   public ReaderHandlerNGTest()
@@ -179,7 +179,7 @@ strictfp public class ReaderHandlerNGTest
 
     for (Reader.Option opt : flags)
     {
-      if (opt.getKey()==null)
+      if (opt.getKey() == null)
         continue;
       assertNotNull(testElement.getAttribute(opt.getKey()));
       assertSame(testElement.getAttribute(opt.getKey()), opt.getValue());

@@ -43,6 +43,7 @@ class FixedInt32Encoding extends Int32Encoding
 
   @Override
   public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+          throws ProtoException
   {
     int result;
     if (field.getter instanceof Function)
@@ -57,7 +58,7 @@ class FixedInt32Encoding extends Int32Encoding
 
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3) | 5);
+      ProtoEncoding.encodeTag(baos, field, WIRE_FIXED32);
     ByteBuffer bb = ByteBuffer.allocate(4);
     bb.order(ByteOrder.LITTLE_ENDIAN);
     bb.putInt(result);

@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MD5FilterInputStream.
  */
-strictfp public class MD5FilterInputStreamNGTest
+public class MD5FilterInputStreamNGTest
 {
   InputStream is;
 
@@ -74,7 +74,7 @@ strictfp public class MD5FilterInputStreamNGTest
       (byte) 1, (byte) 2, (byte) 4, (byte) 16,
       (byte) 32, (byte) 64, (byte) 128
     };
-    MD5FilterInputStream instance =  new MD5FilterInputStream(is);
+    MD5FilterInputStream instance = new MD5FilterInputStream(is);
     int expResult = 7;
     int result = instance.read(b);
     assertEquals(result, expResult);

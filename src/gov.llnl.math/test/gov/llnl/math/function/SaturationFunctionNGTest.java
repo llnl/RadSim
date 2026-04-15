@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for SaturationFunction.
  */
-strictfp public class SaturationFunctionNGTest
+public class SaturationFunctionNGTest
 {
   
   public SaturationFunctionNGTest()

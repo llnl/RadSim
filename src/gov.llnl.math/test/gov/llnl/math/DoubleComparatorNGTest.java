@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoubleComparator.
  */
-strictfp public class DoubleComparatorNGTest
+public class DoubleComparatorNGTest
 {
 
   /**

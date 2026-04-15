@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/MaterialComponentReader.java ---
 /*
  * Copyright 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -33,6 +34,8 @@ public class MaterialComponentReader extends ObjectReader<MaterialComponent>
     MaterialComponentImpl entry = new MaterialComponentImpl();
     String nuclideName = attributes.getValue("nuclide");
     Nuclide nuclide = Nuclides.get(nuclideName);
+    if (nuclide == null)
+      throw new ReaderException("Unable to find nuclide for "+ nuclideName);
     entry.setNuclide(nuclide);
     return entry;
   }

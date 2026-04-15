@@ -14,19 +14,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * 
+ *
  * Test code for ObjectWriter.
- * 
+ *
  * ObjectWriter is used to write an object back to XML.
- * 
+ *
  * This code is used only when writing XML such as scandata.
- * 
+ *
  * We will skip unit testing of for now.
- * 
+ *
  */
-strictfp public class ObjectWriterNGTest
+public class ObjectWriterNGTest
 {
-  
+
   public ObjectWriterNGTest()
   {
   }
@@ -127,5 +127,4 @@ strictfp public class ObjectWriterNGTest
   {
   }
 
-  
 }

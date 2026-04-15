@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ObjectListReader.
  */
-strictfp public class ObjectListReaderNGTest
+public class ObjectListReaderNGTest
 {
 
   public ObjectListReaderNGTest()
@@ -121,7 +121,7 @@ strictfp public class ObjectListReaderNGTest
     ObjectListReader instance = new ObjectListReader(testReader, null, null);
     assertEquals(instance.getSchemaType(), "List-" + testReader.getSchemaType());
   }
-  
+
   @Test
   public void testGetHandlerKey()
   {

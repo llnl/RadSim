@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/filter/EnergyResolutionSpectralFilter.java ---
 /*
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.

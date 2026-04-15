@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReaderProcessor.
  */
-strictfp public class ReaderProcessorNGTest
+public class ReaderProcessorNGTest
 {
-  
+
   public ReaderProcessorNGTest()
   {
   }
@@ -44,5 +44,5 @@ strictfp public class ReaderProcessorNGTest
   {
     // Processors are used in generation of code, not production.
   }
-  
+
 }

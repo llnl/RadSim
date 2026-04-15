@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for ReferenceHandler.
  */
-strictfp public class ReferenceHandlerNGTest
+public class ReferenceHandlerNGTest
 {
 
   /**
@@ -57,7 +57,7 @@ strictfp public class ReferenceHandlerNGTest
     instance.createSchemaElement(null, group);
 
     Element childElement = (Element) testElement.getFirstChild();
-    
+
     assertEquals(childElement.getNodeName(), "xs:element");
     assertNotNull(childElement.getAttribute("name"));
     assertEquals(childElement.getAttribute("name"), key);
@@ -66,7 +66,7 @@ strictfp public class ReferenceHandlerNGTest
 
     for (Reader.Option opt : flags)
     {
-      if (opt.getKey()==null)
+      if (opt.getKey() == null)
         continue;
       assertNotNull(childElement.getAttribute(opt.getKey()));
       assertSame(childElement.getAttribute(opt.getKey()), opt.getValue());

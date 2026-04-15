@@ -23,9 +23,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for VariableSubstitution.
  */
-strictfp public class VariableSubstitutionNGTest
+public class VariableSubstitutionNGTest
 {
-  
+
   public VariableSubstitutionNGTest()
   {
   }
@@ -188,5 +188,5 @@ strictfp public class VariableSubstitutionNGTest
     String result = VariableSubstitution.substituteString("test ${this}", substitutions);
     assertEquals(result, expResult);
   }
-  
+
 }

@@ -21,7 +21,7 @@ import org.xml.sax.Attributes;
 /**
  * Test code for Reader.
  */
-strictfp public class ReaderNGTest
+public class ReaderNGTest
 {
 
   public ReaderNGTest()
@@ -50,6 +50,7 @@ strictfp public class ReaderNGTest
 
   /**
    * Test of end method, of class Reader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -185,6 +186,7 @@ strictfp public class ReaderNGTest
 
   /**
    * Test of createSchemaElement method, of class Reader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -260,6 +262,7 @@ strictfp public class ReaderNGTest
 
   /**
    * Test others in Reader
+   *
    * @throws java.lang.NoSuchFieldException
    * @throws java.lang.NoSuchMethodException
    */
@@ -271,7 +274,7 @@ strictfp public class ReaderNGTest
     assertSame(ed.pkg(), TestPackage.class);
     assertEquals(ed.name(), "str");
     assertSame(ed.type(), String.class);
-    
+
     Reader.Element e = td.getClass().getDeclaredMethod("method")
             .getAnnotation(Reader.Element.class);
     assertNotNull(e);
@@ -281,8 +284,8 @@ strictfp public class ReaderNGTest
     assertFalse(e.required());
     assertFalse(e.unbounded());
     assertFalse(e.deferrable());
-    Reader.Element.NULL nullObj = new Reader.Element.NULL();     
-    
+    Reader.Element.NULL nullObj = new Reader.Element.NULL();
+
     // For coverage 
     Reader.Order order = Reader.Order.ALL;
     order = Reader.Order.OPTIONS;
@@ -297,9 +300,9 @@ strictfp public class ReaderNGTest
     pc = Reader.ProcessContents.Lax;
     pc = Reader.ProcessContents.Skip;
   }
-  
+
   /**
-   * Test enum Option 
+   * Test enum Option
    */
   @Test
   public void testOptions()
@@ -315,11 +318,11 @@ strictfp public class ReaderNGTest
             Reader.Option.ANY_LAX,
             Reader.Option.NO_REFERENCE,
             Reader.Option.DEFERRABLE,
-//            Reader.Option.NO_CACHE,
+            //            Reader.Option.NO_CACHE,
             Reader.Option.NO_ID
     );
-    
-    for(Reader.Option opt : flags)
+
+    for (Reader.Option opt : flags)
     {
       opt.getKey();
       opt.getValue();
@@ -329,7 +332,7 @@ strictfp public class ReaderNGTest
   // <editor-fold defaultstate="collapsed" desc="Support Classes">
   @Reader.Declaration(pkg = UtilityPackage.class,
           name = "ReaderImpl", cls = Reader.class)
-  strictfp public class ReaderImpl implements Reader
+  public class ReaderImpl implements Reader
   {
     @Override
     public Object start(ReaderContext context, Attributes attributes) throws ReaderException
@@ -360,7 +363,7 @@ strictfp public class ReaderNGTest
   @Reader.Declaration(pkg = UtilityPackage.class,
           name = "ReaderVoidImpl")
   @Reader.Attribute()
-  strictfp public class ReaderVoidImpl implements Reader
+  public class ReaderVoidImpl implements Reader
   {
     @Override
     public Object start(ReaderContext context, Attributes attributes) throws ReaderException
@@ -387,7 +390,7 @@ strictfp public class ReaderNGTest
     }
   }
 
-  strictfp public class ReaderNoDec implements Reader
+  public class ReaderNoDec implements Reader
   {
     @Override
     public Object start(ReaderContext context, Attributes attributes) throws ReaderException
@@ -418,7 +421,7 @@ strictfp public class ReaderNGTest
   @Reader.AttributesDecl(@Reader.Attribute)
   @Reader.TextContents()
   @Reader.AnyAttribute()
-  strictfp public class ReaderAnyAttrib implements Reader
+  public class ReaderAnyAttrib implements Reader
   {
     @Override
     public Object start(ReaderContext context, Attributes attributes) throws ReaderException
@@ -451,7 +454,7 @@ strictfp public class ReaderNGTest
     @Reader.ElementDeclaration(pkg = TestPackage.class, name = "str")
     String str = "str";
 
-    @Reader.Element(name="method")
+    @Reader.Element(name = "method")
     public void method()
     {
     }

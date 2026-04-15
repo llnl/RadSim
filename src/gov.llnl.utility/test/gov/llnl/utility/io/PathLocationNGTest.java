@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for PathLocation.
  */
-strictfp public class PathLocationNGTest
+public class PathLocationNGTest
 {
-  
+
   public PathLocationNGTest()
   {
   }
@@ -60,5 +60,5 @@ strictfp public class PathLocationNGTest
     String result = instance.toString();
     assertEquals(result, expResult);
   }
-  
+
 }

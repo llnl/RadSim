@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/LayerBuilder.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -25,6 +26,12 @@ public class LayerBuilder
   {
     this.layer = layer;
     this.units = units;
+  }
+  
+  public LayerBuilder label(String str)
+  {
+    this.layer.label = str;
+    return this;
   }
   
 //<editor-fold desc="material" defaultstate="collapsed">
@@ -188,6 +195,10 @@ public class LayerBuilder
         layer.thickness.setUnits(layer.inner.getUnits());
         layer.thickness.value = layer.outer.value - inner;
         break;
+    }
+    if (layer.label == null)
+    {
+      layer.label = String.format("layer-%x", this.hashCode());
     }
     layer.update();
   }

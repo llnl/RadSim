@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for CharContents.
  */
-strictfp public class CharContentsNGTest
+public class CharContentsNGTest
 {
-  
+
   public CharContentsNGTest()
   {
   }
@@ -49,11 +49,11 @@ strictfp public class CharContentsNGTest
   {
     CharContents instance = new CharContents();
   }
-  
+
   @Test
   public void testSomeMethod()
   {
     // Tested end to end.
   }
-  
+
 }

@@ -88,6 +88,13 @@ public class MCNP_Tally {
         locations.addAll(Arrays.asList(cells));
     }
 
+    public void addPoint(double x, double y, double z, double r) {
+        locations.add(x);
+        locations.add(y);
+        locations.add(z);
+        locations.add(r);
+    }
+
     public void addEnergyBins(double ... bins) {
         energyBins = bins;
     }
@@ -119,7 +126,7 @@ public class MCNP_Tally {
             case CELL_FISSION_ENERGY:
             case PULSES:
                 mnemonic = String.format("F%d:%s", id, particle.getId()); break;
-            case POINT_FLUX: mnemonic = String.format("F%da:%s", id, particle.getId()); break;
+            case POINT_FLUX: mnemonic = String.format("F%d:%s", id, particle.getId()); break;
             case PINHOLE_FLUX_IMAGE: mnemonic = String.format("FIP%d:%s", id, particle.getId());break;
             case PLANAR_RADIOGRAPH_FLUX_IMAGE: mnemonic = String.format("FIR%d:%s", id, particle.getId()); break;
             case CYLINDRICAL_RADIOGRAPH_FLUX_IMAGE: mnemonic = String.format("FIC%d:%s", id, particle.getId()); break;
@@ -129,8 +136,15 @@ public class MCNP_Tally {
         }
         MCNP_Card locationCard = new MCNP_Card(mnemonic);
         for (Object location : locations) {
-            if (location.getClass().equals(MCNP_Cell.class)) locationCard.addEntry(((MCNP_Cell) location).getId());
-            else locationCard.addEntry(((MCNP_Surface) location).getId());
+            if (location.getClass().equals(MCNP_Cell.class)) {
+                locationCard.addEntry(((MCNP_Cell) location).getId());
+            }
+            else if (location.getClass().equals(MCNP_Surface.class)) {
+                locationCard.addEntry(((MCNP_Surface) location).getId());
+            }
+            else {
+                locationCard.addEntry(location);
+            }
         }
         locationCard.addComment(name);
         cards.add(locationCard);

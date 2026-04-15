@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema elementFormDefault="qualified" xmlns:math="http://math.llnl.gov" math:version="1.0" targetNamespace="http://math.llnl.gov" xmlns:util="http://utility.llnl.gov" util:version="1.0" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://utility.llnl.gov" schemaLocation="http://utility.llnl.gov/schema/utility.xsd"/>
+  <xs:complexType name="BayesianNetworkReader-NodeSpecificationReader-type">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="depends" type="xs:string"/>
+      <xs:element name="probability" type="util:string-attr"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="probability" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="BayesianNetworkReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="node" type="math:BayesianNetworkReader-NodeSpecificationReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="CubicAreaHermiteSpline-ControlPoint-Reader-type"/>
+  <xs:complexType name="CubicHermiteSpline-ControlPoint-Reader-type">
+    <xs:attribute name="m" type="xs:double"/>
+    <xs:attribute name="x" type="xs:double" use="required"/>
+    <xs:attribute name="y" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="CubicHermiteSplineReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="x" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="y" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="m" type="util:string-attr"/>
+      <xs:element maxOccurs="unbounded" name="point" type="math:CubicHermiteSpline-ControlPoint-Reader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="endBehavior" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-ChiSquaredDistributionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="df" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-GammaDistributionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="scale" type="xs:double" use="required"/>
+    <xs:attribute name="shape" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-GumbelDistributionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="beta" type="xs:double" use="required"/>
+    <xs:attribute name="mu" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-NormalDistributionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="mean" type="xs:double" use="required"/>
+    <xs:attribute name="var" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-PoissonDistributionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="lambda" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DistributionReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="gumbel" type="math:DistributionReader-GumbelDistributionReader-type"/>
+      <xs:element name="chiSquared" type="math:DistributionReader-ChiSquaredDistributionReader-type"/>
+      <xs:element name="gamma" type="math:DistributionReader-GammaDistributionReader-type"/>
+      <xs:element name="poisson" type="math:DistributionReader-PoissonDistributionReader-type"/>
+      <xs:element name="normal" type="math:DistributionReader-NormalDistributionReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="FunctionReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="linear" type="math:LinearFunctionReader-type"/>
+      <xs:element name="quadratic" type="math:QuadraticFunctionReader-type"/>
+      <xs:element name="saturation" type="math:SaturationFunctionReader-type"/>
+      <xs:element name="cubicHermiteSpline" type="math:CubicHermiteSplineReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="LinearFunctionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="offset" type="xs:double" use="required"/>
+    <xs:attribute name="slope" type="xs:double" use="required"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="MatrixReader-type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:attribute name="columns" type="xs:int"/>
+        <xs:attribute name="major" type="xs:string"/>
+        <xs:attribute name="rows" type="xs:int"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ProbabilityGraphReader-ConditionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="on" type="xs:string"/>
+    <xs:attribute name="ratio" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ProbabilityGraphReader-NodeGroupSection-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="node" type="math:ProbabilityGraphReader-NodeSpecificationReader-type"/>
+    </xs:choice>
+    <xs:attribute name="probability" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ProbabilityGraphReader-NodeSpecificationReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="condition" type="math:ProbabilityGraphReader-ConditionReader-type"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="depends" type="xs:string"/>
+      <xs:element name="probability" type="util:string-attr"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="probability" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="ProbabilityGraphReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="node" type="math:ProbabilityGraphReader-NodeSpecificationReader-type"/>
+      <xs:element name="define_condition" type="xs:string"/>
+      <xs:element name="subgroup" type="math:ProbabilityGraphReader-NodeGroupSection-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="probability" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="QuadraticFunctionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="accel" type="xs:double" use="required"/>
+    <xs:attribute name="offset" type="xs:double" use="required"/>
+    <xs:attribute name="slope" type="xs:double" use="required"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="SaturationFunctionReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="gain" type="xs:double" use="required"/>
+    <xs:attribute name="offset" type="xs:double" use="required"/>
+    <xs:attribute name="saturation" type="xs:double" use="required"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="Vector3Reader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="x" type="xs:double"/>
+    <xs:attribute name="y" type="xs:double"/>
+    <xs:attribute name="z" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="VersorReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="angle" type="xs:double"/>
+    <xs:attribute name="x" type="xs:double"/>
+    <xs:attribute name="y" type="xs:double"/>
+    <xs:attribute name="z" type="xs:double"/>
+  </xs:complexType>
+  <xs:element name="bayesianNetwork" type="math:BayesianNetworkReader-type" util:class="gov.llnl.math.graph.BayesianNetwork"/>
+  <xs:element name="bayesianNode" type="math:BayesianNetworkReader-NodeSpecificationReader-type" util:class="gov.llnl.math.graph.BayesianNetworkReader$NodeSpecification"/>
+  <xs:element name="chiSquared" type="math:DistributionReader-ChiSquaredDistributionReader-type" util:class="gov.llnl.math.distribution.ChiSquaredDistribution"/>
+  <xs:element name="condition" type="math:ProbabilityGraphReader-ConditionReader-type" util:class="gov.llnl.math.graph.ProbabilityGraphNode$Condition"/>
+  <xs:element name="cubicAreaControlPoint" type="math:CubicAreaHermiteSpline-ControlPoint-Reader-type" util:class="gov.llnl.math.spline.CubicAreaHermiteSpline$ControlPoint"/>
+  <xs:element name="cubicControlPoint" type="math:CubicHermiteSpline-ControlPoint-Reader-type" util:class="gov.llnl.math.spline.CubicHermiteSpline$ControlPoint"/>
+  <xs:element name="cubicHermiteSpline" type="math:CubicHermiteSplineReader-type" util:class="gov.llnl.math.spline.CubicHermiteSpline"/>
+  <xs:element name="distribution" type="math:DistributionReader-type" util:class="gov.llnl.math.distribution.Distribution"/>
+  <xs:element name="function" type="math:FunctionReader-type" util:class="gov.llnl.math.function.Function"/>
+  <xs:element name="gamma" type="math:DistributionReader-GammaDistributionReader-type" util:class="gov.llnl.math.distribution.GammaDistribution"/>
+  <xs:element name="gumbel" type="math:DistributionReader-GumbelDistributionReader-type" util:class="gov.llnl.math.distribution.GumbelDistribution"/>
+  <xs:element name="linear" type="math:LinearFunctionReader-type" util:class="gov.llnl.math.function.LinearFunction"/>
+  <xs:element name="matrix" type="math:MatrixReader-type" util:class="gov.llnl.math.matrix.Matrix"/>
+  <xs:element name="normal" type="math:DistributionReader-NormalDistributionReader-type" util:class="gov.llnl.math.distribution.NormalDistribution"/>
+  <xs:element name="poisson" type="math:DistributionReader-PoissonDistributionReader-type" util:class="gov.llnl.math.distribution.PoissonDistribution"/>
+  <xs:element name="probabiblityNode" type="math:ProbabilityGraphReader-NodeSpecificationReader-type" util:class="gov.llnl.math.graph.ProbabilityGraphReader$NodeSpecification"/>
+  <xs:element name="probabilityGraph" type="math:ProbabilityGraphReader-type" util:class="gov.llnl.math.graph.ProbabilityGraph"/>
+  <xs:element name="quadratic" type="math:QuadraticFunctionReader-type" util:class="gov.llnl.math.function.QuadraticFunction"/>
+  <xs:element name="saturation" type="math:SaturationFunctionReader-type" util:class="gov.llnl.math.function.SaturationFunction"/>
+  <xs:element name="vector3" type="math:Vector3Reader-type" util:class="gov.llnl.math.euclidean.Vector3"/>
+  <xs:element name="versor" type="math:VersorReader-type" util:class="gov.llnl.math.euclidean.Versor"/>
+</xs:schema>

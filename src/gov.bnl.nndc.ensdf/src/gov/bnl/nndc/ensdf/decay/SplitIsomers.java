@@ -1117,7 +1117,7 @@ public class SplitIsomers
       XrayEdge Kedge = xrayData.findEdge("K");
       if (kv > 0 && Kedge != null)
       {
-        double yield = Kedge.getFlorencenceYield();
+        double yield = Kedge.getFluorescenceYield();
         for (Xray xray : Kedge.getXrays())
         {
           dt.emissions.add(new XrayImpl(dt, xray, yield * kv));
@@ -1127,7 +1127,7 @@ public class SplitIsomers
 
       for (XrayEdge edge : xrayData.getEdges()) {
         if (lv > 0 && edge.getName().startsWith("L")) {
-          double yield = edge.getFlorencenceYield();
+          double yield = edge.getFluorescenceYield();
           for (Xray xray : edge.getXrays())
             dt.emissions.add(new XrayImpl(dt, xray, yield * lv));
         }

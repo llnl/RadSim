@@ -20,9 +20,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for PolymorphicReader.
  */
-strictfp public class PolymorphicReaderNGTest
+public class PolymorphicReaderNGTest
 {
-  
+
   public PolymorphicReaderNGTest()
   {
   }
@@ -42,6 +42,7 @@ strictfp public class PolymorphicReaderNGTest
 
   /**
    * Test of getReaders method, of class PolymorphicReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -73,6 +74,7 @@ strictfp public class PolymorphicReaderNGTest
 
   /**
    * Test of of method, of class PolymorphicReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -90,17 +92,19 @@ strictfp public class PolymorphicReaderNGTest
 
   /**
    * Test of start method, of class PolymorphicReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
   public void testStart() throws Exception
   {
-    PolymorphicReader instance = new PolymorphicReaderImpl();    
+    PolymorphicReader instance = new PolymorphicReaderImpl();
     assertNull(instance.start(null, null));
   }
 
   /**
    * Test of end method, of class PolymorphicReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -109,7 +113,7 @@ strictfp public class PolymorphicReaderNGTest
     ReaderContext context = TestReaderContext.create();
     PolymorphicReader instance = new PolymorphicReaderImpl();
     assertNull(instance.end(context));
-    
+
     IntPolyReaderImpl ipri = new IntPolyReaderImpl();
     Integer obj = 6;
     context.setState(obj);
@@ -118,6 +122,7 @@ strictfp public class PolymorphicReaderNGTest
 
   /**
    * Test of getHandlers method, of class PolymorphicReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -127,18 +132,21 @@ strictfp public class PolymorphicReaderNGTest
     assertNotNull(instance.getHandlers(null));
   }
 
-  @Reader.Declaration(pkg = TestSupport.TestPackage.class, 
-          name = "PolymorphicReaderImpl", cls = Long.class)  
-  strictfp public class PolymorphicReaderImpl extends PolymorphicReader
+  @Reader.Declaration(pkg = TestSupport.TestPackage.class,
+          name = "PolymorphicReaderImpl", cls = Long.class)
+  public class PolymorphicReaderImpl extends PolymorphicReader
   {
     @Override
     public ObjectReader[] getReaders() throws ReaderException
     {
-      return new ObjectReader[]{ new LongContents() };
+      return new ObjectReader[]
+      {
+        new LongContents()
+      };
     }
   }
-  
-  strictfp public class IntPolyReaderImpl<Integer> extends PolymorphicReader<Integer>
+
+  public class IntPolyReaderImpl<Integer> extends PolymorphicReader<Integer>
   {
     @Override
     public ObjectReader[] getReaders() throws ReaderException
@@ -146,5 +154,5 @@ strictfp public class PolymorphicReaderNGTest
       return null;
     }
   }
-  
+
 }

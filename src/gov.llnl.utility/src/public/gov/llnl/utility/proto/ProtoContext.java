@@ -34,15 +34,15 @@ public class ProtoContext
       current = stack.get(stack.size() - 1);
   }
 
-  public Object getState(ProtoField field)
+  public Object getState(ProtoField field, boolean search)
   {
     Object out = current.get(field);
     
     // search backwards
-    if (out == null)
+    if (out == null && search)
     {
       int i = stack.size()-1;
-      while (i>0 & out == null)
+      while (i>0 && out == null)
       {
         i--;
         out = stack.get(i).get(field);      

@@ -10,15 +10,14 @@ import org.testng.annotations.Test;
 
 /**
  * Test code for Validate.
- * 
+ *
  * Validation is a utility to test if the schema worked properly.
- * 
- * Not used in production.  No testing is required.
- * 
+ *
+ * Not used in production. No testing is required.
+ *
  */
-strictfp public class ValidateNGTest
+public class ValidateNGTest
 {
-  
 
   /**
    * Test of getPackageResource method, of class Validate.
@@ -62,5 +61,5 @@ strictfp public class ValidateNGTest
 //    boolean result = instance.validate(resource, inputStream, systemId);
 //    assertEquals(result, expResult);
   }
-  
+
 }

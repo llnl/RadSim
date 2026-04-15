@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/test/SampleGeneratorProxy.java ---
 /*
  * Copyright 2017, Lawrence Livermore National Security, LLC.
  * All rights reserved

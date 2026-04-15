@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/calibration/GaussianFitterReader.java ---
 /*
  * Copyright 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved

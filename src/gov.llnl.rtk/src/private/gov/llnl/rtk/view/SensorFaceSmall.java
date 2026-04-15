@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/view/SensorFaceSmall.java ---
 /*
  * Copyright (c) 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved.

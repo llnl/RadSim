@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/GeometryReader.java ---
 /*
  * Copyright 2017, Lawrence Livermore National Security, LLC.
  * All rights reserved

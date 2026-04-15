@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for Exceptions.
  */
-strictfp public class ExceptionsNGTest
+public class ExceptionsNGTest
 {
-  
+
   public ExceptionsNGTest()
   {
   }
@@ -81,5 +81,5 @@ strictfp public class ExceptionsNGTest
     assertTrue(result.containsKey("key"));
     assertTrue(result.containsKey("apple"));
   }
-  
+
 }

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema elementFormDefault="qualified" xmlns:math="http://math.llnl.gov" math:version="1.0" xmlns:rtk="http://rtk.llnl.gov" rtk:version="1.0" targetNamespace="http://rtk.llnl.gov" xmlns:util="http://utility.llnl.gov" util:version="1.0" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://math.llnl.gov" schemaLocation="http://math.llnl.gov/schema/math.xsd"/>
+  <xs:import namespace="http://utility.llnl.gov" schemaLocation="http://utility.llnl.gov/schema/utility.xsd"/>
+  <xs:complexType name="AttributesReader-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:any minOccurs="0" namespace="##any"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="ChannelEnergyPairReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="channel" type="xs:double" use="required"/>
+    <xs:attribute name="energy" type="xs:double" use="required"/>
+    <xs:attribute name="origin" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="ChannelRegionOfInterestReader-type">
+    <xs:attribute name="lower" type="xs:double" use="required"/>
+    <xs:attribute name="upper" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="CompositionReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element minOccurs="0" name="entry" type="rtk:MaterialComponentReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="ControlMapping-Reader-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="spline" type="math:CubicHermiteSplineReader-type"/>
+    </xs:choice>
+    <xs:attribute name="energy" type="xs:double"/>
+    <xs:attribute name="origin" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="CoordinateGeoReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="CumulativePeakFinder-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element minOccurs="1" name="expectedCumulative" type="xs:double"/>
+      <xs:element minOccurs="1" name="expectedLowerFraction" type="xs:double"/>
+      <xs:element minOccurs="1" name="empiricalChannel" type="xs:double"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="DecimationReader-type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DefaultResolutionModelReader-type">
+    <xs:attribute name="energy" type="xs:double"/>
+    <xs:attribute name="fwhm" type="xs:double"/>
+    <xs:attribute name="fwhm0" type="xs:double"/>
+    <xs:attribute name="power" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="DetectorCalibratorReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="singlePeakGainStabilizer" type="rtk:SinglePeakGainStabilizerReader-type"/>
+      <xs:element name="nonlinearStabilizer" type="rtk:NonlinearStabilizerReader-type"/>
+      <xs:element name="externalCalibration" type="rtk:ExternalCalibration-Reader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="copy_of" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="DoseTableReader-InterpolationTableReader-type">
+    <xs:sequence>
+      <xs:element name="nuclide" type="xs:string"/>
+      <xs:element name="z" type="util:string-attr"/>
+      <xs:element name="ad" type="util:string-attr"/>
+      <xs:element name="values" type="util:string-attr"/>
+      <xs:element name="slopes" type="util:string-attr"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DoseTableReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="version" type="util:integer-attr"/>
+      <xs:element maxOccurs="unbounded" name="interpolationTable" type="rtk:DoseTableReader-InterpolationTableReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="DoubleSpectraListReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="gadrasVersion" type="xs:string"/>
+      <xs:element name="energyBins" type="rtk:EnergyScaleReader-type"/>
+      <xs:element name="spectrum" type="rtk:DoubleSpectrumReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="DoubleSpectrumReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element minOccurs="0" name="attributes" type="rtk:AttributesReader-type"/>
+      <xs:element name="attributes" type="rtk:SpectrumReader-AttributesSection-type"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="realTime" type="util:double-attr"/>
+      <xs:element name="liveTime" type="util:double-attr"/>
+      <xs:element name="gammaEnergyBins" type="rtk:EnergyScaleReader-type"/>
+      <xs:element name="gammaCounts" type="xs:string"/>
+      <xs:element name="minimumValidChannel" type="util:integer-attr"/>
+      <xs:element name="maximumValidChannel" type="util:integer-attr"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyPairsScaleReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="pair" type="rtk:ChannelEnergyPairReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="channels" type="xs:int"/>
+    <xs:attribute name="origin" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyRegionOfInterestReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="lower" type="xs:double" use="required"/>
+    <xs:attribute name="upper" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyResolutionSpectralFilter-Reader-type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="EnergyScaleMapperReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="pair" type="rtk:ChannelEnergyPairReader-type"/>
+      <xs:element name="ignore" type="rtk:EnergyRegionOfInterestReader-type"/>
+    </xs:choice>
+    <xs:attribute name="channels" type="xs:int"/>
+    <xs:attribute name="constrainZero" type="xs:string"/>
+    <xs:attribute name="target" type="xs:double"/>
+    <xs:attribute name="smoothing" type="xs:string"/>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyScaleReader-BinsLinear-type">
+    <xs:attribute name="begin" type="xs:double" use="required"/>
+    <xs:attribute name="end" type="xs:double" use="required"/>
+    <xs:attribute name="steps" type="xs:int" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyScaleReader-BinsSqrt-type">
+    <xs:attribute name="begin" type="xs:double"/>
+    <xs:attribute name="end" type="xs:double"/>
+    <xs:attribute name="steps" type="xs:int"/>
+  </xs:complexType>
+  <xs:complexType name="EnergyScaleReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="pairs" type="rtk:EnergyPairsScaleReader-type"/>
+      <xs:element name="sqrt" type="rtk:EnergyScaleReader-BinsSqrt-type"/>
+      <xs:element name="linear" type="rtk:EnergyScaleReader-BinsLinear-type"/>
+      <xs:element name="values" type="util:string-attr"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="use_db" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="Expected-Reader-type"/>
+  <xs:complexType name="ExpectedListReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="expected" type="rtk:Expected-Reader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="ExternalCalibration-Reader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="ExternalPeakTrackerReader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="FluxListReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="flux" type="rtk:FluxReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="FluxReader-AttributesSection-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:any minOccurs="0" namespace="##any"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="FluxReader-type">
+    <xs:all minOccurs="0">
+      <xs:element minOccurs="0" name="attributes" type="rtk:FluxReader-AttributesSection-type"/>
+      <xs:element minOccurs="0" name="model" type="rtk:SourceModelReader-type"/>
+      <xs:element minOccurs="0" name="gammaLines" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="gammaGroups" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="neutronGroups" type="util:string-attr"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="GaussianFitterReader-type">
+    <xs:all minOccurs="0">
+      <xs:element minOccurs="0" name="startChannelFraction" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="endChannelFraction" type="util:double-attr"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="GeometryReader-type">
+    <xs:all minOccurs="0">
+      <xs:element minOccurs="0" name="extent1" type="rtk:QuantityReader-type"/>
+      <xs:element minOccurs="0" name="extent2" type="rtk:QuantityReader-type"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="LayerReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="thickness" type="rtk:QuantityReader-type"/>
+      <xs:element minOccurs="0" name="geometry" type="rtk:GeometryReader-type"/>
+      <xs:element name="material" type="rtk:MaterialReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="label" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="List-SensorViewReader-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element minOccurs="0" name="smallFace" type="rtk:SensorFaceSmallReader-type"/>
+      <xs:element minOccurs="0" name="rectangularFace" type="rtk:SensorFaceRectangularReader-type"/>
+      <xs:element minOccurs="0" name="rectangularCollimatedFace" type="rtk:SensorFaceRectangularCollimatedReader-type"/>
+      <xs:element minOccurs="0" name="sensorViewComposite" type="rtk:SensorViewCompositeReader-type"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="LiveTimeRangeCheck-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="minimumLiveTime" type="xs:double"/>
+      <xs:element name="maximumLiveTime" type="xs:double"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="LowEnergyCheck-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="fractionBelowLLD" type="xs:double"/>
+      <xs:element name="lldChannel" type="xs:int"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="MaterialComponentReader-type">
+    <xs:all minOccurs="0">
+      <xs:element minOccurs="0" name="doseFraction" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="atomFraction" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="massFraction" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="activity" type="rtk:QuantityReader-type"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:anyAttribute namespace="##any" processContents="skip"/>
+  </xs:complexType>
+  <xs:complexType name="MaterialReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="comment" type="xs:string"/>
+      <xs:element minOccurs="0" name="age" type="rtk:QuantityReader-type"/>
+      <xs:element name="density" type="rtk:QuantityReader-type"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="component" type="rtk:MaterialComponentReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="NonlinearStabilizerReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="target" type="rtk:StabilizerTarget-Reader-type"/>
+      <xs:element name="temperatureMap" type="rtk:NonlinearityMap-Reader-type"/>
+      <xs:element name="rateMap" type="rtk:NonlinearityMap-Reader-type"/>
+      <xs:choice>
+        <xs:element name="externalPeakTracker" type="rtk:ExternalPeakTrackerReader-type"/>
+        <xs:element name="predictivePeakTracker" type="rtk:PredictivePeakTrackerReader-type"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="energyScaleMapper" type="rtk:EnergyScaleMapperReader-type"/>
+      <xs:element minOccurs="0" name="energyScale" type="rtk:EnergyScaleReader-type"/>
+    </xs:sequence>
+    <xs:attribute name="channels" type="xs:int"/>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="NonlinearityMap-Reader-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="control" type="rtk:ControlMapping-Reader-type"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="NullGammaSpectrumCheck-Reader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="NullMeasurementCheck-Reader-type">
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="PeakFinderReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="cumulativePeakFinder" type="rtk:CumulativePeakFinder-Reader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="PeakFitterReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="weightedCentroidFitter" type="rtk:WeightedCentroidFitterReader-type"/>
+      <xs:element name="gaussianFitter" type="rtk:GaussianFitterReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="PeakTesterReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="ratioPeakTester" type="rtk:RatioPeakTester-Reader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="PeakTrackerReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="externalPeakTracker" type="rtk:ExternalPeakTrackerReader-type"/>
+      <xs:element name="predictivePeakTracker" type="rtk:PredictivePeakTrackerReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="PileupCorrectionReader-type">
+    <xs:choice>
+      <xs:element name="rateCorrection" type="rtk:PileupRateCorrection-Reader-type"/>
+      <xs:element name="deadTimeCorrection" type="rtk:PileupDeadTimeCorrection-Reader-type"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PileupDeadTimeCorrection-Reader-type"/>
+  <xs:complexType name="PileupRateCorrection-Reader-type">
+    <xs:attribute name="rate" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="PredictivePeakTrackerReader-type">
+    <xs:all minOccurs="0">
+      <xs:element name="decimation" type="util:integer-attr"/>
+      <xs:element name="meanTimeConstant" type="util:double-attr"/>
+      <xs:element name="biasTimeConstant" type="util:double-attr"/>
+      <xs:element name="spectralTimeConstant1" type="util:double-attr"/>
+      <xs:element name="spectralTimeConstant2" type="util:double-attr"/>
+      <xs:element name="peakFitter" type="rtk:PeakFitterReader-type"/>
+      <xs:element minOccurs="0" name="peakFinder" type="rtk:PeakFinderReader-type"/>
+      <xs:element name="peakTester" type="rtk:PeakTesterReader-type"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:element name="QualityChecks" type="rtk:QualityChecksReader-type" util:class="gov.llnl.rtk.quality.QualityChecks"/>
+  <xs:complexType name="QualityChecksReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:any/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="QuantityReader-type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="unc" type="xs:double"/>
+        <xs:attribute name="units" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RatioPeakTester-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="minimumPeakRatio" type="xs:double"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SaturationCheck-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="maximumCountRate" type="xs:double"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SensorFaceRectangularCollimatedReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="origin" type="math:Vector3Reader-type"/>
+      <xs:element name="orientation" type="math:VersorReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="height" type="xs:double" use="required"/>
+    <xs:attribute name="size" type="xs:double" use="required"/>
+    <xs:attribute name="top" type="xs:double" use="required"/>
+    <xs:attribute name="width" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SensorFaceRectangularReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="origin" type="math:Vector3Reader-type"/>
+      <xs:element name="orientation" type="math:VersorReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="height" type="xs:double" use="required"/>
+    <xs:attribute name="width" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SensorFaceSmallReader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="origin" type="math:Vector3Reader-type"/>
+      <xs:element name="orientation" type="math:VersorReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="area" type="xs:double" use="required"/>
+    <xs:attribute name="width" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SensorViewCompositeReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="origin" type="math:Vector3Reader-type"/>
+      <xs:element name="orientation" type="math:VersorReader-type"/>
+      <xs:element name="elements" type="rtk:List-SensorViewReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SensorViewReader-type">
+    <xs:choice minOccurs="0">
+      <xs:element name="smallFace" type="rtk:SensorFaceSmallReader-type"/>
+      <xs:element name="rectangularFace" type="rtk:SensorFaceRectangularReader-type"/>
+      <xs:element name="rectangularCollimatedFace" type="rtk:SensorFaceRectangularCollimatedReader-type"/>
+      <xs:element name="sensorViewComposite" type="rtk:SensorViewCompositeReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SingleChannelSpikeCheck-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="singleChannelFraction" type="xs:double"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SinglePeakGainStabilizerReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="target" type="rtk:StabilizerTarget-Reader-type"/>
+      <xs:choice>
+        <xs:element name="externalPeakTracker" type="rtk:ExternalPeakTrackerReader-type"/>
+        <xs:element name="predictivePeakTracker" type="rtk:PredictivePeakTrackerReader-type"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="energyScaleMapper" type="rtk:EnergyScaleMapperReader-type"/>
+      <xs:element minOccurs="0" name="energyScale" type="rtk:EnergyScaleReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SmoothingSpectralFilterReader-type">
+    <xs:attribute name="coef" type="xs:double" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SourceModelReader-type">
+    <xs:sequence minOccurs="0">
+      <xs:element name="geometry" type="rtk:GeometryReader-type"/>
+      <xs:element maxOccurs="unbounded" name="layer" type="rtk:LayerReader-type"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="title" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="SpectraListFilter-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="rule" type="rtk:SpectraListFilter-RuleImpl-Reader-type"/>
+      <xs:element name="include" type="rtk:SpectraListFilter-RuleImpl-Reader-type"/>
+      <xs:element name="exclude" type="rtk:SpectraListFilter-RuleImpl-Reader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="limit" type="xs:int"/>
+  </xs:complexType>
+  <xs:complexType name="SpectraListFilter-RuleImpl-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="roi" type="rtk:EnergyRegionOfInterestReader-type"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+    <xs:attribute name="contains" type="xs:string"/>
+    <xs:attribute name="field" type="xs:string" use="required"/>
+    <xs:attribute name="matches" type="xs:string"/>
+    <xs:attribute name="op" type="xs:string"/>
+    <xs:attribute name="value" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="SpectrumDoseReader-type">
+    <xs:all minOccurs="0">
+      <xs:element name="bins" type="rtk:EnergyScaleReader-type"/>
+      <xs:element name="dose" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="correction" type="rtk:PileupCorrectionReader-type"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="SpectrumReader-AttributesSection-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:any minOccurs="0" namespace="##any"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="StabilizerTarget-Reader-type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:attribute name="units" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TimestampOrderingCheck-Reader-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="timestampValidRange" type="xs:long"/>
+    </xs:choice>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:complexType name="WeightedCentroidFitterReader-type">
+    <xs:all minOccurs="0">
+      <xs:element minOccurs="0" name="biasCoefficients" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="expectedChannel" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="peakSigma" type="util:double-attr"/>
+    </xs:all>
+    <xs:attributeGroup ref="util:object-attribs"/>
+  </xs:complexType>
+  <xs:element name="calibrator" type="rtk:DetectorCalibratorReader-type" util:class="gov.llnl.rtk.calibration.DetectorCalibrator"/>
+  <xs:element name="channelEnergyPair" type="rtk:ChannelEnergyPairReader-type" util:class="gov.llnl.rtk.calibration.ChannelEnergyPair"/>
+  <xs:element name="channelRegionOfInterest" type="rtk:ChannelRegionOfInterestReader-type" util:class="gov.llnl.rtk.data.ChannelRegionOfInterest"/>
+  <xs:element name="component" type="rtk:MaterialComponentReader-type" util:class="gov.llnl.rtk.physics.MaterialComponent"/>
+  <xs:element name="composition" type="rtk:CompositionReader-type" util:class="gov.llnl.rtk.physics.Composition"/>
+  <xs:element name="controlMapping" type="rtk:ControlMapping-Reader-type" util:class="gov.llnl.rtk.calibration.ControlMapping"/>
+  <xs:element name="coordinate" type="rtk:CoordinateGeoReader-type" util:class="gov.llnl.rtk.geo.CoordinateGeo"/>
+  <xs:element name="cumulativePeakFinder" type="rtk:CumulativePeakFinder-Reader-type" util:class="gov.llnl.rtk.calibration.CumulativePeakFinder"/>
+  <xs:element name="deadTimeCorrection" type="rtk:PileupDeadTimeCorrection-Reader-type" util:class="gov.llnl.rtk.model.PileupDeadTimeCorrection"/>
+  <xs:element name="decimation" type="rtk:DecimationReader-type" util:class="gov.llnl.rtk.data.Decimation"/>
+  <xs:element name="defaultResolutionModel" type="rtk:DefaultResolutionModelReader-type" util:class="gov.llnl.rtk.model.DefaultResolutionModel"/>
+  <xs:element name="distance" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="doseTable" type="rtk:DoseTableReader-type" util:class="gov.llnl.rtk.physics.DoseTable"/>
+  <xs:element name="doubleSpectraList" type="rtk:DoubleSpectraListReader-type" util:class="gov.llnl.rtk.data.DoubleSpectraList"/>
+  <xs:element name="energyPairs" type="rtk:EnergyPairsScaleReader-type" util:class="gov.llnl.rtk.data.EnergyPairsScale"/>
+  <xs:element name="energyPolynomial" type="util:string-attr"/>
+  <xs:element name="energyRegionOfInterest" type="rtk:EnergyRegionOfInterestReader-type" util:class="gov.llnl.rtk.data.EnergyRegionOfInterest"/>
+  <xs:element name="energyResolutionSpectralFilter" type="rtk:EnergyResolutionSpectralFilter-Reader-type" util:class="gov.llnl.rtk.filter.EnergyResolutionSpectralFilter"/>
+  <xs:element name="energyScale" type="rtk:EnergyScaleReader-type" util:class="gov.llnl.rtk.data.EnergyScale"/>
+  <xs:element name="energyScaleMapper" type="rtk:EnergyScaleMapperReader-type" util:class="gov.llnl.rtk.data.EnergyScaleMapper"/>
+  <xs:element name="expected" type="rtk:Expected-Reader-type" util:class="gov.llnl.rtk.labeling.Expected"/>
+  <xs:element name="expectedList" type="rtk:ExpectedListReader-type" util:class="gov.llnl.rtk.labeling.ExpectedList"/>
+  <xs:element name="externalCalibration" type="rtk:ExternalCalibration-Reader-type" util:class="gov.llnl.rtk.calibration.ExternalCalibration"/>
+  <xs:element name="externalPeakTracker" type="rtk:ExternalPeakTrackerReader-type" util:class="gov.llnl.rtk.calibration.ExternalPeakTracker"/>
+  <xs:element name="flux" type="rtk:FluxReader-type" util:class="gov.llnl.rtk.flux.Flux"/>
+  <xs:element name="fluxList" type="rtk:FluxListReader-type" util:class="gov.llnl.rtk.flux.FluxList"/>
+  <xs:element name="gammaDose" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gammaFlux" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gammaFluxLines" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gammaFluxTotal" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gammaFluxUncollided" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gammaLeakage" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="gaussianFitter" type="rtk:GaussianFitterReader-type" util:class="gov.llnl.rtk.calibration.GaussianFitter"/>
+  <xs:element name="geometry" type="rtk:GeometryReader-type" util:class="gov.llnl.rtk.physics.Geometry"/>
+  <xs:element name="highVoltage" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="layer" type="rtk:LayerReader-type" util:class="gov.llnl.rtk.physics.LayerImpl"/>
+  <xs:element name="liveTimeRangeCheck" type="rtk:LiveTimeRangeCheck-Reader-type" util:class="gov.llnl.rtk.quality.LiveTimeRangeCheck"/>
+  <xs:element name="lowEnergyCheck" type="rtk:LowEnergyCheck-Reader-type" util:class="gov.llnl.rtk.quality.LowEnergyCheck"/>
+  <xs:element name="material" type="rtk:MaterialReader-type" util:class="gov.llnl.rtk.physics.Material"/>
+  <xs:element name="model" type="xs:string" util:class="java.lang.String"/>
+  <xs:element name="neutronDose" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="neutronFlux" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="neutronLeakage" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="neutrons" type="xs:double" util:class="java.lang.Double"/>
+  <xs:element name="nonlinearMap" type="rtk:NonlinearityMap-Reader-type" util:class="gov.llnl.rtk.calibration.NonlinearityMap"/>
+  <xs:element name="nonlinearStabilizer" type="rtk:NonlinearStabilizerReader-type" util:class="gov.llnl.rtk.calibration.NonlinearStabilizer"/>
+  <xs:element name="nullGammaSpectrumCheck" type="rtk:NullGammaSpectrumCheck-Reader-type" util:class="gov.llnl.rtk.quality.NullGammaSpectrumCheck"/>
+  <xs:element name="nullMeasurementCheck" type="rtk:NullMeasurementCheck-Reader-type" util:class="gov.llnl.rtk.quality.NullMeasurementCheck"/>
+  <xs:element name="peakFinder" type="rtk:PeakFinderReader-type" util:class="gov.llnl.rtk.calibration.PeakFinder"/>
+  <xs:element name="peakFitter" type="rtk:PeakFitterReader-type" util:class="gov.llnl.rtk.calibration.PeakFitter"/>
+  <xs:element name="peakTester" type="rtk:PeakTesterReader-type" util:class="gov.llnl.rtk.calibration.PeakTester"/>
+  <xs:element name="peakTracker" type="rtk:PeakTrackerReader-type" util:class="gov.llnl.rtk.calibration.PeakTracker"/>
+  <xs:element name="pileupCorrection" type="rtk:PileupCorrectionReader-type" util:class="gov.llnl.rtk.model.PileupCorrection"/>
+  <xs:element name="powerLaw" type="xs:double" util:class="java.lang.Double"/>
+  <xs:element name="predictivePeakTracker" type="rtk:PredictivePeakTrackerReader-type" util:class="gov.llnl.rtk.calibration.PredictivePeakTracker"/>
+  <xs:element name="quantity" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="rateCorrection" type="rtk:PileupRateCorrection-Reader-type" util:class="gov.llnl.rtk.model.PileupRateCorrection"/>
+  <xs:element name="ratioPeakTester" type="rtk:RatioPeakTester-Reader-type" util:class="gov.llnl.rtk.calibration.RatioPeakTester"/>
+  <xs:element name="rectangularCollimatedFace" type="rtk:SensorFaceRectangularCollimatedReader-type" util:class="gov.llnl.rtk.view.SensorFaceRectangularCollimated"/>
+  <xs:element name="rectangularFace" type="rtk:SensorFaceRectangularReader-type" util:class="gov.llnl.rtk.view.SensorFaceRectangular"/>
+  <xs:element name="rule" type="rtk:SpectraListFilter-RuleImpl-Reader-type" util:class="gov.llnl.rtk.data.SpectraListFilter$RuleImpl"/>
+  <xs:element name="saturationCheck" type="rtk:SaturationCheck-Reader-type" util:class="gov.llnl.rtk.quality.SaturationCheck"/>
+  <xs:element name="sensorView" type="rtk:SensorViewReader-type" util:class="gov.llnl.rtk.view.SensorView"/>
+  <xs:element name="sensorViewComposite" type="rtk:SensorViewCompositeReader-type" util:class="gov.llnl.rtk.view.SensorViewComposite"/>
+  <xs:element name="singleChannelSpikeCheck" type="rtk:SingleChannelSpikeCheck-Reader-type" util:class="gov.llnl.rtk.quality.SingleChannelSpikeCheck"/>
+  <xs:element name="singlePeakGainStabilizer" type="rtk:SinglePeakGainStabilizerReader-type" util:class="gov.llnl.rtk.calibration.SinglePeakGainStabilizer"/>
+  <xs:element name="smallFace" type="rtk:SensorFaceSmallReader-type" util:class="gov.llnl.rtk.view.SensorFaceSmall"/>
+  <xs:element name="smoothingSpectralFilter" type="rtk:SmoothingSpectralFilterReader-type" util:class="gov.llnl.rtk.filter.SmoothingSpectralFilter"/>
+  <xs:element name="sourceModel" type="rtk:SourceModelReader-type" util:class="gov.llnl.rtk.physics.SourceModelImpl"/>
+  <xs:element name="spectraList" type="rtk:DoubleSpectraListReader-type" util:class="gov.llnl.rtk.data.DoubleSpectraList"/>
+  <xs:element name="spectraListFilter" type="rtk:SpectraListFilter-Reader-type" util:class="gov.llnl.rtk.data.SpectraListFilter"/>
+  <xs:element name="spectrum" type="rtk:DoubleSpectrumReader-type" util:class="gov.llnl.rtk.data.DoubleSpectrum"/>
+  <xs:element name="spectrumDoseCalculator" type="rtk:SpectrumDoseReader-type" util:class="gov.llnl.rtk.SpectrumDoseCalculator"/>
+  <xs:element name="stabilizerTarget" type="rtk:StabilizerTarget-Reader-type" util:class="gov.llnl.rtk.calibration.StabilizerTarget"/>
+  <xs:element name="temperature" type="rtk:QuantityReader-type" util:class="gov.llnl.rtk.physics.Quantity"/>
+  <xs:element name="timestamp" type="xs:string" util:class="java.time.Instant"/>
+  <xs:element name="timestampOrderingCheck" type="rtk:TimestampOrderingCheck-Reader-type" util:class="gov.llnl.rtk.quality.TimestampOrderingCheck"/>
+  <xs:element name="title" type="xs:string" util:class="java.lang.String"/>
+  <xs:element name="weightedCentroidFitter" type="rtk:WeightedCentroidFitterReader-type" util:class="gov.llnl.rtk.calibration.WeightedCentroidFitter"/>
+</xs:schema>

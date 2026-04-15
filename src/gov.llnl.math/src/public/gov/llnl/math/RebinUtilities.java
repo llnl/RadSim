@@ -9,6 +9,7 @@ package gov.llnl.math;
 import gov.llnl.math.matrix.Matrix;
 import gov.llnl.math.matrix.MatrixFactory;
 import java.io.Serializable;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -35,6 +36,7 @@ public class RebinUtilities
 
     /**
      * Checks that the edges are increasing
+     *
      * @throws gov.llnl.math.RebinUtilities.RebinException
      */
     void verifyEdges() throws RebinException;
@@ -69,9 +71,9 @@ public class RebinUtilities
     @Override
     public void verifyEdges() throws RebinException
     {
-      for (int i=0 ; i < edges_.length-1 ; i++)
+      for (int i = 0; i < edges_.length - 1; i++)
       {
-        if (edges_[i] >= edges_[i+1])
+        if (edges_[i] >= edges_[i + 1])
           throw new RebinException("Edges must monotonically increase");
       }
     }
@@ -104,9 +106,9 @@ public class RebinUtilities
     @Override
     public void verifyEdges() throws RebinException
     {
-      for (int i=0 ; i < edges_.length-1 ; i++)
+      for (int i = 0; i < edges_.length - 1; i++)
       {
-        if (edges_[i] >= edges_[i+1])
+        if (edges_[i] >= edges_[i + 1])
           throw new RebinException("Edges must monotonically increase");
       }
     }
@@ -157,11 +159,16 @@ public class RebinUtilities
     @Override
     public void verifyEdges() throws RebinException
     {
-      for (int i=0 ; i < this.length-1 ; i++)
+      for (int i = 0; i < this.length - 1; i++)
       {
-        if (this.get(i) >= this.get(i+1))
+        if (this.get(i) >= this.get(i + 1))
           throw new RebinException("Edges must monotonically increase");
       }
+    }
+
+    public double[] toArray()
+    {
+      return IntStream.range(0, size()).mapToDouble(this::get).toArray();
     }
   }
 
@@ -307,8 +314,8 @@ public class RebinUtilities
         System.out.printf(" values_length = %d, r = %d, c = %d \n",
                 values_.length, r, c);
       }
-        return values_[r];
-  }
+      return values_[r];
+    }
   }
 
   static public class DoubleArrayOutputWrapper implements OutputWrapper, Serializable
@@ -579,9 +586,9 @@ public class RebinUtilities
       {
         n = (int) (bins1);
 
-          output.initialize(((double) n + 1.0 - bins1), in, n);
-          continue;
-        }
+        output.initialize(((double) n + 1.0 - bins1), in, n);
+        continue;
+      }
 
       if (bins1 > i1)
       {
@@ -634,6 +641,16 @@ public class RebinUtilities
   }
 
   // Frontends for common tasks.
+/**
+   * Rebins a double array from one set of bin edges to another.
+   * This method performs fractional binning to preserve the total integral of the input.
+   *
+   * @param input the data values associated with each input bin.
+   * @param inputBins the edges defining the input bins (length must be input.length + 1).
+   * @param outputBins the edges defining the desired output bins.
+   * @return a new double array containing the rebinned data.
+   * @throws RebinException if bin edges are not monotonic or dimensions mismatch.
+   */
   static public double[] rebin(double input[], double inputBins[], double outputBins[]) throws RebinException
   {
     double out[] = new double[outputBins.length - 1];
@@ -644,6 +661,16 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Scales the x-axis of the input data.
+   * This effectively stretches or compresses the spectrum by mapping the input 
+   * range [0, value] onto the normalized range [0, 1].
+   *
+   * @param input the input data array.
+   * @param value the maximum value of the original scale to be mapped to 1.
+   * @return a scaled double array of the same length as the input.
+   * @throws RebinException if the operation fails due to invalid dimensions or scale.
+   */
   static public double[] scale(double input[], double value) throws RebinException
   {
     int channels = input.length;
@@ -655,23 +682,34 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Resamples the input data to a different number of channels.
+   * Useful for upsampling or downsampling a spectrum while maintaining the same 
+   * relative range [0, 1].
+   *
+   * @param input the input data array.
+   * @param channels the desired number of bins in the output array.
+   * @return a new double array with the specified number of channels.
+   * @throws RebinException if dimensions are inconsistent.
+   */
   static public double[] rescale(double input[], int channels) throws RebinException
   {
     double out[] = new double[channels];
     execute(new DoubleArrayOutputWrapper(out),
             new DoubleArrayInputWrapper(input),
-            StepBinEdges.createLinear(0, 1, input.length + 1),
-            StepBinEdges.createLinear(0, 1, channels + 1));
+            StepBinEdges.createLinear(0, 1, input.length ),
+            StepBinEdges.createLinear(0, 1, channels));
     return out;
   }
 
   /**
    * Shift a histogram forward or back.
    *
-   * @param input
-   * @param channels is positive if toward higher channels or negative if
-   * towards lower.
-   * @return
+   * @param input the input data array.
+   * @param channels the number of channels to shift. Positive values shift toward 
+   * higher indices; negative values shift toward lower indices.
+   * @return a shifted double array of the same length as the input.
+   * @throws RebinException if dimensions mismatch or calculation fails.
    */
   static public double[] shift(double[] input, double channels) throws RebinException
   {
@@ -684,6 +722,16 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Rebins a Matrix where each column is treated as a separate dataset.
+   * Preserves the total sum of each column across the new binning structure.
+   *
+   * @param input the input Matrix.
+   * @param inputBins the edges defining the input rows.
+   * @param outputBins the edges defining the output rows.
+   * @return a new Matrix with (outputBins.length - 1) rows and the same number of columns.
+   * @throws RebinException if bin edges are invalid.
+   */
   static public Matrix rebin(Matrix input, double inputBins[], double outputBins[]) throws RebinException
   {
     Matrix out = MatrixFactory.newColumnMatrix(outputBins.length - 1, input.columns());
@@ -694,6 +742,15 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Rescales a Matrix to a new number of rows (channels).
+   * Operates column-wise to adjust the resolution of the data.
+   *
+   * @param input the input Matrix.
+   * @param channels the desired number of rows in the output Matrix.
+   * @return a new Matrix with the specified number of rows.
+   * @throws RebinException if dimensions are inconsistent.
+   */
   static public Matrix rescale(Matrix input, int channels) throws RebinException
   {
     Matrix out = MatrixFactory.newColumnMatrix(channels, input.columns());
@@ -704,6 +761,14 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Aggregates input integer data into coarser bins based on specific edge indices.
+   * Unlike {@code rebin}, this performs simple summation over discrete channel ranges.
+   *
+   * @param data the input integer array.
+   * @param channelEdges indices in the data array that define the start/end of new bins.
+   * @return an integer array where each element is the sum of the specified range.
+   */
   static public int[] collect(int[] data, int[] channelEdges)
   {
     int[] out = new int[channelEdges.length - 1];
@@ -717,6 +782,13 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Aggregates input double data into coarser bins based on specific edge indices.
+   *
+   * @param data the input double array.
+   * @param channelEdges indices in the data array that define the start/end of new bins.
+   * @return a double array where each element is the sum of the specified range.
+   */
   static public double[] collect(double[] data, int[] channelEdges)
   {
     double[] out = new double[channelEdges.length - 1];
@@ -730,6 +802,14 @@ public class RebinUtilities
     return out;
   }
 
+  /**
+   * Aggregates Matrix rows into coarser bins based on specific edge indices.
+   * Sums the values for each column within the specified row ranges.
+   *
+   * @param data the input Matrix.
+   * @param channelEdges row indices defining the boundaries for collection.
+   * @return a new Matrix with rows reduced according to channelEdges.
+   */
   static public Matrix collect(Matrix data, int[] channelEdges)
   {
     Matrix out = MatrixFactory.newColumnMatrix(channelEdges.length - 1, data.columns());

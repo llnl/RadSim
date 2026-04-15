@@ -42,7 +42,7 @@ public class AnyEncoding implements ProtoEncoding
   public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs)
           throws ProtoException
   {
-    if (type != 2)
+    if (type != WIRE_LEN)
       throw new ProtoException("bad wire type", bs.position());
 
     ProtoField field3 = new ProtoField();
@@ -59,34 +59,34 @@ public class AnyEncoding implements ProtoEncoding
     {
       try
       {
-        int tag = bs2.get();
-        if (tag == -1)
-          break;
+        int key = Int32Encoding.decodeVInt32(bs2);
+        int id = key >>> 3;
+        int type2 = key & 0x7;
 
-        switch (tag >> 3)
+        switch (id)
         {
           case 1:
-            field1.encoding.parseField(context, field1, tag & 0x7, ref, bs2);
+            field1.encoding.parseField(context, field1, type2, ref, bs2);
             Class c = Class.forName((String) (ref[0]));
-            if (!c.isInstance(ProtoEncoding.class))
+            if (!ProtoEncoding.class.isAssignableFrom(c))
               throw new ProtoException("bad encoder", bs2.position());
             encoder = (ProtoEncoding) c.getConstructor().newInstance();
             break;
 
           case 2:
             if (encoder == null)
-              throw new ProtoException("missing encoder", bs.position());
-            field3.encoding.parseField(context, field3, tag & 0x7, obj, bs2);
+              throw new ProtoException("missing encoder", bs2.position());
+            encoder.parseField(context, field3, type2, obj, bs2);
             break;
 
           default:
-            MessageEncoding.ignoreField(tag & 0x7, bs2);
+            MessageEncoding.ignoreField(type2, bs2);
             break;
         }
       }
       catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex)
       {
-        throw new ProtoException("unable to find encoder", bs.position());
+        throw new ProtoException("unable to find encoder", bs2.position());
       }
     }
     context.leaveMessage(bs2);
@@ -104,13 +104,13 @@ public class AnyEncoding implements ProtoEncoding
       if (annotation == null)
         throw new RuntimeException("Can't find encoder for " + o.getClass().getName());
       Class cls = annotation.value();
-      if (!cls.isInstance(ProtoEncoding.class))
+      if (!ProtoEncoding.class.isAssignableFrom(cls))
         throw new RuntimeException("Bad encoder " + cls.getName());
       ProtoEncoding encoder = (ProtoEncoding) cls.getConstructor().newInstance();
       ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
       Type.String.serializeField(field1, baos2, cls.getName());
       encoder.serializeField(field2, baos2, o);
-      baos.write((field.id << 3) | 2);
+      ProtoEncoding.encodeTag(baos, field, WIRE_LEN);
       Int32Encoding.encodeVInt32(baos, baos2.size());
       baos2.writeTo(baos);
     }

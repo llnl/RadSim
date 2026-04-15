@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+Copyright 2016, Lawrence Livermore National Security, LLC.
+All rights reserved
+
+Terms and conditions are given in "Notice" file.
+-->
+
+<xs:schema version="1.0" 
+           targetNamespace="http://utility.llnl.gov"
+           xmlns="http://utility.llnl.gov"
+           xmlns:util="http://utility.llnl.gov"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+  
+  <xs:attributeGroup name="object-attribs">
+    <xs:attribute name="ref_id" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:attributeGroup>
+    
+  <xs:complexType name="reference-type">
+    <xs:attribute name="ref_id" type="xs:string" use="required"/>  
+  </xs:complexType>
+  
+  <xs:complexType name="import-type">
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="import" type="xs:string" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="imports-type">
+    <xs:sequence>
+      <xs:element name="reference" type="import-type" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>  
+    <xs:attribute name="extern" type="xs:string"/>  
+  </xs:complexType>
+  
+  <xs:complexType name="string-attr">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:anyAttribute processContents="skip"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="integer-attr">
+    <xs:simpleContent>
+      <xs:extension base="xs:integer">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:anyAttribute processContents="skip"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="double-attr">
+    <xs:simpleContent>
+      <xs:extension base="xs:double">
+        <xs:attributeGroup ref="util:object-attribs"/>
+        <xs:anyAttribute processContents="skip"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+    
+  <xs:complexType name="empty-attr">
+    <xs:anyAttribute processContents="skip"/>
+  </xs:complexType>
+  
+  <xs:simpleType name="boolean-optional">
+    <xs:union memberTypes="xs:boolean">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value=""/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+   
+</xs:schema>

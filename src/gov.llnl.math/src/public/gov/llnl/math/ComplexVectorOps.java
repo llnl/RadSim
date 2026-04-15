@@ -44,7 +44,7 @@ public class ComplexVectorOps
     return a;
   }
 
-  static public ComplexVector divideAssign(ComplexVectorImpl a, double v)
+  static public ComplexVector divideAssign(ComplexVector a, double v)
   {
     DoubleArray.divideAssign(a.getReal(), v);
     DoubleArray.divideAssign(a.getImag(), v);

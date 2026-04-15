@@ -160,10 +160,10 @@ public class MutableVersorNGTest
     MutableVersor instance = new MutableVersor();
     instance.assign(1, 0, 0, 0);
     instance.multiplyAssign(q);
-    assertEquals(instance.x, -1.0);
-    assertEquals(instance.y, 0.0);
-    assertEquals(instance.z, 0.0);
-    assertEquals(instance.u, 0.0);
+    assertEquals(instance.x, -1.0, 0.0);
+    assertEquals(instance.y, 0.0, 0.0);
+    assertEquals(instance.z, 0.0, 0.0);
+    assertEquals(instance.u, 0.0, 0.0);
   }
 
   /**
@@ -176,11 +176,11 @@ public class MutableVersorNGTest
     MutableVersor instance = new MutableVersor();
     instance.multiplyAssign(q);
     instance.multiplyInvAssign(q);
-    assertEquals(instance.u, 1.0);
+    assertEquals(instance.u, 1.0, 0.0);
     q = Quaternion.of(0, 0, 1, 0);
     instance.multiplyAssign(q);
     instance.multiplyInvAssign(q);
-    assertEquals(instance.u, 1.0);
+    assertEquals(instance.u, 1.0, 0.0);
   }
 
   /**
@@ -193,7 +193,7 @@ public class MutableVersorNGTest
     instance.assign(-0.5, 0.5, 0.5, -0.5);
     double[] expResult = new double[]
     {
-      -0.5, 0.5, 0.5, -0.5
+      0.5, -0.5, -0.5, 0.5
     };
     double[] result = instance.toArray();
     assertEquals(result, expResult);

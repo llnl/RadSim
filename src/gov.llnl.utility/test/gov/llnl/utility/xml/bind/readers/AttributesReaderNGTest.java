@@ -11,11 +11,12 @@ import org.testng.annotations.Test;
 /**
  * Test code for AttributesReader.
  */
-strictfp public class AttributesReaderNGTest
+public class AttributesReaderNGTest
 {
 
   /**
    * Test of getHandlers method, of class AttributesReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -26,6 +27,7 @@ strictfp public class AttributesReaderNGTest
 
   /**
    * Test of start method, of class AttributesReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -51,5 +53,5 @@ strictfp public class AttributesReaderNGTest
   {
     // Tested end to end.
   }
-  
+
 }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:if="ant:if"
+         xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1"
+         xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3"
+         xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc"
+         xmlns:j2coverage="http://www.coverage.org"
+         xmlns:jacoco="antlib:org.jacoco.ant"
+         xmlns:unless="ant:unless" basedir=".." default="default">
+
+  <target depends="init" name="-init-coverage">
+    <property name="coverage.dir"  value="${build.dir}/coverage"/>
+    <property name="coverage.classes.dir" value="${coverage.dir}/classes"/>
+    <property name="coverage.results.dir" value="${coverage.dir}/results"/>
+    <property name="coverage.report.dir" value="${coverage.dir}/report"/>
+    <property name="javac.coverage.compilerargs" value="-g:lines,vars,source"/>
+    <echo message="${libs.testng.classpath}"/>
+    <echo message="${run.test.classpath}"/>
+    <echo message="${build.dir}"/>
+    <property name="libs.jacoco.classpath" value="${build.dir}/lib/org.jacoco.ant-nodeps.jar"/>
+    <available property="have.jacoco" file="${build.dir}/lib/org.jacoco.ant-nodeps.jar"/>
+  </target>
+
+  <target depends="-init-coverage" unless="have.jacoco" name="-resolve-jacoco">
+    <echo message="${libs.jacoco.classpath}"/>
+    <echo message="${have.jacoco}"/>
+    <ant target="resolve-coverage"/>
+  </target>
+
+  <target depends="-resolve-jacoco" name="-install-jacoco">
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpath="${libs.jacoco.classpath}" />
+    <taskdef classname="org.testng.TestNGAntTask" classpath="${libs.testng.classpath}" name="testng"/>
+  </target>
+
+
+  <target depends="init,deps-jar,-pre-pre-compile,-pre-compile, -copy-persistence-xml,-compile-depend,compile-test,-init-coverage"
+          if="have.tests" name="-do-compile-coverage">
+    <mkdir dir="${coverage.classes.dir}"/>
+    <j2seproject3:javac gensrcdir="${build.generated.sources.dir}"
+                        debug="true"
+                        destdir="${coverage.classes.dir}"
+    >
+      <customize>
+        <compilerarg line="${javac.coverage.compilerargs}"/>
+      </customize>
+    </j2seproject3:javac>
+  </target>
+
+  <target depends="-init-coverage,-do-compile-coverage" name="compile-coverage"/>
+
+  <target name="-init-macrodef-coverage" depends="-install-jacoco">
+    <macrodef name="coverage-testng" uri="http://www.coverage.org">
+      <attribute name="suitename"/>
+      <attribute default="${includes}" name="includes"/>
+      <attribute default="${excludes}" name="excludes"/>
+      <attribute default="**" name="testincludes"/>
+      <attribute default="" name="testmethods"/>
+      <element name="customize" optional="true"/>
+      <sequential>
+        <condition else="" property="testng.methods.arg" value="@{testincludes}.@{testmethods}">
+          <isset property="test.method"/>
+        </condition>
+        <union id="test.set">
+          <fileset dir="${test.src.dir}" excludes="@{excludes},**/*.xml,${excludes}" includes="@{includes}">
+            <filename name="@{testincludes}"/>
+          </fileset>
+        </union>
+        <jacoco:coverage destfile="${coverage.results.dir}/${release.package}_jacoco.exec">
+          <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="@{suitename}" testname="TestNG tests" workingDir="${work.dir}">
+            <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
+            <propertyset>
+              <propertyref prefix="test-sys-prop."/>
+              <mapper from="test-sys-prop.*" to="*" type="glob"/>
+            </propertyset>
+            <classpath>
+              <path path="${run.test.classpath}"/>
+            </classpath>
+            <jvmarg line="${endorsed.classpath.cmd.line.arg}"/>
+            <customize/>
+          </testng>
+        </jacoco:coverage>
+        <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
+      </sequential>
+    </macrodef>
+
+    <macrodef name="coverage-impl" uri="http://www.coverage.org">
+      <attribute name="suitename"/>
+      <attribute default="${includes}" name="includes"/>
+      <attribute default="${excludes}" name="excludes"/>
+      <attribute default="**" name="testincludes"/>
+      <attribute default="" name="testmethods"/>
+      <element implicit="true" name="customize" optional="true"/>
+      <sequential>
+        <j2coverage:coverage-testng excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}" suitename="@{suitename}">
+          <customize/>
+        </j2coverage:coverage-testng>
+      </sequential>
+    </macrodef>
+
+    <macrodef name="coverage" uri="http://www.coverage.org">
+      <attribute name="suitename"/>
+      <attribute default="${includes}" name="includes"/>
+      <attribute default="${excludes}" name="excludes"/>
+      <attribute default="**" name="testincludes"/>
+      <attribute default="" name="testmethods"/>
+      <sequential>
+        <j2coverage:coverage-impl excludes="@{excludes}" includes="@{includes}" testincludes="@{testincludes}" testmethods="@{testmethods}" suitename="@{suitename}">
+          <customize>
+            <jvmarg line="${run.jvmargs}"/>
+            <jvmarg line="${run.jvmargs.ide}"/>
+          </customize>
+        </j2coverage:coverage-impl>
+      </sequential>
+    </macrodef>
+  </target>
+
+  <target depends="init,compile-coverage,-init-test-run-module-properties,-init-macrodef-coverage" if="have.tests" name="-do-coverage-run">
+    <j2coverage:coverage includes="${includes}" testincludes="**/*Test.java" suitename="${implementation.title}"/>
+  </target>
+
+  <target depends="init,-do-coverage-run" if="have.tests" name="coverage-report">
+    <jacoco:report>
+      <executiondata>
+        <file file="${coverage.results.dir}/${release.package}_jacoco.exec"/>
+      </executiondata>
+
+      <structure name="Unittest coverage report for ${release.package}">
+        <classfiles>
+          <fileset dir="${build.classes.dir}"/>
+        </classfiles>
+        <sourcefiles encoding="UTF-8">
+          <fileset dir="src"/>
+        </sourcefiles>
+      </structure>
+
+      <html destdir="${coverage.report.dir}"/>
+    </jacoco:report>
+  </target>
+  <target depends="init" if="netbeans.home+have.tests" name="-coverage-browse"/>
+  <target depends="init,coverage-report,-coverage-browse" description="Run unit tests." name="coverage"/>
+
+</project>

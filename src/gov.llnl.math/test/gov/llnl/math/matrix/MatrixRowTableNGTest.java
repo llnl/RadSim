@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixRowTable.
  */
-strictfp public class MatrixRowTableNGTest
+public class MatrixRowTableNGTest
 {
   
   public MatrixRowTableNGTest()
@@ -101,7 +101,7 @@ strictfp public class MatrixRowTableNGTest
   {
     MatrixRowTable instance = new MatrixRowTable(3,2);
     instance.set(0, 0, 5);
-    assertEquals(instance.get(0, 0), 5.0);
+    assertEquals(instance.get(0, 0), 5.0, 0.0);
   }
 
   /**

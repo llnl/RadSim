@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/data/EnergyScale.java ---
 /*
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -37,6 +38,11 @@ public interface EnergyScale extends Expandable, Serializable
    * @return the energy boundary for this edge.
    */
   double getEdge(int edge);
+  
+  default double getCenter(int channel)
+  {
+    return (getEdge(channel)+getEdge(channel+1))/2;
+  }
 
   /**
    * Get the energy associated with the fractional bin.

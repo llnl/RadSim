@@ -23,6 +23,13 @@ public class Cursor
   int index; // location of the cursor
   double fraction; // strictly 0<= fraction <=1 unless we are extrapolating
 
+  /**
+   * Search a limited range.
+   * 
+   * @param x Array to search.
+   * @param start Starting point (inclusive).
+   * @param end Ending point (exclusive)
+   */
   public Cursor(double[] x, int start, int end)
   {
     this.intervals = x;

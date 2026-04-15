@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoubleArrayCollectors.
  */
-strictfp public class DoubleArrayCollectorsNGTest
+public class DoubleArrayCollectorsNGTest
 {
 
   public DoubleArrayCollectorsNGTest()

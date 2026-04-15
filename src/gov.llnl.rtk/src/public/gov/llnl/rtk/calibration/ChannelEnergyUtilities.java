@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/calibration/ChannelEnergyUtilities.java ---
 /* 
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.

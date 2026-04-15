@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for StatisticalUtilities.
  */
-strictfp public class StatisticalUtilitiesNGTest
+public class StatisticalUtilitiesNGTest
 {
 
   /**
@@ -35,11 +35,11 @@ strictfp public class StatisticalUtilitiesNGTest
   @Test
   public void testBinomialAnscombeTransform()
   {
-    assertEquals(StatisticalUtilities.binomialAnscombeTransform(0), 0.4812753739423435);
-    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.1), 0.5480081266146937);
-    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.2), 0.6104198077759172);
-    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.3), 0.6700931577543916);
-    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.4), 0.7281301767812984);
+    assertEquals(StatisticalUtilities.binomialAnscombeTransform(0), 0.4812753739423435, 0.0);
+    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.1), 0.5480081266146937, 0.0);
+    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.2), 0.6104198077759172, 0.0);
+    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.3), 0.6700931577543916, 0.0);
+    assertEquals(StatisticalUtilities.binomialAnscombeTransform(.4), 0.7281301767812984, 0.0);
   }
 
   /**

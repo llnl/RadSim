@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ProcessBuilderUtilities.
  */
-strictfp public class ProcessBuilderUtilitiesNGTest
+public class ProcessBuilderUtilitiesNGTest
 {
 
   @Test
@@ -22,7 +22,7 @@ strictfp public class ProcessBuilderUtilitiesNGTest
   {
     ProcessBuilderUtilities instance = new ProcessBuilderUtilities();
   }
-  
+
   /**
    * Test of parseExecutable method, of class ProcessBuilderUtilities.
    */
@@ -35,5 +35,5 @@ strictfp public class ProcessBuilderUtilitiesNGTest
     assertEquals(result, expResult);
     // FIXME.  The current implementation has an extra argument.  
   }
-  
+
 }

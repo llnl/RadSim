@@ -225,8 +225,8 @@ public class VersorNGTest
   {
     Versor instance = Versor.of(Vector3.AXIS_X, Math.PI / 2);
     Versor result = instance.inv();
-    assertEquals(result.getU(), 0.7071067811865476);
-    assertEquals(result.getX(), -0.7071067811865475);
+    assertEquals(result.getU(), 0.7071067811865476, 0.0);
+    assertEquals(result.getX(), -0.7071067811865475, 0.0);
     assertEquals(result.getY(), 0.0, 1e-10);
     assertEquals(result.getZ(), 0.0, 1e-10);
   }

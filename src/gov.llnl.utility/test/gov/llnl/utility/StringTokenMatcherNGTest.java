@@ -6,9 +6,6 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.TokenDef;
-import gov.llnl.utility.StringTokenMatcher;
-import gov.llnl.utility.Tokenizer;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import static org.testng.Assert.*;
@@ -17,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for StringTokenMatcher.
  */
-strictfp public class StringTokenMatcherNGTest
+public class StringTokenMatcherNGTest
 {
 
   public StringTokenMatcherNGTest()
@@ -86,21 +83,25 @@ strictfp public class StringTokenMatcherNGTest
     assertEquals(tokenImpl.group(), "!");
 
     assertEquals(iterator.hasNext(), false);
-    
-    try{ iterator.next();
-    fail("Expected NoSuchElementException");
+
+    try
+    {
+      iterator.next();
+      fail("Expected NoSuchElementException");
     }
     catch (NoSuchElementException ex)
-    {}
+    {
+    }
 
     // Test UnsupportedOperationException
     try
     {
-    iterator.remove();
-    fail("Expected UnsupportedOperationException");
+      iterator.remove();
+      fail("Expected UnsupportedOperationException");
     }
-    catch(UnsupportedOperationException ex)
-    {}
+    catch (UnsupportedOperationException ex)
+    {
+    }
   }
 
 }

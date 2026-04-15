@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/Source.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -16,11 +17,13 @@ public interface Source
 {
   Nuclide getNuclide();
 
-  double getActivity();
+  double getActivity(Units activityUnits);
 
+  Quantity getActivityQuantity();  
+  
   default double getAtoms()
   {
-    return getActivity() / getNuclide().getDecayConstant();
+    return getActivity(PhysicalProperty.ACTIVITY) / getNuclide().getDecayConstant();
   }
 
   /**
@@ -37,7 +40,7 @@ public interface Source
     return source;
   }
 
-  public static Source fromActivity(Nuclide nuclide, QuantityImpl activity)
+  public static Source fromActivity(Nuclide nuclide, Quantity activity)
   {
     activity.require(PhysicalProperty.ACTIVITY);
     if (nuclide.getDecayConstant() == 0)

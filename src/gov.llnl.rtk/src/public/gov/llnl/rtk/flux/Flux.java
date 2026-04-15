@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/Flux.java ---
 /* 
  * Copyright 2022, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -63,6 +64,11 @@ public interface Flux extends Expandable
    * @return
    */
   public FluxEvaluator newNeutronEvaluator();
+  
+  default public FluxGroup findPhotonGroup(double energy)
+  {
+    return FluxUtilities.findGroup(this.getPhotonGroups(), energy);
+  }
 
   default public EnergyScale getPhotonGroupsScale()
   {

@@ -1,6 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+// --- file: gov/llnl/rtk/physics/EmissionScaled.java ---
+/* 
+ * Copyright 2025, Lawrence Livermore National Security, LLC.
+ * All rights reserved.
+ * 
+ * Terms and conditions are given in "Notice" file.
  */
 package gov.llnl.rtk.physics;
 

@@ -36,10 +36,10 @@ public class QuaternionOpsNGTest
     Quaternion expResult = new QuaternionImpl(-8, 2, 6, 4);
     Quaternion result = QuaternionOps.multiply(q1, q2);
     assertEquals(result.getClass(), expResult.getClass());
-    assertEquals(result.getU(), expResult.getU());
-    assertEquals(result.getX(), expResult.getX());
-    assertEquals(result.getY(), expResult.getY());
-    assertEquals(result.getZ(), expResult.getZ());
+    assertEquals(result.getU(), expResult.getU(), 0.0);
+    assertEquals(result.getX(), expResult.getX(), 0.0);
+    assertEquals(result.getY(), expResult.getY(), 0.0);
+    assertEquals(result.getZ(), expResult.getZ(), 0.0);
   }
 
   /**

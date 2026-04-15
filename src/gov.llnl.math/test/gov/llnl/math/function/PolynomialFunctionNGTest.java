@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for PolynomialFunction.
  */
-strictfp public class PolynomialFunctionNGTest
+public class PolynomialFunctionNGTest
 {
 
   public PolynomialFunctionNGTest()

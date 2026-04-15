@@ -199,7 +199,7 @@ public abstract class ProtoBuilder<T, B>
      *
      * Currently this uses the ordinals as defined by Java. Thus order maters.
      *
-     * FIXME there should be a version with user defined translation between
+     * TODO there should be a version with user defined translation between
      * objects.
      *
      * @param <EnumType>

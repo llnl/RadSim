@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/view/LinearTrace.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -19,13 +20,14 @@ public class LinearTrace implements Trace
 {
   Instant t0;
   Spline xf;
-  Vector3 offset;
+  Vector3 offset; 
 
   /**
    * Convert a set of positions down a linear path into a path.
    *
    * @param t
    * @param x
+   * @param offset
    * @return
    */
   static public Trace create(List<Instant> t, double[] x, Vector3 offset)

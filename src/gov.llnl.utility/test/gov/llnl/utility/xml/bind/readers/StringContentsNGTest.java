@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for StringContents.
  */
-strictfp public class StringContentsNGTest
+public class StringContentsNGTest
 {
-  
+
   public StringContentsNGTest()
   {
   }
@@ -36,5 +36,5 @@ strictfp public class StringContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

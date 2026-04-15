@@ -25,7 +25,7 @@ import org.xml.sax.SAXParseException;
 /**
  * Test code for SaxHandler.
  */
-strictfp public class SaxHandlerNGTest
+public class SaxHandlerNGTest
 {
 
   public SaxHandlerNGTest()

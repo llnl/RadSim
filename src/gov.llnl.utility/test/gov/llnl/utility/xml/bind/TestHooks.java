@@ -9,7 +9,7 @@ package gov.llnl.utility.xml.bind;
 /**
  * Test code for TestHooks.
  */
-strictfp public class TestHooks implements DocumentReader.Hook
+public class TestHooks implements DocumentReader.Hook
 {
   @Override
   public void startDocument(DocumentReader dr)

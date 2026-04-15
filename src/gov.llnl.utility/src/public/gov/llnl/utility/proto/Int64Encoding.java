@@ -7,8 +7,6 @@
 package gov.llnl.utility.proto;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.ObjLongConsumer;
@@ -38,7 +36,7 @@ public class Int64Encoding extends LongEncoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     long result;
     if (field.getter instanceof Function)
@@ -52,48 +50,35 @@ public class Int64Encoding extends LongEncoding
       result = ((ToLongFunction) field.getter).applyAsLong(obj);
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3));
+      ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     // contents
     Int64Encoding.encodeVInt64(baos, result);
   }
 
   static long decodeVInt64(ByteSource bs) throws ProtoException
   {
-    long i = 0;
-    int shift = 0;
-    while (true)
-    {
-      int j = bs.get();
-      if (j == -1)
-        throw new ProtoException("truncated fixed int field", bs.position());
-      i |= (j & (0x7f)) << shift;
-      if ((j & 0x80) == 0)
-        break;
-      shift += 7;
-    }
-    return i;
-  }
+    int pos0 = bs.position();
+    long result = 0;
 
-  static long decodeVInt64(ByteBuffer bs) throws ProtoException
-  {
-    try
+    for (int shift = 0; shift < 64; shift += 7)
     {
-      long i = 0;
-      int shift = 0;
-      while (true)
-      {
-        int j = bs.get();
-        i |= (j & (0x7f)) << shift;
-        if ((j & 0x80) == 0)
-          break;
-        shift += 7;
-      }
-      return i;
+      int b = bs.get();
+      if (b == -1)
+        throw new ProtoException("truncated vint64", pos0);
+
+      long bits = (long) (b & 0x7f);
+
+      // 10th byte may only carry 1 bit for a valid uint64 varint encoding
+      if (shift == 63 && bits > 0x01)
+        throw new ProtoException("malformed vint64", pos0);
+
+      result |= (bits << shift);
+
+      if ((b & 0x80) == 0)
+        return result;
     }
-    catch (BufferUnderflowException ex)
-    {
-      throw new ProtoException("truncated fixed int field", bs.position());
-    }
+
+    throw new ProtoException("malformed vint64", pos0);
   }
 
   static void encodeVInt64(ByteArrayOutputStream baos, long v)

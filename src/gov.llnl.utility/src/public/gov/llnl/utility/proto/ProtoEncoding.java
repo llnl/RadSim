@@ -17,6 +17,11 @@ import java.io.ByteArrayOutputStream;
 public interface ProtoEncoding<T>
 {
 
+  public static final int WIRE_VARINT = 0;
+  public static final int WIRE_FIXED64 = 1;
+  public static final int WIRE_LEN = 2;
+  public static final int WIRE_FIXED32 = 5;
+
   /**
    * Common types used by the proto encoder.
    *
@@ -124,4 +129,71 @@ public interface ProtoEncoding<T>
   {
     return "";
   }
+
+  public static void encodeTag(ByteArrayOutputStream baos, ProtoField field, int wire)
+          throws ProtoException
+  {
+    int id = field.id;
+
+    // Field numbers: 1..(2^29-1), and 19000-19999 are reserved by protobuf
+    if (id <= 0 || id > 0x1FFFFFFF)
+      throw new ProtoException("invalid field id " + id, 0);
+    if (id >= 19000 && id <= 19999)
+      throw new ProtoException("field id " + id + " is in reserved range 19000-19999", 0);
+
+    // Wire types: you do not support groups (3,4), and protobuf only defines 0..5
+    if (wire < 0 || wire > 5 || wire == 3 || wire == 4)
+      throw new ProtoException("invalid/unsupported wire type " + wire + " for field " + id, 0);
+
+    int key = (id << 3) | wire;
+    Int32Encoding.encodeVInt32(baos, key);
+  }
+
+  public static int decodeTag(ByteSource is) throws ProtoException
+  {
+    int pos0 = is.position();
+
+    int i = 0;
+    int shift = 0;
+
+    // Key is a uint32 varint, max 5 bytes
+    for (int count = 0; count < 5; ++count)
+    {
+      int j = is.get();
+
+      // Preserve old behavior: return -1 only if we're at EOF before reading any tag bytes
+      if (j == -1)
+      {
+        if (count == 0)
+          return -1;
+        throw new ProtoException("truncated tag", pos0);
+      }
+
+      i |= (j & 0x7f) << shift;
+
+      if ((j & 0x80) == 0)
+      {
+        int fieldNumber = i >>> 3;
+        int wireType = i & 0x7;
+
+        if (fieldNumber == 0)
+          throw new ProtoException("invalid tag, field number 0", pos0);
+        if (fieldNumber > 0x1FFFFFFF)
+          throw new ProtoException("invalid tag, field number too large " + fieldNumber, pos0);
+        if (fieldNumber >= 19000 && fieldNumber <= 19999)
+          throw new ProtoException("invalid tag, reserved field number " + fieldNumber, pos0);
+
+        if (wireType > 5 || wireType == 3 || wireType == 4)
+          throw new ProtoException("invalid/unsupported wire type " + wireType, pos0);
+
+        return i;
+      }
+
+      shift += 7;
+    }
+
+    // If we consumed 5 bytes and still have continuation, it's a malformed varint32 key
+    throw new ProtoException("malformed tag varint (too long)", pos0);
+  }
+
 }

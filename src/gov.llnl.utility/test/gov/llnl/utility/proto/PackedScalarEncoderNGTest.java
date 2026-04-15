@@ -26,7 +26,7 @@ public class PackedScalarEncoderNGTest
 
     static
     {
-      ProtoBuilder<A, A> builder = newBuilder(null,"A",A::new);
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", A::new);
       builder.field("a", 1).packed(Type.SInt32).as((o) -> o.data, (o, v) -> o.data = v);
       FIELDS = builder.toFields();
     }

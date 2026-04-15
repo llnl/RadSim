@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ImportsReader.
  */
-strictfp public class ImportsReaderNGTest
+public class ImportsReaderNGTest
 {
 
   public ImportsReaderNGTest()
@@ -55,6 +55,7 @@ strictfp public class ImportsReaderNGTest
 
   /**
    * Test of start method, of class ImportsReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -77,6 +78,7 @@ strictfp public class ImportsReaderNGTest
 
   /**
    * Test of getHandlers method, of class ImportsReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -89,6 +91,7 @@ strictfp public class ImportsReaderNGTest
 
   /**
    * Test of createSchemaType method, of class ImportsReader.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -101,6 +104,7 @@ strictfp public class ImportsReaderNGTest
 
   /**
    * Test of createSchemaElement method, of class ImportsReader.
+   *
    * @throws java.lang.Exception
    */
   @Test

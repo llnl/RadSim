@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ExpandableObject.
  */
-strictfp public class ExpandableObjectNGTest
+public class ExpandableObjectNGTest
 {
 
   public ExpandableObjectNGTest()
@@ -90,7 +90,7 @@ strictfp public class ExpandableObjectNGTest
     assertNull(instance.getAttribute("string", String.class));
 
     assertEquals(instance.getAttribute("int", Integer.TYPE), Integer.valueOf(1));
-    assertEquals((Double)instance.getAttribute("double", Double.TYPE), (Double)3.14159265359D);
+    assertEquals((Double) instance.getAttribute("double", Double.TYPE), (Double) 3.14159265359D);
   }
 
   @Test(expectedExceptions =
@@ -109,7 +109,7 @@ strictfp public class ExpandableObjectNGTest
     assertNull(instance.getAttribute(Attribute.of("AutobotsRollOut!", Integer.TYPE)));
 
     assertEquals(instance.getAttribute(Attribute.of("int", Integer.TYPE)), Integer.valueOf(1));
-    assertEquals((Double)instance.getAttribute(Attribute.of("double", Double.TYPE)), (Double)3.14159265359D);
+    assertEquals((Double) instance.getAttribute(Attribute.of("double", Double.TYPE)), (Double) 3.14159265359D);
   }
 
   @Test(expectedExceptions =
@@ -128,7 +128,7 @@ strictfp public class ExpandableObjectNGTest
     assertNull(instance.getAttribute("Ohana means family. Family means no one gets left behind.", String.class, null));
 
     assertEquals(instance.getAttribute("int", Integer.TYPE, null), Integer.valueOf(1));
-    assertEquals((Double)instance.getAttribute("double", Double.TYPE, null), (Double)3.14159265359D);
+    assertEquals((Double) instance.getAttribute("double", Double.TYPE, null), (Double) 3.14159265359D);
     assertEquals(instance.getAttribute("You are who you choose to be", String.class, "Superman"), "Superman");
   }
 

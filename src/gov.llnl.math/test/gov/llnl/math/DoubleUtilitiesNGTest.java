@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoubleUtilities.
  */
-strictfp public class DoubleUtilitiesNGTest
+public class DoubleUtilitiesNGTest
 {
 
   /**

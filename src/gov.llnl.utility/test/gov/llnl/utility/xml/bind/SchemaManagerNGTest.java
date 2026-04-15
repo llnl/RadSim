@@ -18,7 +18,7 @@ import org.xml.sax.EntityResolver;
 /**
  * Test code for SchemaManager.
  */
-strictfp public class SchemaManagerNGTest
+public class SchemaManagerNGTest
 {
 
   public SchemaManagerNGTest()

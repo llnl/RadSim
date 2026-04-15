@@ -31,11 +31,11 @@ public class MCNP_Job {
         return new MCNP_Job(name, deck, outputDir, "mcnp6");
     }
 
-    public Result run() throws Exception {
+    public File run() throws Exception {
         return run(1);
     }
 
-    public Result run(int tasks) throws Exception {
+    public File run(int tasks) throws Exception {
 
         // Create the various files
         Path path = Paths.get(outputDir.toString(), name + "_" + System.currentTimeMillis());
@@ -67,8 +67,7 @@ public class MCNP_Job {
             line = stdInput.readLine();
         }
 
-        // Todo: parse output file into java objects
-        return new Result(outputFile);
+        return outputFile;
     }
 
 

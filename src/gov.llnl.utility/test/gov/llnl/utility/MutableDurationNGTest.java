@@ -24,9 +24,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for MutableDuration.
  */
-strictfp public class MutableDurationNGTest
+public class MutableDurationNGTest
 {
-  
+
   public MutableDurationNGTest()
   {
   }
@@ -62,7 +62,7 @@ strictfp public class MutableDurationNGTest
     assertEquals(instance.get(ChronoUnit.NANOS), 1000);
   }
 
-  @Test(expectedExceptions=UnsupportedTemporalTypeException.class)
+  @Test(expectedExceptions = UnsupportedTemporalTypeException.class)
   public void testGet1()
   {
     MutableDuration instance = new MutableDuration(500, 1000);
@@ -145,7 +145,7 @@ strictfp public class MutableDurationNGTest
     assertEquals(instance.compareTo(Duration.ofSeconds(15)), -1);
     assertEquals(instance.compareTo(Duration.ofSeconds(0)), 1);
   }
-  
+
   /**
    * Test of equals method, of class MutableDuration.
    */
@@ -160,8 +160,8 @@ strictfp public class MutableDurationNGTest
     assertTrue(instance.equals(mdField));
     assertTrue(instance.equals(taField));
   }
-  
-   /**
+
+  /**
    * Test of clear method, of class MutableDuration.
    */
   @Test
@@ -172,7 +172,7 @@ strictfp public class MutableDurationNGTest
     assertTrue(instance.seconds == 0);
     assertTrue(instance.nanos == 0);
   }
-  
+
   /**
    * Test of isZero method, of class MutableDuration.
    */
@@ -186,7 +186,7 @@ strictfp public class MutableDurationNGTest
     instance = new MutableDuration(0, 0);
     assertTrue(instance.isZero());
   }
-  
+
   /**
    * Test of isNegative method, of class MutableDuration.
    */
@@ -198,7 +198,7 @@ strictfp public class MutableDurationNGTest
     instance = new MutableDuration(-10L, 1);
     assertTrue(instance.isNegative());
   }
-  
+
   /**
    * Test of assign method, of class MutableDuration.
    */
@@ -210,7 +210,7 @@ strictfp public class MutableDurationNGTest
     instance.assign(dField);
     assertEquals(instance, new MutableDuration(0, 0));
   }
-  
+
   /**
    * Test of subtractAssign method, of class MutableDuration.
    */
@@ -222,8 +222,8 @@ strictfp public class MutableDurationNGTest
     instance.subtractAssign(dField);
     assertEquals(instance, new MutableDuration(10L, 1));
   }
-  
-   /**
+
+  /**
    * Test of toMillis method, of class MutableDuration.
    */
   @Test
@@ -234,7 +234,7 @@ strictfp public class MutableDurationNGTest
     long result = instance.toMillis();
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of of method, of class MutableDuration.
    */
@@ -247,7 +247,7 @@ strictfp public class MutableDurationNGTest
     MutableDuration expResult = instance.of(dField);
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of ofSeconds method, of class MutableDuration.
    */
@@ -256,7 +256,7 @@ strictfp public class MutableDurationNGTest
   {
     // Tested in testOf
   }
-  
+
   /**
    * Test of of toString, of class MutableDuration.
    */

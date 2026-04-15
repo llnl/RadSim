@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for BooleanContents.
  */
-strictfp public class BooleanContentsNGTest
+public class BooleanContentsNGTest
 {
-  
+
   public BooleanContentsNGTest()
   {
   }
@@ -49,11 +49,11 @@ strictfp public class BooleanContentsNGTest
   {
     BooleanContents instance = new BooleanContents();
   }
-  
+
   @Test
   public void testSomeMethod()
   {
     // Tested end to end.
   }
-  
+
 }

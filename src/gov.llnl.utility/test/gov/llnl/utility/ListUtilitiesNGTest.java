@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ListUtilities.
  */
-strictfp public class ListUtilitiesNGTest
+public class ListUtilitiesNGTest
 {
 
   /**
@@ -26,8 +26,8 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testNewList()
   {
-    Iterable<Integer> iterable = Arrays.asList(1,2,3);
-    List expResult = Arrays.asList(1,2,3);
+    Iterable<Integer> iterable = Arrays.asList(1, 2, 3);
+    List expResult = Arrays.asList(1, 2, 3);
     List result = ListUtilities.newList(iterable);
     assertEquals(result, expResult);
   }
@@ -38,8 +38,8 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testPermute()
   {
-    List<Integer> control = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
-    List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+    List<Integer> control = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     int range = list.size();
     ListUtilities.permute(list, range);
     // Do we have the same list object
@@ -63,8 +63,8 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testUnique()
   {
-    List<Integer> list = Arrays.asList(1,4,2,2,1,2,3,4,3,1,3,4);
-    List expResult = Arrays.asList(1,2,3,4);
+    List<Integer> list = Arrays.asList(1, 4, 2, 2, 1, 2, 3, 4, 3, 1, 3, 4);
+    List expResult = Arrays.asList(1, 2, 3, 4);
     List<Integer> result = ListUtilities.unique(list);
     assertEquals(result, expResult);
   }
@@ -75,7 +75,7 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testGetDoubleField()
   {
-    List<Integer> list = Arrays.asList(1,2,3,4);
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
     ToDoubleFunction<Integer> mapper = value -> value * 2.0;
     double[] expResult = new double[]
     {
@@ -91,8 +91,8 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testReverse_1args_1()
   {
-    List<Integer> list = Arrays.asList(1,2,3,4);
-    Integer[] expResult = Arrays.asList(4,3,2,1).toArray(Integer[]::new);
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
+    Integer[] expResult = Arrays.asList(4, 3, 2, 1).toArray(Integer[]::new);
     ReverseCollection<Integer> result = ListUtilities.reverse(list);
 
     Integer[] resultArray = new Integer[result.size()];
@@ -126,7 +126,7 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testFindFirst()
   {
-    List<Integer> list = Arrays.asList(1,2,3,4);
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
     ListUtilities.FindMatcher<Integer> matcher = value -> value > 2;
     ListIterator result = ListUtilities.findFirst(list, matcher);
     assertEquals(result.next(), 3);
@@ -140,7 +140,7 @@ strictfp public class ListUtilitiesNGTest
   @Test
   public void testReplaceFirst()
   {
-    List<Integer> list = Arrays.asList(1,2,3,4);
+    List<Integer> list = Arrays.asList(1, 2, 3, 4);
     Integer replacement = 21;
     ListUtilities.FindMatcher<Integer> matcher = value -> value == 2;
     Integer result = ListUtilities.replaceFirst(list, replacement, matcher);
@@ -158,7 +158,7 @@ strictfp public class ListUtilitiesNGTest
   })
   public void testShrinkTo()
   {
-    List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
+    List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
     int size = 2;
 
     List<Integer> result = ListUtilities.shrinkTo(list, size);
@@ -181,7 +181,7 @@ strictfp public class ListUtilitiesNGTest
     ArrayList<Integer> list = new ArrayList<>(0);
     int requiredSize = 10;
     ListUtilities.ensureSize(list, requiredSize);
-    
+
     assertEquals(list.size(), requiredSize);
   }
 

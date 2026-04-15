@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema elementFormDefault="qualified" xmlns:n42="http://physics.nist.gov/N42/2011/N42" n42:version="1.0" targetNamespace="http://physics.nist.gov/N42/2011/N42" xmlns:util="http://utility.llnl.gov" util:version="1.0" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://utility.llnl.gov" schemaLocation="http://utility.llnl.gov/schema/utility.xsd"/>
+  <xs:element name="AnalysisAlgorithmSetting" type="n42:AnalysisAlgorithmSettingType" util:class="gov.nist.physics.n42.data.AnalysisAlgorithmSetting"/>
+  <xs:complexType name="AnalysisAlgorithmSettingType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="AnalysisAlgorithmSettingName" type="xs:string"/>
+      <xs:element minOccurs="1" name="AnalysisAlgorithmSettingValue" type="xs:string"/>
+      <xs:element minOccurs="1" name="AnalysisAlgorithmSettingUnits" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="AnalysisAlgorithmVersion" type="n42:AnalysisAlgorithmVersionType" util:class="gov.nist.physics.n42.data.AnalysisAlgorithmVersion"/>
+  <xs:complexType name="AnalysisAlgorithmVersionType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="AnalysisAlgorithmComponentName" type="xs:string"/>
+      <xs:element minOccurs="1" name="AnalysisAlgorithmComponentVersion" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="AnalysisResults" type="n42:AnalysisResultsType" util:class="gov.nist.physics.n42.data.AnalysisResults"/>
+  <xs:element abstract="true" name="AnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="AnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="AnalysisStartDateTime" type="xs:string"/>
+      <xs:element minOccurs="0" name="AnalysisAlgorithmName" type="xs:string"/>
+      <xs:element minOccurs="0" name="AnalysisAlgorithmCreatorName" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AnalysisAlgorithmVersion" type="n42:AnalysisAlgorithmVersionType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="AnalysisAlgorithmSetting" type="n42:AnalysisAlgorithmSettingType"/>
+      <xs:element minOccurs="0" name="AnalysisResultStatusCode" type="util:EnumReader-type"/>
+      <xs:element minOccurs="0" name="AnalysisConfidenceValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="AnalysisResultDescription" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadAlarm" type="n42:RadAlarmType"/>
+      <xs:element minOccurs="0" name="NuclideAnalysisResults" type="n42:NuclideAnalysisResultsType"/>
+      <xs:element minOccurs="0" name="SpectrumPeakAnalysisResults" type="n42:SpectrumPeakAnalysisResultsType"/>
+      <xs:element minOccurs="0" name="GrossCountAnalysisResults" type="n42:GrossCountAnalysisResultsType"/>
+      <xs:element minOccurs="0" name="DoseAnalysisResults" type="n42:DoseAnalysisResultsType"/>
+      <xs:element minOccurs="0" name="ExposureAnalysisResults" type="n42:ExposureAnalysisResultsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Fault" type="n42:FaultType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:AnalysisResultsExtension"/>
+    </xs:sequence>
+    <xs:attribute name="derivedDataReferences" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radMeasurementGroupReferences" type="xs:string"/>
+    <xs:attribute name="radMeasurementReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="ChannelData" type="n42:ChannelDataType" util:class="[D"/>
+  <xs:complexType name="ChannelDataType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="compressionCode" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="Characteristic" type="n42:CharacteristicType" util:class="gov.nist.physics.n42.data.Characteristic"/>
+  <xs:element name="CharacteristicGroup" type="n42:CharacteristicGroupType" util:class="gov.nist.physics.n42.data.CharacteristicGroup"/>
+  <xs:complexType name="CharacteristicGroupType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="CharacteristicGroupName" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Characteristic" type="n42:CharacteristicType"/>
+    </xs:sequence>
+    <xs:attribute name="groupOutOfLimits" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="CharacteristicType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="CharacteristicName" type="xs:string"/>
+      <xs:element name="CharacteristicValue" type="xs:string"/>
+      <xs:element name="CharacteristicValueUnits" type="xs:string"/>
+      <xs:element name="CharacteristicValueDataClassCode" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="valueOutOfLimits" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="Characteristics" type="n42:CharacteristicsType" util:class="gov.nist.physics.n42.data.Characteristics"/>
+  <xs:complexType name="CharacteristicsType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Characteristic" type="n42:CharacteristicType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CharacteristicGroup" type="n42:CharacteristicGroupType"/>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="CountRate" type="n42:CountRateType" util:class="gov.nist.physics.n42.data.DoseRate"/>
+  <xs:complexType name="CountRateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="CountRateValue" type="n42:QuantityType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string" use="required"/>
+    <xs:attribute name="radRawDoseRateReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="DerivedData" type="n42:DerivedDataType" util:class="gov.nist.physics.n42.data.DerivedData"/>
+  <xs:element abstract="true" name="DerivedDataExtension" nillable="false"/>
+  <xs:complexType name="DerivedDataType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="MeasurementClassCode" type="xs:string"/>
+      <xs:element minOccurs="1" name="StartDateTime" type="xs:string"/>
+      <xs:element minOccurs="1" name="RealTimeDuration" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Spectrum" type="n42:SpectrumType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="GrossCounts" type="n42:GrossCountsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="DoseRate" type="n42:DoseRateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TotalDose" type="n42:DoseRateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExposureRate" type="n42:ExposureRateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TotalExposure" type="n42:ExposureRateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:DerivedDataExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="DoseAnalysisResults" type="n42:DoseAnalysisResultsType" util:class="gov.nist.physics.n42.data.DoseAnalysisResults"/>
+  <xs:element abstract="true" name="DoseAnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="DoseAnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="AverageDoseRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="AverageDoseRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MaximumDoseRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MinimumDoseRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundDoseRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundDoseRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="TotalDoseValue" type="n42:QuantityType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:DoseAnalysisResultsExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="DoseRate" type="n42:DoseRateType" util:class="gov.nist.physics.n42.data.DoseRate"/>
+  <xs:complexType name="DoseRateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="DoseRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="DoseRateLevelDescription" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string" use="required"/>
+    <xs:attribute name="radRawDoseRateReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="EfficiencyCalibration" type="n42:EfficiencyCalibrationType" util:class="gov.nist.physics.n42.data.EfficiencyCalibration"/>
+  <xs:complexType name="EfficiencyCalibrationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="EnergyValues" type="util:string-attr"/>
+      <xs:element minOccurs="1" name="EfficiencyValues" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="EfficiencyUncertaintyValues" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="CalibrationDateTime" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="EnergyCalibration" type="n42:EnergyCalibrationType" util:class="gov.nist.physics.n42.data.EnergyCalibration"/>
+  <xs:complexType name="EnergyCalibrationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:choice minOccurs="1">
+        <xs:element name="CoefficientValues" type="util:string-attr"/>
+        <xs:element name="EnergyBoundaryValues" type="util:string-attr"/>
+        <xs:element minOccurs="0" name="EnergyValues" type="util:string-attr"/>
+        <xs:element minOccurs="0" name="EnergyDeviationValues" type="util:string-attr"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="CalibrationDateTime" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="EnergyWindows" type="n42:EnergyWindowsType" util:class="gov.nist.physics.n42.data.EnergyWindows"/>
+  <xs:complexType name="EnergyWindowsType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="WindowStartEnergyValues" type="util:string-attr"/>
+      <xs:element minOccurs="1" name="WindowEndEnergyValues" type="util:string-attr"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="ExposureAnalysisResults" type="n42:ExposureAnalysisResultsType" util:class="gov.nist.physics.n42.data.ExposureAnalysisResults"/>
+  <xs:element abstract="true" name="ExposureAnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="ExposureAnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="AverageExposureRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="AverageExposureRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MaximumExposureRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MinimumExposureRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundExposureRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundExposureRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="TotalExposureValue" type="n42:QuantityType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:ExposureAnalysisResultsExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="ExposureRate" type="n42:ExposureRateType" util:class="gov.nist.physics.n42.data.ExposureRate"/>
+  <xs:complexType name="ExposureRateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="ExposureRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="ExposureRateLevelDescription" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string" use="required"/>
+    <xs:attribute name="radRawExposureRateReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="FWHMCalibration" type="n42:FWHMCalibrationType" util:class="gov.nist.physics.n42.data.FWHMCalibration"/>
+  <xs:complexType name="FWHMCalibrationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="EnergyValues" type="util:string-attr"/>
+      <xs:element minOccurs="1" name="FWHMValues" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="FWHMUncertaintyValues" type="util:string-attr"/>
+      <xs:element minOccurs="0" name="CalibrationDateTime" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="Fault" type="n42:FaultType" util:class="gov.nist.physics.n42.data.Fault"/>
+  <xs:element abstract="true" name="FaultExtension" nillable="false"/>
+  <xs:complexType name="FaultType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="FaultCodeValue" type="xs:string"/>
+      <xs:element minOccurs="1" name="FaultDescription" type="xs:string"/>
+      <xs:element minOccurs="1" name="FaultSeverityCode" type="util:EnumReader-type"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:FaultExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="GeographicPoint" type="n42:GeographicPointType" util:class="gov.nist.physics.n42.data.GeographicPoint"/>
+  <xs:complexType name="GeographicPointType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="LatitudeValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="1" name="LongitudeValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="ElevationValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="ElevationOffsetValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="GeoPointAccuracyValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="ElevationAccuracyValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="ElevationOffsetAccuracyValue" type="util:double-attr"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GrossCountAnalysisResults" type="n42:GrossCountAnalysisResultsType" util:class="gov.nist.physics.n42.data.GrossCountAnalysisResults"/>
+  <xs:element abstract="true" name="GrossCountAnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="GrossCountAnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="AverageCountRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="AverageCountRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MaximumCountRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="MinimumCountRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="TotalCountsValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundCountRateValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="BackgroundCountRateUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="SourcePosition" type="n42:SourcePositionType"/>
+      <xs:element minOccurs="0" name="SourcePosition" type="n42:SourcePositionType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:GrossCountAnalysisResultsExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="GrossCounts" type="n42:GrossCountsType" util:class="gov.nist.physics.n42.data.GrossCounts"/>
+  <xs:complexType name="GrossCountsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="LiveTimeDuration" type="util:DurationContents-type"/>
+      <xs:element minOccurs="0" name="CountData" type="n42:NonNegativeDoubleListType"/>
+    </xs:sequence>
+    <xs:attribute name="energyWindowsReference" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="LocationDescription" type="n42:LocationDescriptionType" util:class="gov.nist.physics.n42.data.LocationDescription"/>
+  <xs:complexType name="LocationDescriptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="MultimediaData" type="n42:MultimediaDataType" util:class="gov.nist.physics.n42.data.MultimediaData"/>
+  <xs:element abstract="true" name="MultimediaDataExtension" nillable="false"/>
+  <xs:complexType name="MultimediaDataType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:MultimediaDataExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radItemInformationReferences" type="xs:string"/>
+    <xs:attribute name="sequenceNumber" type="xs:int"/>
+  </xs:complexType>
+  <xs:element name="NonNegativeDoubleList" type="n42:NonNegativeDoubleListType" util:class="[D"/>
+  <xs:complexType name="NonNegativeDoubleListType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="Nuclide" type="n42:NuclideType" util:class="gov.nist.physics.n42.data.Nuclide"/>
+  <xs:element name="NuclideAnalysisResults" type="n42:NuclideAnalysisResultsType" util:class="gov.nist.physics.n42.data.NuclideAnalysisResults"/>
+  <xs:element abstract="true" name="NuclideAnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="NuclideAnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Nuclide" type="n42:NuclideType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:NuclideAnalysisResultsExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element abstract="true" name="NuclideExtension" nillable="false"/>
+  <xs:complexType name="NuclideType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="NuclideIdentifiedIndicator" type="xs:boolean"/>
+      <xs:element minOccurs="1" name="NuclideName" type="xs:string"/>
+      <xs:element minOccurs="0" name="NuclideActivityValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="NuclideActivityUncertaintyValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="NuclideMinimumDetectableActivityValue" type="n42:QuantityType"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element name="NuclideIDConfidenceDescription" type="xs:string"/>
+        <xs:element name="NuclideIDConfidenceValue" type="util:double-attr"/>
+        <xs:element name="NuclideIDConfidenceUncertaintyValue" type="util:double-attr"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="NuclideCategoryDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="NuclideSourceGeometryCode" type="util:EnumReader-type"/>
+      <xs:element minOccurs="0" name="SourcePosition" type="n42:SourcePositionType"/>
+      <xs:element minOccurs="0" name="NuclideShieldingAtomicNumber" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="NuclideShieldingArealDensityValue" type="util:double-attr"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:NuclideExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="Orientation" type="n42:OrientationType" util:class="gov.nist.physics.n42.data.Orientation"/>
+  <xs:complexType name="OrientationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="AzimuthValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="InclinationValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RollValue" type="n42:QuantityType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Origin" type="n42:OriginType" util:class="gov.nist.physics.n42.data.Origin"/>
+  <xs:complexType name="OriginType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GeographicPoint" type="n42:GeographicPointType"/>
+      <xs:element minOccurs="0" name="OriginDescription" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="originReference" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="Quantity" type="n42:QuantityType" util:class="gov.nist.physics.n42.data.Quantity"/>
+  <xs:complexType name="QuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="units" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="RadAlarm" type="n42:RadAlarmType" util:class="gov.nist.physics.n42.data.RadAlarm"/>
+  <xs:element abstract="true" name="RadAlarmExtension" nillable="false"/>
+  <xs:complexType name="RadAlarmType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadAlarmDateTime" type="xs:string"/>
+      <xs:element name="RadAlarmCategoryCode" type="util:EnumReader-type"/>
+      <xs:element minOccurs="0" name="RadAlarmDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="AlarmAudibleIndicator" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="RadAlarmLightColor" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadAlarmEnergyWindowIndices" type="util:string-attr"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadAlarmExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radDetectorInformationReferences" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadDetectorInformation" type="n42:RadDetectorInformationType" util:class="gov.nist.physics.n42.data.RadDetectorInformation"/>
+  <xs:element abstract="true" name="RadDetectorInformationExtension" nillable="false"/>
+  <xs:complexType name="RadDetectorInformationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadDetectorName" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadDetectorCategoryCode" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadDetectorKindCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadDetectorDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadDetectorLengthValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RadDetectorWidthValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RadDetectorDepthValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RadDetectorDiameterValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RadDetectorVolumeValue" type="n42:QuantityType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadDetectorCharacteristics" type="n42:CharacteristicsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadDetectorInformationExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadDetectorState" type="n42:RadDetectorStateType" util:class="gov.nist.physics.n42.data.RadDetectorState"/>
+  <xs:element abstract="true" name="RadDetectorStateExtension" nillable="false"/>
+  <xs:complexType name="RadDetectorStateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="StateVector" type="n42:StateVectorType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Fault" type="n42:FaultType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadDetectorCharacteristics" type="n42:CharacteristicsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadDetectorStateExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadInstrumentData" type="n42:RadInstrumentDataType" util:class="gov.nist.physics.n42.data.RadInstrumentData"/>
+  <xs:element abstract="true" name="RadInstrumentDataExtension" nillable="false"/>
+  <xs:complexType name="RadInstrumentDataType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadInstrumentDataCreatorName" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadInstrumentInformation" type="n42:RadInstrumentInformationType"/>
+      <xs:element maxOccurs="unbounded" name="RadDetectorInformation" type="n42:RadDetectorInformationType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadItemInformation" type="n42:RadItemInformationType"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element name="RadMeasurement" type="n42:RadMeasurementType"/>
+        <xs:element name="RadMeasurementGroup" type="n42:RadMeasurementGroupType"/>
+        <xs:element name="EnergyCalibration" type="n42:EnergyCalibrationType"/>
+        <xs:element name="FWHMCalibration" type="n42:FWHMCalibrationType"/>
+        <xs:element name="TotalEfficiencyCalibration" type="n42:EfficiencyCalibrationType"/>
+        <xs:element name="FullEnergyPeakEfficiencyCalibration" type="n42:EfficiencyCalibrationType"/>
+        <xs:element name="IntrinsicFullEnergyPeakEfficiencyCalibration" type="n42:EfficiencyCalibrationType"/>
+        <xs:element name="IntrinsicSingleEscapePeakEfficiencyCalibration" type="n42:EfficiencyCalibrationType"/>
+        <xs:element name="IntrinsicDoubleEscapePeakEfficiencyCalibration" type="n42:EfficiencyCalibrationType"/>
+        <xs:element name="EnergyWindows" type="n42:EnergyWindowsType"/>
+        <xs:element name="DerivedData" type="n42:DerivedDataType"/>
+        <xs:element name="AnalysisResults" type="n42:AnalysisResultsType"/>
+      </xs:choice>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadInstrumentDataExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="n42DocDateTime" type="xs:string"/>
+    <xs:attribute name="n42DocUUID" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="RadInstrumentInformation" type="n42:RadInstrumentInformationType" util:class="gov.nist.physics.n42.data.RadInstrumentInformation"/>
+  <xs:element abstract="true" name="RadInstrumentInformationExtension" nillable="false"/>
+  <xs:complexType name="RadInstrumentInformationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadInstrumentManufacturerName" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadInstrumentIdentifier" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadInstrumentModelName" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadInstrumentDescription" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadInstrumentClassCode" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="RadInstrumentVersion" type="n42:RadInstrumentVersionType"/>
+      <xs:element minOccurs="0" name="RadInstrumentQualityControl" type="n42:RadInstrumentQualityControlType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadInstrumentCharacteristics" type="n42:CharacteristicsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadInstrumentInformationExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadInstrumentQualityControl" type="n42:RadInstrumentQualityControlType" util:class="gov.nist.physics.n42.data.RadInstrumentQualityControl"/>
+  <xs:complexType name="RadInstrumentQualityControlType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="InspectionDateTime" type="xs:string"/>
+      <xs:element minOccurs="1" name="InCalibrationIndicator" type="xs:boolean"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="RadInstrumentState" type="n42:RadInstrumentStateType" util:class="gov.nist.physics.n42.data.RadInstrumentState"/>
+  <xs:element abstract="true" name="RadInstrumentStateExtension" nillable="false"/>
+  <xs:complexType name="RadInstrumentStateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadInstrumentModeCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadInstrumentModeDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="StateVector" type="n42:StateVectorType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Fault" type="n42:FaultType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadInstrumentCharacteristics" type="n42:CharacteristicsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadInstrumentStateExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radInstrumentInformationReference" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="RadInstrumentVersion" type="n42:RadInstrumentVersionType" util:class="gov.nist.physics.n42.data.RadInstrumentVersion"/>
+  <xs:complexType name="RadInstrumentVersionType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="RadInstrumentComponentName" type="xs:string"/>
+      <xs:element name="RadInstrumentComponentVersion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RadItemInformation" type="n42:RadItemInformationType" util:class="gov.nist.physics.n42.data.RadItemInformation"/>
+  <xs:element abstract="true" name="RadItemInformationExtension" nillable="false"/>
+  <xs:complexType name="RadItemInformationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadItemDescription" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadItemQuantity" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RadItemMeasurementGeometryDescription" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadItemCharacteristics" type="n42:CharacteristicsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadItemInformationExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadItemQuantity" type="n42:RadItemQuantityType" util:class="gov.nist.physics.n42.data.RadItemQuantity"/>
+  <xs:complexType name="RadItemQuantityType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="RadItemQuantityValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="RadItemQuantityUncertaintyValue" type="util:double-attr"/>
+      <xs:element minOccurs="1" name="RadItemQuantityUnits" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadItemState" type="n42:RadItemStateType" util:class="gov.nist.physics.n42.data.RadItemState"/>
+  <xs:element abstract="true" name="RadItemStateExtension" nillable="false"/>
+  <xs:complexType name="RadItemStateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="StateVector" type="n42:StateVectorType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadItemStateExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="radItemInformationReference" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="RadMeasurement" type="n42:RadMeasurementType" util:class="gov.nist.physics.n42.data.RadMeasurement"/>
+  <xs:element abstract="true" name="RadMeasurementExtension" nillable="false"/>
+  <xs:element name="RadMeasurementGroup" type="n42:RadMeasurementGroupType" util:class="gov.nist.physics.n42.data.RadMeasurementGroup"/>
+  <xs:complexType name="RadMeasurementGroupType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="RadMeasurementGroupDescription" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radMeasurementGroupUUID" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="RadMeasurementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="1" name="MeasurementClassCode" type="util:EnumReader-type"/>
+      <xs:element minOccurs="1" name="StartDateTime" type="xs:string"/>
+      <xs:element minOccurs="1" name="RealTimeDuration" type="util:DurationContents-type"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Spectrum" type="n42:SpectrumType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="GrossCounts" type="n42:GrossCountsType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="DoseRate" type="n42:DoseRateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CountRate" type="n42:CountRateType"/>
+      <xs:element minOccurs="0" name="RadInstrumentState" type="n42:RadInstrumentStateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadDetectorState" type="n42:RadDetectorStateType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RadItemState" type="n42:RadItemStateType"/>
+      <xs:element minOccurs="0" name="OccupancyIndicator" type="xs:boolean"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:RadMeasurementExtension"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="radMeasurementGroupReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="RelativeLocation" type="n42:RelativeLocationType" util:class="gov.nist.physics.n42.data.RelativeLocation"/>
+  <xs:complexType name="RelativeLocationType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RelativeLocationAzimuthValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="RelativeLocationInclinationValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="0" name="DistanceValue" type="n42:QuantityType"/>
+      <xs:element minOccurs="1" name="Origin" type="n42:OriginType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SourcePosition" type="n42:SourcePositionType" util:class="gov.nist.physics.n42.data.SourcePosition"/>
+  <xs:complexType name="SourcePositionType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:choice minOccurs="1">
+        <xs:element name="GeographicPoint" type="n42:GeographicPointType"/>
+        <xs:element name="LocationDescription" type="n42:LocationDescriptionType"/>
+        <xs:element name="RelativeLocation" type="n42:RelativeLocationType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Spectrum" type="n42:SpectrumType" util:class="gov.nist.physics.n42.data.Spectrum"/>
+  <xs:element abstract="true" name="SpectrumExtension" nillable="false"/>
+  <xs:element name="SpectrumPeak" type="n42:SpectrumPeakType" util:class="gov.nist.physics.n42.data.SpectrumPeak"/>
+  <xs:element name="SpectrumPeakAnalysisResults" type="n42:SpectrumPeakAnalysisResultsType" util:class="gov.nist.physics.n42.data.SpectrumPeakAnalysisResults"/>
+  <xs:element abstract="true" name="SpectrumPeakAnalysisResultsExtension" nillable="false"/>
+  <xs:complexType name="SpectrumPeakAnalysisResultsType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" name="SpectrumPeak" type="n42:SpectrumPeakType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:SpectrumPeakAnalysisResultsExtension"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element abstract="true" name="SpectrumPeakExtension" nillable="false"/>
+  <xs:complexType name="SpectrumPeakType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element minOccurs="0" name="SpectrumPeakEnergyValue" type="util:double-attr"/>
+      <xs:element minOccurs="0" name="SpectrumPeakNetAreaValue" type="util:double-attr"/>
+      <xs:element maxOccurs="unbounded" name="SpectrumPeakNetAreaUncertaintyValue" type="util:double-attr"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:SpectrumPeakExtension"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpectrumType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Remark" type="xs:string"/>
+      <xs:element name="LiveTimeDuration" type="util:DurationContents-type"/>
+      <xs:element name="ChannelData" type="n42:ChannelDataType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="n42:SpectrumExtension"/>
+    </xs:sequence>
+    <xs:attribute name="FWHMCalibrationReference" type="xs:string"/>
+    <xs:attribute name="energyCalibrationReference" type="xs:string" use="required"/>
+    <xs:attribute name="fullEnergyPeakEfficiencyCalibrationReference" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="intrinsicDoubleEscapePeakEfficiencyCalibrationReference" type="xs:string"/>
+    <xs:attribute name="intrinsicFullEnergyPeakEfficiencyCalibrationReference" type="xs:string"/>
+    <xs:attribute name="intrinsicSingleEscapePeakEfficiencyCalibrationReference" type="xs:string"/>
+    <xs:attribute name="radDetectorInformationReference" type="xs:string"/>
+    <xs:attribute name="radRawSpectrumReferences" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="StateVector" type="n42:StateVectorType" util:class="gov.nist.physics.n42.data.StateVector"/>
+  <xs:complexType name="StateVectorType">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="GeographicPoint" type="n42:GeographicPointType"/>
+        <xs:element name="LocationDescription" type="n42:LocationDescriptionType"/>
+        <xs:element name="RelativeLocation" type="n42:RelativeLocationType"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="Orientation" type="n42:OrientationType"/>
+      <xs:element minOccurs="0" name="SpeedValue" type="n42:QuantityType"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

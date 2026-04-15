@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for PathTrace.
  */
-strictfp public class PathTraceNGTest
+public class PathTraceNGTest
 {
-  
+
   public PathTraceNGTest()
   {
   }
@@ -65,5 +65,5 @@ strictfp public class PathTraceNGTest
     String result = instance.toString();
     assertEquals(result, expResult);
   }
-  
+
 }

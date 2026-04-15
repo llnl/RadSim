@@ -27,6 +27,7 @@ public class SInt64EncodingNGTest
   {
     long i;
     Long j;
+
     public A(long i)
     {
       this.i = i;
@@ -60,7 +61,7 @@ public class SInt64EncodingNGTest
 
     static
     {
-      ProtoBuilder<A,A> builder = newBuilder(null,"A",()->new A(0));
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", () -> new A(0));
       builder.field("i", 1).type(Type.SInt64).asLong(A::getI, A::setI);
       builder.field("j", 2).type(Type.SInt64).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
@@ -89,7 +90,7 @@ public class SInt64EncodingNGTest
     }
     System.out.println();
     assertEquals(a.i, -12345);
-    assertEquals((long)a.j, 12345);
+    assertEquals((long) a.j, 12345);
   }
 
   @Test
@@ -101,9 +102,9 @@ public class SInt64EncodingNGTest
     A o = new A(0);
     ByteBuffer b = ByteBuffer.allocate(3);
     b.order(ByteOrder.LITTLE_ENDIAN);
-    b.put((byte)0xf1);
-    b.put((byte)0xc0);
-    b.put((byte)0x01);
+    b.put((byte) 0xf1);
+    b.put((byte) 0xc0);
+    b.put((byte) 0x01);
     b.rewind();
     SInt64Encoding instance = new SInt64Encoding();
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
@@ -143,7 +144,7 @@ public class SInt64EncodingNGTest
   }
 
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

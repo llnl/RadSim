@@ -35,6 +35,13 @@ class NetworkDoublesEncoding extends MessageEncoding<double[]>
   @Override
   public byte[] serializeContents(ProtoContext context, double[] values)
   {
+    if (values == null)
+    {
+      ByteBuffer bb = ByteBuffer.allocate(Integer.BYTES);
+      bb.putInt(-1);
+      bb.rewind();
+      return bb.array();
+    }
     ByteBuffer bb = ByteBuffer.allocate(values.length * Double.BYTES + Integer.BYTES);
     bb.order(ByteOrder.BIG_ENDIAN);
     bb.putInt(values.length);
@@ -56,12 +63,16 @@ class NetworkDoublesEncoding extends MessageEncoding<double[]>
     if (!bs.hasRemaining())
       return null;
     ByteBuffer bb = bs.request(Integer.BYTES);
+    if (bb.remaining() != Integer.BYTES)
+      throw new ProtoException("trunacted int", bs.position());
     bb.order(ByteOrder.BIG_ENDIAN);
     int sz = bb.getInt();
     if (sz < 0)
       return null;
     double[] values = new double[sz];
     bb = bs.request(sz * Double.BYTES);
+    if (bb.remaining() != sz * Double.BYTES)
+      throw new ProtoException("trunacted double[]", bs.position());
     DoubleBuffer db = bb.asDoubleBuffer();
     if (db.limit() != sz)
       throw new ProtoException("size mismatch (" + sz + "," + db.limit() + ")", bs.position());

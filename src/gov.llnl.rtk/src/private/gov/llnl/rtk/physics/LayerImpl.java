@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/LayerImpl.java ---
 /* 
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -43,9 +44,9 @@ public class LayerImpl implements Layer
     material = layer.getMaterial();
     
     // Copy over the values assuming that they are correct in the layer we are copying
-    inner.assign(layer.getInner());
+    inner.assign(layer.getInnerRadius());
     thickness.assign(layer.getThickness());
-    outer.assign(layer.getOuter());
+    outer.assign(layer.getOuterRadius());
     volume.assign(layer.getVolume());
     mass.assign(layer.getMass());
   }
@@ -64,7 +65,7 @@ public class LayerImpl implements Layer
     if (uptodate)
       return;
     if (this.previous != null)
-      this.inner.value = this.previous.getOuter().get();
+      this.inner.value = this.previous.getOuterRadius().get();
     this.outer.value = this.inner.value + this.thickness.value;
     if (this.geometry != null)
       this.volume.value = this.geometry.computeVolume(inner, thickness).get();
@@ -115,13 +116,13 @@ public class LayerImpl implements Layer
   }
 
   @Override
-  public Quantity getInner()
+  public Quantity getInnerRadius()
   {
     return this.inner;
   }
 
   @Override
-  public Quantity getOuter()
+  public Quantity getOuterRadius()
   {
     return this.outer;
   }

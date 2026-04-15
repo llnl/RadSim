@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixColumnTable.
  */
-strictfp public class MatrixColumnTableNGTest
+public class MatrixColumnTableNGTest
 {
   
   public MatrixColumnTableNGTest()
@@ -90,7 +90,7 @@ strictfp public class MatrixColumnTableNGTest
   {
     MatrixColumnTable instance = new MatrixColumnTable(3,2);
     instance.set(0, 0, 5);
-    assertEquals(instance.get(0, 0), 5.0);
+    assertEquals(instance.get(0, 0), 5.0, 0.0);
   }
 
   /**
@@ -101,7 +101,7 @@ strictfp public class MatrixColumnTableNGTest
   {
     MatrixColumnTable instance = new MatrixColumnTable(3,2);
     instance.set(0, 0, 5);
-    assertEquals(instance.get(0, 0), 5.0);
+    assertEquals(instance.get(0, 0), 5.0, 0.0);
   }
 
   /**

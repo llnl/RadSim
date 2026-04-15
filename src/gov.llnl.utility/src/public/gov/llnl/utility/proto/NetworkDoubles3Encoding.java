@@ -19,7 +19,7 @@ import java.nio.ByteOrder;
  *
  * @author nelson85
  */
- class NetworkDoubles3Encoding extends MessageEncoding<double[][][]>
+class NetworkDoubles3Encoding extends MessageEncoding<double[][][]>
 {
   static final NetworkDoubles3Encoding INSTANCE = new NetworkDoubles3Encoding();
 
@@ -65,6 +65,8 @@ import java.nio.ByteOrder;
       return null;
 
     ByteBuffer bb = bs.request(Integer.BYTES);
+    if (bb.remaining() != Integer.BYTES)
+      throw new ProtoException("truncated int", bs.position());
     bb.order(ByteOrder.BIG_ENDIAN);
     int sz = bb.getInt();
     if (sz < 0)

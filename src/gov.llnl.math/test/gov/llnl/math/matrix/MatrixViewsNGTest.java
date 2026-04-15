@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixViews.
  */
-strictfp public class MatrixViewsNGTest
+public class MatrixViewsNGTest
 {
   /**
    * Test of selectColumn method, of class MatrixViews.
@@ -171,7 +171,7 @@ strictfp public class MatrixViewsNGTest
     assertEquals(result.rows(),5);
     assertEquals(result.columns(),1);
     for (int i=0;i<5;i++)
-      assertEquals(matrix.get(i,i), result.get(i,0));
+      assertEquals(matrix.get(i,i), result.get(i,0), 0.0);
     MatrixOps.fill(result, 0);
     for (int i=0;i<5;i++)
       assertEquals(matrix.get(i,i), 0.0);

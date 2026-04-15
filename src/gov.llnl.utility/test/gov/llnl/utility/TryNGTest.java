@@ -15,14 +15,15 @@ import org.testng.annotations.Test;
 /**
  * Test code for Try.
  */
-strictfp public class TryNGTest
+public class TryNGTest
 {
-  
+
   public TryNGTest()
   {
   }
-  
+
   Object obj;
+
   public void call(Object i) throws FileNotFoundException
   {
     obj = i;
@@ -38,7 +39,7 @@ strictfp public class TryNGTest
     result.accept(this, 1);
     assertEquals(this.obj, 1);
   }
-  
+
   /**
    * Test of promote method, of class Try.
    */
@@ -49,5 +50,5 @@ strictfp public class TryNGTest
     result.accept(2);
     assertEquals(this.obj, 2);
   }
-  
+
 }

@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxGroupBin.java ---
 /* 
  * Copyright 2022, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -7,6 +8,7 @@
 package gov.llnl.rtk.flux;
 
 import java.io.Serializable;
+import java.util.stream.DoubleStream;
 
 /**
  * Representation of group with undefined distribution.

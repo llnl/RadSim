@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for WaveletTransform.
  */
-strictfp public class WaveletTransformNGTest
+public class WaveletTransformNGTest
 {
 
   @Test

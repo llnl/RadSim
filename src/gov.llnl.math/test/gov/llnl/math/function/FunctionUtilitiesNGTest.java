@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for FunctionUtilities.
  */
-strictfp public class FunctionUtilitiesNGTest
+public class FunctionUtilitiesNGTest
 {
   
   public FunctionUtilitiesNGTest()

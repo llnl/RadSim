@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/data/SpectrumReader.java ---
 package gov.llnl.rtk.data;
 
 import gov.llnl.utility.ArrayEncoding;

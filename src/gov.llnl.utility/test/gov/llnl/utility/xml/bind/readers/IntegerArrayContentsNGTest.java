@@ -6,7 +6,6 @@
  */
 package gov.llnl.utility.xml.bind.readers;
 
-
 import gov.llnl.utility.xml.bind.readers.IntegerArrayContents;
 import gov.llnl.utility.ArrayEncoding;
 import static gov.llnl.utility.TestSupport.newElement;
@@ -20,7 +19,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for IntegerArrayContents.
  */
-strictfp public class IntegerArrayContentsNGTest
+public class IntegerArrayContentsNGTest
 {
 
   public IntegerArrayContentsNGTest()

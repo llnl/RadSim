@@ -21,9 +21,9 @@ import org.w3c.dom.Document;
 /**
  * Test code for DocumentWriterImpl.
  */
-strictfp public class DocumentWriterImplNGTest
+public class DocumentWriterImplNGTest
 {
-  
+
   public DocumentWriterImplNGTest()
   {
   }
@@ -128,5 +128,5 @@ strictfp public class DocumentWriterImplNGTest
   {
     // Tested end to end.
   }
-  
+
 }

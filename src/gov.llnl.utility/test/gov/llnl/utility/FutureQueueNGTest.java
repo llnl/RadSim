@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for FutureQueue.
  */
-strictfp public class FutureQueueNGTest
+public class FutureQueueNGTest
 {
-  
+
   public FutureQueueNGTest()
   {
   }
@@ -42,7 +42,8 @@ strictfp public class FutureQueueNGTest
     FutureQueue instance = new FutureQueue();
     assertTrue(instance.isEmpty());
     boolean[] done = new boolean[1];
-    Future<Integer> future = new Future() {
+    Future<Integer> future = new Future()
+    {
       @Override
       public boolean cancel(boolean mayInterruptIfRunning)
       {
@@ -77,7 +78,7 @@ strictfp public class FutureQueueNGTest
     assertFalse(instance.isEmpty());
     instance.get();
     assertFalse(instance.isEmpty());
-    done[0]=true;
+    done[0] = true;
     instance.get();
     assertTrue(instance.isEmpty());
   }
@@ -91,7 +92,8 @@ strictfp public class FutureQueueNGTest
     FutureQueue instance = new FutureQueue();
     assertEquals(instance.size(), 0);
     boolean[] done = new boolean[1];
-    Future<Integer> future = new Future() {
+    Future<Integer> future = new Future()
+    {
       @Override
       public boolean cancel(boolean mayInterruptIfRunning)
       {
@@ -126,7 +128,7 @@ strictfp public class FutureQueueNGTest
     assertEquals(instance.size(), 1);
     instance.get();
     assertEquals(instance.size(), 1);
-    done[0]=true;
+    done[0] = true;
     instance.get();
     assertEquals(instance.size(), 0);
   }
@@ -140,7 +142,8 @@ strictfp public class FutureQueueNGTest
     FutureQueue instance = new FutureQueue();
     assertNull(instance.get());
     boolean[] done = new boolean[1];
-    Future<Integer> future = new Future() {
+    Future<Integer> future = new Future()
+    {
       @Override
       public boolean cancel(boolean mayInterruptIfRunning)
       {
@@ -173,10 +176,10 @@ strictfp public class FutureQueueNGTest
     };
     instance.put(future);
     assertNull(instance.get());
-    done[0]=true;
+    done[0] = true;
     Object result = instance.get();
     assertNotNull(result);
     assertEquals(result, 1);
   }
-  
+
 }

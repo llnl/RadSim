@@ -19,9 +19,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for LongArrayContents.
  */
-strictfp public class LongArrayContentsNGTest
+public class LongArrayContentsNGTest
 {
-  
+
   public LongArrayContentsNGTest()
   {
   }
@@ -51,7 +51,7 @@ strictfp public class LongArrayContentsNGTest
   {
     LongArrayContents instance = new LongArrayContents();
   }
-  
+
   /**
    * Test of createSchemaType method, of class LongArrayContents.
    */
@@ -87,5 +87,5 @@ strictfp public class LongArrayContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

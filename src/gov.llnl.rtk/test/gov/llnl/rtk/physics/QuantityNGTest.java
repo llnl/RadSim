@@ -44,7 +44,7 @@ public class QuantityNGTest
     double value = 5.1;
     Quantity result = Quantity.scalar(value);
     assertEquals(result.getValue(), 5.1, 0.00001);
-    assertEquals(result.getUnits().getSymbol(), null);
+    assertEquals(result.getUnits(), null);
   }
 
   @Test(expectedExceptions = UnitsException.class)
@@ -93,7 +93,7 @@ public class QuantityNGTest
     Quantity instance = Quantity.of(4, "cm");
     Quantity expResult = Quantity.of(16, "cm");
     Quantity result = instance.scaled(scalar);
-    assertEquals(result, expResult);
+    assertEquals(result.get(), expResult.get(), 0.0);
   }
 
   /**

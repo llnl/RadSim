@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for PropertyUtilities.
  */
-strictfp public class PropertyUtilitiesNGTest
+public class PropertyUtilitiesNGTest
 {
 
   public PropertyUtilitiesNGTest()
@@ -24,7 +24,7 @@ strictfp public class PropertyUtilitiesNGTest
   {
     PropertyUtilities instance = new PropertyUtilities();
   }
-  
+
   /**
    * Test of get method, of class PropertyUtilities.
    */

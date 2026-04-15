@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for PackageUtilities.
  */
-strictfp public class PackageUtilitiesNGTest
+public class PackageUtilitiesNGTest
 {
   PackageUtilities pu;
 
@@ -73,7 +73,7 @@ strictfp public class PackageUtilitiesNGTest
   {
     Class<?> klass = pu.getClass();
     URL result = PackageUtilities.getManifestURL(klass);
-    try ( InputStream is = result.openStream())
+    try (InputStream is = result.openStream())
     {
     }
   }

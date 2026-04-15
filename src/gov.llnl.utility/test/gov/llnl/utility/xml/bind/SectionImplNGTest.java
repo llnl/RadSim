@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for SectionImpl.
  */
-strictfp public class SectionImplNGTest
+public class SectionImplNGTest
 {
 
   public SectionImplNGTest()

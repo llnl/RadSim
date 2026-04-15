@@ -16,15 +16,16 @@ import org.testng.annotations.Test;
 /**
  * Test code for SchemaBuilderUtilities.
  */
-strictfp public class SchemaBuilderUtilitiesNGTest
+public class SchemaBuilderUtilitiesNGTest
 {
-  
+
   public SchemaBuilderUtilitiesNGTest()
   {
   }
 
   /**
-   * Test of createSchemaTypeDefaultString method, of class SchemaBuilderUtilities.
+   * Test of createSchemaTypeDefaultString method, of class
+   * SchemaBuilderUtilities.
    */
   @Test
   public void testCreateSchemaTypeDefaultString() throws Exception
@@ -67,5 +68,5 @@ strictfp public class SchemaBuilderUtilitiesNGTest
   {
     // Tested end to end.
   }
-  
+
 }

@@ -13,27 +13,26 @@ import org.testng.annotations.Test;
 /**
  * Test code for AnnotationUtilities.
  */
-strictfp public class AnnotationUtilitiesNGTest
+public class AnnotationUtilitiesNGTest
 {
-  
+
   public AnnotationUtilitiesNGTest()
   {
   }
-  
 
   static class Case1
-  { 
+  {
   }
-  
+
   @Schema.Using(UtilityPackage.class)
   static class Case2
-  {    
+  {
   }
-  
+
   @Schema.Using(UtilityPackage.class)
   @Schema.Using(UtilityPackage.class)
   static class Case3
-  {    
+  {
   }
 
   /**
@@ -46,5 +45,5 @@ strictfp public class AnnotationUtilitiesNGTest
     assertEquals(AnnotationUtilities.getRepeatingAnnotation(Case2.class, Schema.Using.class).size(), 1);
     assertEquals(AnnotationUtilities.getRepeatingAnnotation(Case3.class, Schema.Using.class).size(), 2);
   }
-  
+
 }

@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for Iterators.
  */
-strictfp public class IteratorsNGTest
+public class IteratorsNGTest
 {
 
   public IteratorsNGTest()
@@ -30,11 +30,11 @@ strictfp public class IteratorsNGTest
   @Test
   public void testCast_Iterator_Class()
   {
-    Iterator<Object> iter =  Arrays.<Object>asList("a","b","c").iterator();
+    Iterator<Object> iter = Arrays.<Object>asList("a", "b", "c").iterator();
     Iterator<String> result = Iterators.cast(iter, String.class);
     ArrayList<String> contents = new ArrayList<>();
     result.forEachRemaining(contents::add);
-    assertEquals(contents, Arrays.asList("a","b","c"));
+    assertEquals(contents, Arrays.asList("a", "b", "c"));
   }
 
   /**
@@ -43,11 +43,11 @@ strictfp public class IteratorsNGTest
   @Test
   public void testCast_Iterator()
   {
-    Iterator<String> iter = Arrays.asList("a","b","c").iterator();
+    Iterator<String> iter = Arrays.asList("a", "b", "c").iterator();
     Iterator<Object> result = Iterators.cast(iter);
     ArrayList<Object> contents = new ArrayList<>();
     result.forEachRemaining(contents::add);
-    assertEquals(contents, Arrays.asList("a","b","c"));
+    assertEquals(contents, Arrays.asList("a", "b", "c"));
   }
 
   /**

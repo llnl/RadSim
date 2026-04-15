@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/MaterialImpl.java ---
 /* 
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -142,6 +143,8 @@ public class MaterialImpl implements Material
     for (MaterialComponent iter : this)
     {
       Nuclide nuclide = iter.getNuclide();
+      if (nuclide == null)
+        throw new NullPointerException("Nuclide is null");
       if (set.contains(nuclide))
         duplicates = true;
       set.add(nuclide);

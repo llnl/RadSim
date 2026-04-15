@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for Pair.
  */
-strictfp public class PairNGTest
+public class PairNGTest
 {
-  
+
   public PairNGTest()
   {
   }
@@ -92,5 +92,5 @@ strictfp public class PairNGTest
     Object result = instance.setKey(k);
     assertEquals(result, instance.getKey());
   }
-  
+
 }

@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for PowerFunction.
  */
-strictfp public class PowerFunctionNGTest
+public class PowerFunctionNGTest
 {
   
   public PowerFunctionNGTest()

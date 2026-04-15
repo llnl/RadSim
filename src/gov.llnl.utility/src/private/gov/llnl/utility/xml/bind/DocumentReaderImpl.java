@@ -13,6 +13,7 @@ import gov.llnl.utility.annotation.Internal;
 import gov.llnl.utility.xml.bind.SaxHandler.SAXExceptionProxy;
 import gov.llnl.utility.io.MD5FilterInputStream;
 import gov.llnl.utility.io.ReaderException;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +34,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiConsumer;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -198,7 +198,7 @@ public class DocumentReaderImpl<Component> implements DocumentReader<Component>
         fs2 = new GZIPInputStream(fs);
       }
       InputSource inputSource = new InputSource();
-      inputSource.setByteStream(fs2);
+      inputSource.setByteStream(new BufferedInputStream(fs2));
       inputSource.setSystemId(file.toString());
       return (Component) loadSourceInternal(inputSource);
     }

@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for FlagReader.
  */
-strictfp public class FlagReaderNGTest
+public class FlagReaderNGTest
 {
-  
+
   public FlagReaderNGTest()
   {
   }
@@ -43,5 +43,5 @@ strictfp public class FlagReaderNGTest
     Reader.TextContents tc = fr.getTextContents();
     assertEquals(tc.base(), "util:boolean-optional");
   }
-  
+
 }

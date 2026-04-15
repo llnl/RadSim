@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/DecayCalculator.java ---
 package gov.llnl.rtk.physics;
 
 import gov.llnl.math.matrix.Matrix;
@@ -94,7 +95,7 @@ public class DecayCalculator
     m2.age = Quantity.of(0, "s");
     m2.comment = m.getComment();
     m2.density = m.getDensity();
-    m2.label = m.getLabel();
+    m2.label = m.getName();
     
     // Collect the radioactive parts as atom fractions
     for (MaterialComponent mc : m)
@@ -209,7 +210,7 @@ public class DecayCalculator
       out.add(Source.fromAtoms(source.getNuclide(), factor * atoms));
     }
     if (Math.abs(initialAtoms - finalAtoms) > 1e-8 * initialAtoms)
-        throw new RuntimeException("Atom balance failed");
+      throw new RuntimeException("Atom balance failed");
     return out;
   }
 
@@ -225,7 +226,7 @@ public class DecayCalculator
     // Convert to a modifiable source
     SourceImpl input = new SourceImpl(source);
     double lambda = source.getNuclide().getDecayConstant();
-    double N = source.getActivity() / lambda;
+    double N = source.getActivity(PhysicalProperty.ACTIVITY) / lambda;
 
     // Add teh transiend equibrium from each path
     List<Source> output = new ArrayList<>();
@@ -295,7 +296,7 @@ public class DecayCalculator
     {
       SourceImpl s2 = (SourceImpl) findNuclide(out, source.getNuclide());
       s2.atoms += source.getAtoms();
-      s2.activity += source.getActivity();
+      s2.activity += source.getActivity(PhysicalProperty.ACTIVITY);
     }
 
     for (DecayTransition ts : decayLibrary.getTransitionsFrom(source.getNuclide()))
@@ -607,7 +608,7 @@ public class DecayCalculator
       if (e.getNuclide().getAtomicMass() == last.getNuclide().getAtomicMass())
       {
         last.atoms += e.getAtoms();
-        last.activity += e.getActivity();
+        last.activity += e.getActivity(PhysicalProperty.ACTIVITY);
         continue;
       }
       out.add(e);

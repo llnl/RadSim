@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/Nuclides.java ---
 /*
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -6,7 +7,6 @@
  */
 package gov.llnl.rtk.physics;
 
-import gov.llnl.utility.ReflectionUtilities;
 import java.util.ArrayList;
 import java.util.List;
 

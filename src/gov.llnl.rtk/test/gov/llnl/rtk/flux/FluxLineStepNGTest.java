@@ -6,7 +6,6 @@
  */
 package gov.llnl.rtk.flux;
 
-import gov.llnl.rtk.flux.FluxLineStep;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -53,7 +52,7 @@ public class FluxLineStepNGTest
   public void testToString()
   {
     FluxLineStep instance = newInstance();
-    String expResult = "LineStep(e=10.000000,i=20.000000)";
+    String expResult = "LineStep(e=10.00,i=2.000e+01,s=2.000e+00)";
     String result = instance.toString();
     assertEquals(result, expResult);
   }

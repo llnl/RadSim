@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DocumentReaderImpl.
  */
-strictfp public class DocumentReaderImplNGTest
+public class DocumentReaderImplNGTest
 {
 
   /**
@@ -61,16 +61,18 @@ strictfp public class DocumentReaderImplNGTest
   @Test
   public void testCreateContext() throws Exception
   {
-    DocumentReader instance = DocumentReader.create(Object.class); 
-    instance.setErrorHandler((rc,e)->{});
+    DocumentReader instance = DocumentReader.create(Object.class);
+    instance.setErrorHandler((rc, e) ->
+    {
+    });
     ReaderContextImpl result = (ReaderContextImpl) instance.createContext();
     assertNotNull(result);
     assertSame(result.getDocumentReader(), instance);
     assertNotNull(result.propertyHandler);
     assertNotNull(result.exceptionHandler);
   }
-  
-    /**
+
+  /**
    * Test of createContext method, of class DocumentReaderImpl.
    *
    * @throws java.lang.Exception
@@ -79,7 +81,9 @@ strictfp public class DocumentReaderImplNGTest
   public void testCreateContext2() throws Exception
   {
     DocumentReader instance = DocumentReader.create(AnyReader.of(Object.class));
-    instance.setErrorHandler((rc,e)->{});
+    instance.setErrorHandler((rc, e) ->
+    {
+    });
     ReaderContextImpl result = (ReaderContextImpl) instance.createContext();
     assertNotNull(result);
     assertSame(result.getDocumentReader(), instance);

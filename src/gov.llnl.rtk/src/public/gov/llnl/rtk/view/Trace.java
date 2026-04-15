@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/view/Trace.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved

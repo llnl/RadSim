@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for LimitedSizeQueue.
  */
-strictfp public class LimitedSizeQueueNGTest
+public class LimitedSizeQueueNGTest
 {
-  
+
   public LimitedSizeQueueNGTest()
   {
   }
@@ -34,7 +34,7 @@ strictfp public class LimitedSizeQueueNGTest
     assertEquals(result, expResult);
   }
 
-   /**
+  /**
    * Test of enqueue method, of class LimitedSizeQueue.
    */
   @Test
@@ -47,7 +47,7 @@ strictfp public class LimitedSizeQueueNGTest
     Object result = instance.enqueue(in);
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of enqueue method, of class LimitedSizeQueue.
    */
@@ -62,7 +62,7 @@ strictfp public class LimitedSizeQueueNGTest
     assertEquals(result, expResult);
   }
 
-   /**
+  /**
    * Test of enqueue method, of class LimitedSizeQueue.
    */
   @Test
@@ -75,7 +75,7 @@ strictfp public class LimitedSizeQueueNGTest
     Object result = instance.enqueue(in);
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of clear method, of class LimitedSizeQueue.
    */
@@ -91,7 +91,10 @@ strictfp public class LimitedSizeQueueNGTest
     if (instance.filled < size)
       instance.filled++;
     instance.clear();
-    assertEquals(instance.storage, new Object[]{null});
+    assertEquals(instance.storage, new Object[]
+    {
+      null
+    });
     assertEquals(instance.index, -1);
     assertEquals(instance.filled, 0);
   }
@@ -115,7 +118,7 @@ strictfp public class LimitedSizeQueueNGTest
     Object result = instance.get(i);
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of get method, of class LimitedSizeQueue.
    */
@@ -186,5 +189,5 @@ strictfp public class LimitedSizeQueueNGTest
     Iterator result = instance.iterator();
     assertEquals(result, expResult);
   }
-  
+
 }

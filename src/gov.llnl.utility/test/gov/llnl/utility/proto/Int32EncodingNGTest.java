@@ -27,10 +27,11 @@ public class Int32EncodingNGTest
   {
     int i;
     Integer j;
-    
+
     public A()
-    {}
-    
+    {
+    }
+
     public A(int i)
     {
       this.i = i;
@@ -64,7 +65,7 @@ public class Int32EncodingNGTest
 
     static
     {
-      ProtoBuilder<A,A> builder = newBuilder(null,"A",A::new);
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", A::new);
       builder.field("i", 1).type(Type.Int32).asInt(A::getI, A::setI);
       builder.field("j", 2).type(Type.Int32).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
@@ -103,8 +104,8 @@ public class Int32EncodingNGTest
     A o = new A(0);
     ByteBuffer b = ByteBuffer.allocate(2);
     b.order(ByteOrder.LITTLE_ENDIAN);
-    b.put((byte)0xb9);
-    b.put((byte)0x60);
+    b.put((byte) 0xb9);
+    b.put((byte) 0x60);
     b.rewind();
     Int32Encoding instance = new Int32Encoding();
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
@@ -144,7 +145,7 @@ public class Int32EncodingNGTest
   }
 
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -6,7 +6,6 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.ByteArrayChannel;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
@@ -21,7 +20,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ByteArrayChannel.
  */
-strictfp public class ByteArrayChannelNGTest
+public class ByteArrayChannelNGTest
 {
 
   public ByteArrayChannelNGTest()

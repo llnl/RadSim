@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.14
+Created-By: 17.0.12+8-LTS-286 (Oracle Corporation)
+Built-By: hangal1
+Built-Date: 2026-04-15 16:03:17
+Specification-Title: LLNL Utility classes
+Specification-Version: 2.0.0.0
+Specification-Vendor: Lawrence Livermore National Laboratory
+Implementation-Title: gov.llnl.utility
+Implementation-Vendor: Lawrence Livermore National Laboratory
+Implementation-Version: 4
+Release-Class-Path: 
+

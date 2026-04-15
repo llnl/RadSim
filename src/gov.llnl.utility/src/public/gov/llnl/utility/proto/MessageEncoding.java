@@ -116,12 +116,12 @@ public abstract class MessageEncoding<T> implements ProtoEncoding<T>
   public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs)
           throws ProtoException
   {
-    if (type != 2)
+    if (type != WIRE_LEN)
       throw new ProtoException("bad wire type on field " + field.name + " of " + this.getClass().getName(), bs.position());
 
     // Limit consumption to the declared object size
     int size = Int32Encoding.decodeVInt32(bs);
-//    System.out.println("STRUCT "+ this.getClass().getName() +" " + size);
+//    System.out.println("STRUCT " + field.id + " " + this.getClass().getName() + " " + size);
     ByteSource bs2 = context.enterMessage(bs, size);
     ((BiConsumer) field.setter).accept(obj, parseContents(context, bs2));
     context.leaveMessage(bs2);
@@ -149,7 +149,7 @@ public abstract class MessageEncoding<T> implements ProtoEncoding<T>
     byte[] contents = this.serializeContents(null, result);
 
     // field and wire type
-    baos.write((field.id << 3) | 2);
+    ProtoEncoding.encodeTag(baos, field, WIRE_LEN);
     if (contents == null)
     {
       Int32Encoding.encodeVInt32(baos, 0);
@@ -180,15 +180,10 @@ public abstract class MessageEncoding<T> implements ProtoEncoding<T>
     {
       try (InputStream is = Files.newInputStream(file))
       {
-        BufferedInputStream bs;
+        InputStream is2 = is;
         if (PathUtilities.isGzip(file))
-        {
-          GZIPInputStream gis = new GZIPInputStream(is);
-          bs = new BufferedInputStream(gis);
-        }
-        else
-          bs = new BufferedInputStream(is);
-        return this.parseStream(bs);
+          is2 = new GZIPInputStream(is);
+        return this.parseStream(new BufferedInputStream(is2));
       }
     }
 
@@ -294,14 +289,27 @@ public abstract class MessageEncoding<T> implements ProtoEncoding<T>
     // Consume fields until we run out of contents
     while (bs.hasRemaining())
     {
-      int tag = bs.get();
-      // if EOF then stop
-      if (tag == -1)
-        break;
+      int tag;
 
-      // Break tag into fields
-      int id = tag >> 3;
+      if (true)
+      {
+        tag = ProtoEncoding.decodeTag(bs);  // varint "key" (field<<3 | wire)
+        if (tag == -1)
+          break;
+      }
+      else
+      {
+        // There was a bug in the protocol implementation that failed to use a var int.   
+        // To convert the broken file we need to turn on this old log then resave the file.
+        tag = bs.get();
+        // if EOF then stop
+        if (tag == -1)
+          break;
+      }
+
+      int id = tag >>> 3;
       int type = tag & 0x7;
+//      System.out.println(bs.position() + " id=" + id + " type=" + type + " " + this.getClass());
 
       // Check for a field handler
       if (found == null || found.id != id)
@@ -386,25 +394,31 @@ public abstract class MessageEncoding<T> implements ProtoEncoding<T>
    */
   static void ignoreField(int type, ByteSource bs) throws ProtoException
   {
+    int pos0 = bs.position();
     // eat unknown field base on wire type
     switch (type)
     {
-      case 0:
+      case WIRE_VARINT:
         Int64Encoding.decodeVInt64(bs);
         break;
-      case 1:
-        bs.request(8);
+      case WIRE_FIXED32:
+        if (bs.request(4).remaining() != 4)
+          throw new ProtoException("truncated fixed32", pos0);
         break;
-      case 2:
+      case WIRE_FIXED64:
+        if (bs.request(8).remaining() != 8)
+          throw new ProtoException("truncated fixed64", pos0);
+        break;
+      case WIRE_LEN:
         int sz = Int32Encoding.decodeVInt32(bs);
-        bs.request(sz);
+        if (bs.request(sz).remaining() != sz)
+          throw new ProtoException("truncated field", pos0);
         break;
       case 3:
       case 4:
-        throw new ProtoException("group not supported", bs.position());
-      case 5:
-        bs.request(4);
-        break;
+        throw new ProtoException("group not supported", pos0);
+      default:
+        throw new ProtoException("bad wire type " + type, pos0);
     }
   }
 

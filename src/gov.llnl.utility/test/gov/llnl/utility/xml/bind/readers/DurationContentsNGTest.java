@@ -20,7 +20,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Test code for DurationContents.
  */
-strictfp public class DurationContentsNGTest
+public class DurationContentsNGTest
 {
 
   public DurationContentsNGTest()
@@ -65,7 +65,7 @@ strictfp public class DurationContentsNGTest
       }
     };
     DurationContents dc = new DurationContents();
-   
+
     assertNull(dc.start(null, attr));
 
     // Set nanos

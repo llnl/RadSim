@@ -15,7 +15,7 @@ import gov.llnl.math.random.RandomGenerator;
 /**
  * Test code for Fourier.
  */
-strictfp public class FourierNGTest
+public class FourierNGTest
 {
   long seed = 1L;
   RandomGenerator random = new Random48(seed);

@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for FileUtilities.
  */
-strictfp public class FileUtilitiesNGTest
+public class FileUtilitiesNGTest
 {
 
   public FileUtilitiesNGTest()

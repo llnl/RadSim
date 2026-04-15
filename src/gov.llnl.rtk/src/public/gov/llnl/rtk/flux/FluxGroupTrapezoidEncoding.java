@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxGroupTrapezoidEncoding.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved

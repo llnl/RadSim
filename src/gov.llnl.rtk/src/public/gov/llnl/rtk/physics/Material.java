@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/Material.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -9,9 +10,11 @@ package gov.llnl.rtk.physics;
 import java.util.Iterator;
 
 /**
- * A Material represents the composition a unit of substance.
+ * Represents the composition of a material, including its components, density,
+ * and age.
  *
- * Materials have property such as age and density.
+ * Materials can consist of multiple components, each with unique properties
+ * such as atomic number and mass fraction.
  *
  * @author nelson85
  */
@@ -19,11 +22,13 @@ public interface Material extends Iterable<MaterialComponent>
 {
 
   /**
-   * Get the name of this material.
+   * Get the label for this material.
    *
-   * @return
+   * The default name is constructed from the nuclides of its components.
+   *
+   * @return the label as a String.
    */
-  default public String getLabel()
+  default public String getName()
   {
     StringBuilder b = new StringBuilder();
     for (MaterialComponent c : this)
@@ -33,12 +38,20 @@ public interface Material extends Iterable<MaterialComponent>
     return b.toString();
   }
 
+  public static MaterialBuilder builder()
+  {
+    return new MaterialBuilder(UnitSystem.SI);
+  }
+
+  public static MaterialBuilder builder(UnitSystem units)
+  {
+    return new MaterialBuilder(units);
+  }
+
   /**
-   * Get the description of the material.
+   * Get the description of this material. Used by some material libraries.
    *
-   * Used by some material libraries.
-   *
-   * @return the description or null if not available.
+   * @return the description, or null if not available.
    */
   default public String getDescription()
   {
@@ -46,11 +59,9 @@ public interface Material extends Iterable<MaterialComponent>
   }
 
   /**
-   * Get the comment for this material.
+   * Get the comment for this material. Used by some material libraries.
    *
-   * Used by some material libraries.
-   *
-   * @return the comment or null if not available.
+   * @return the comment, or null if not available.
    */
   default public String getComment()
   {
@@ -58,38 +69,38 @@ public interface Material extends Iterable<MaterialComponent>
   }
 
   /**
-   * Get the age of the material.
+   * Get the age of this material.
    *
-   * @return age as a quantity.
+   * @return the age as a Quantity object.
    */
   Quantity getAge();
 
   /**
-   * Get the density of the material.
+   * Get the density of this material.
    *
-   * @return density as a quantity.
+   * @return the density as a Quantity object.
    */
   Quantity getDensity();
 
   /**
-   * Get an iterator for traversing the list of components.
+   * Get an iterator to traverse the components of this material.
    *
-   * @return a new iterator.
+   * @return an Iterator for MaterialComponent objects.
    */
   @Override
   Iterator<MaterialComponent> iterator();
 
   /**
-   * Get the number of components that make up this material.
+   * Get the number of components in this material.
    *
-   * @return
+   * @return the number of components as an integer.
    */
   int size();
 
   /**
-   * Compute the average Z for the material.
+   * Compute the average atomic number (Z) for this material.
    *
-   * @return the average Z of the material.
+   * @return the average atomic number as a double.
    */
   default double getAverageZ()
   {
@@ -106,11 +117,10 @@ public interface Material extends Iterable<MaterialComponent>
   }
 
   /**
-   * Computes the effective Z for the material.
+   * Compute the effective atomic number (Z) for this material. Based on the
+   * x-ray effective Z formula.
    *
-   * This is based on the x-ray effective Z formula.
-   *
-   * @return the effective Z of the material.
+   * @return the effective atomic number as a double.
    */
   default double getEffectiveZ()
   {
@@ -129,8 +139,9 @@ public interface Material extends Iterable<MaterialComponent>
   /**
    * Find the component associated with a given nuclide.
    *
-   * @param nuclide
-   * @return the component or null if the nuclide is not found.
+   * @param nuclide the Nuclide to search for.
+   * @return the MaterialComponent associated with the nuclide, or null if not
+   * found.
    */
   default MaterialComponent findNuclide(Nuclide nuclide)
   {

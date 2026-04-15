@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ResourceUtilities.
  */
-strictfp public class ResourceUtilitiesNGTest
+public class ResourceUtilitiesNGTest
 {
 
   /**
@@ -40,5 +40,5 @@ strictfp public class ResourceUtilitiesNGTest
   {
     // Not used in ERNIE
   }
-  
+
 }

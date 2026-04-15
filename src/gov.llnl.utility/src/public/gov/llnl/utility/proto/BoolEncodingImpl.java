@@ -43,7 +43,7 @@ public class BoolEncodingImpl extends BooleanEncoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     if (field.getter == null)
       return;
@@ -63,7 +63,7 @@ public class BoolEncodingImpl extends BooleanEncoding
 
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3));
+      ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     baos.write(result ? 1 : 0);
   }
 

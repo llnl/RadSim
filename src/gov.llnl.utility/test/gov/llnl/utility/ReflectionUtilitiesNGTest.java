@@ -17,13 +17,13 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReflectionUtilities.
  */
-strictfp public class ReflectionUtilitiesNGTest
+public class ReflectionUtilitiesNGTest
 {
-  
+
   public ReflectionUtilitiesNGTest()
   {
   }
-  
+
   /**
    * Test of convertMethod method, of class ReflectionUtilities.
    */
@@ -35,13 +35,13 @@ strictfp public class ReflectionUtilitiesNGTest
     assertNotNull(result);
   }
 
-  
   Object object;
+
   public void reference(Object a)
   {
-    this.object= a;
+    this.object = a;
   }
-  
+
   /**
    * Test of getMethod method, of class ReflectionUtilities.
    */
@@ -64,17 +64,17 @@ strictfp public class ReflectionUtilitiesNGTest
     Supplier<A> result = ReflectionUtilities.getConstructor(clsName, resultType);
     assertNotNull(result);
   }
-  
+
   static public class A
   {
     public A()
     {
-      
+
     }
-    
+
     public A(String s)
     {
-      
+
     }
   }
 
@@ -113,5 +113,5 @@ strictfp public class ReflectionUtilitiesNGTest
     assertTrue(ReflectionUtilities.argumentsMatch(parameters, Parameter[].class, Class[].class));
     assertFalse(ReflectionUtilities.argumentsMatch(parameters, Parameter[].class));
   }
-  
+
 }

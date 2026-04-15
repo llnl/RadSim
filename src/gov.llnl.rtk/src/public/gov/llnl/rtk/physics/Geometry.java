@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/Geometry.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -36,6 +37,8 @@ public interface Geometry
     {
       case SPHERICAL:
         return newSpherical();
+      case CONE:
+        return new GeometryImpl(type, extent1, extent2);
       default:
         throw new UnsupportedOperationException();
     }

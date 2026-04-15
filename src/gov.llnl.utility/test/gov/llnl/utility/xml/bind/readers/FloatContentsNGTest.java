@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for FloatContents.
  */
-strictfp public class FloatContentsNGTest
+public class FloatContentsNGTest
 {
-  
+
   public FloatContentsNGTest()
   {
   }
@@ -49,7 +49,7 @@ strictfp public class FloatContentsNGTest
   {
     FloatContents instance = new FloatContents();
   }
-  
+
   /**
    * Test of getObjectClass method, of class FloatContents.
    */
@@ -67,5 +67,5 @@ strictfp public class FloatContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

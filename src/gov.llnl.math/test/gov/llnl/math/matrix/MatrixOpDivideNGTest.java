@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixOpDivide.
  */
-strictfp public class MatrixOpDivideNGTest
+public class MatrixOpDivideNGTest
 {
 
   public MatrixOpDivideNGTest()

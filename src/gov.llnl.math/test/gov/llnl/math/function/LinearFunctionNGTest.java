@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for LinearFunction.
  */
-strictfp public class LinearFunctionNGTest
+public class LinearFunctionNGTest
 {
   
   public LinearFunctionNGTest()

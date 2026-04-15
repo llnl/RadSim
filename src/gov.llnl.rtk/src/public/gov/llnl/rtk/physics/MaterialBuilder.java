@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/MaterialBuilder.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -8,7 +9,7 @@ package gov.llnl.rtk.physics;
 
 /**
  * Utility for constructing a Material properly.
- * 
+ *
  * @author nelson85
  */
 public class MaterialBuilder
@@ -54,6 +55,8 @@ public class MaterialBuilder
    */
   public MaterialBuilder add(Nuclide nuclide, double fraction)
   {
+    if (nuclide == null)
+      throw new NullPointerException("Null nuclide");
     material.entries.add(new MaterialComponentImpl(nuclide, fraction, 0, null));
     return this;
   }
@@ -69,8 +72,8 @@ public class MaterialBuilder
    */
   public MaterialBuilder add(Element element, double fraction)
   {
-    material.entries.add(new MaterialComponentImpl(Nuclides.natural(element), fraction, 0, null));
-    return this;
+    Nuclide nuclide = Nuclides.natural(element);
+    return this.add(nuclide, fraction);
   }
 
   public void add(MaterialComponent v)
@@ -89,6 +92,8 @@ public class MaterialBuilder
    */
   public MaterialBuilder atoms(Nuclide nuclide, double fraction)
   {
+    if (nuclide == null)
+      throw new NullPointerException("Null nuclide");
     material.entries.add(new MaterialComponentImpl(nuclide, 0, fraction, null));
     return this;
   }
@@ -104,12 +109,14 @@ public class MaterialBuilder
    */
   public MaterialBuilder atoms(Element element, double fraction)
   {
-    material.entries.add(new MaterialComponentImpl(Nuclides.natural(element), 0, fraction, null));
-    return this;
+    Nuclide nuclide = Nuclides.natural(element);
+    return atoms(nuclide, fraction);
   }
 
   public MaterialBuilder trace(Nuclide nuclide, Quantity activity)
   {
+    if (nuclide == null)
+      throw new NullPointerException("Null nuclide");
     activity.require(PhysicalProperty.ACTIVITY);
     material.entries.add(new MaterialComponentImpl(nuclide, 0, 0, activity));
     return this;

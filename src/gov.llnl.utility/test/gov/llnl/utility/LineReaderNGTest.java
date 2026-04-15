@@ -6,12 +6,8 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.LineReader;
-import gov.llnl.utility.Iterators;
 import gov.llnl.utility.LineReader.LineIterator;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,7 +19,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for LineReader.
  */
-strictfp public class LineReaderNGTest
+public class LineReaderNGTest
 {
 
   /**

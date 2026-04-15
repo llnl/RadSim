@@ -16,7 +16,7 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * Test code for LinearFunctionReader.
  */
-strictfp public class LinearFunctionReaderNGTest
+public class LinearFunctionReaderNGTest
 {
   
   public LinearFunctionReaderNGTest()

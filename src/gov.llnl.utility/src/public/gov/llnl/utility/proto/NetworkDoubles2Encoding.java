@@ -77,9 +77,11 @@ class NetworkDoubles2Encoding extends MessageEncoding<double[][]>
   {
     if (!bs.hasRemaining())
       return null;
-    
+
     // Fetch the first dimension
     ByteBuffer bb = bs.request(Integer.BYTES);
+    if (bb.remaining() != Integer.BYTES)
+      throw new ProtoException("truncated int", bs.position());
     bb.order(ByteOrder.BIG_ENDIAN);
     int sz = bb.getInt();
     if (sz < 0)
@@ -90,11 +92,15 @@ class NetworkDoubles2Encoding extends MessageEncoding<double[][]>
     for (int i = 0; i < sz; ++i)
     {
       bb = bs.request(Integer.BYTES);
+      if (bb.remaining() != Integer.BYTES)
+        throw new ProtoException("truncated int", bs.position());
       int sz2 = bb.getInt();
       if (sz2 < 0)
         continue;
       values[i] = new double[sz2];
       bb = bs.request(Double.BYTES * sz2);
+      if (bb.remaining() != Double.BYTES * sz2)
+        throw new ProtoException("truncated double[]", bs.position());
       bb.asDoubleBuffer().get(values[i]);
     }
     return values;
@@ -105,8 +111,8 @@ class NetworkDoubles2Encoding extends MessageEncoding<double[][]>
   {
     return null;
   }
-  
-    @Override
+
+  @Override
   public String getSchemaName()
   {
     return "bytes";

@@ -11,7 +11,7 @@ package gov.llnl.math.random;
  * 
  * @author nelson85
  */
-strictfp public class SequenceGenerator implements RandomGenerator
+public class SequenceGenerator implements RandomGenerator
 {
   int indexDouble;
   double[] doubleValues;

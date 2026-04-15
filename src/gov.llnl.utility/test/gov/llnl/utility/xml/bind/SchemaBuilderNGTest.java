@@ -10,20 +10,20 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * Test code for SchemaBuilder.
- * 
- * SchemaBuilder is used in code generation not production.  Unfortunately,
- * it cannot be a Java processor because it does not currently fit into
- * the one source file at a time used by a standard processor.  
- * 
+ *
+ * SchemaBuilder is used in code generation not production. Unfortunately, it
+ * cannot be a Java processor because it does not currently fit into the one
+ * source file at a time used by a standard processor.
+ *
  * We will not be testing this at the unit level because it is exercised
  * regularly every time a file is compiled.
- * 
+ *
  */
-strictfp public class SchemaBuilderNGTest
+public class SchemaBuilderNGTest
 {
-  
+
   public SchemaBuilderNGTest()
   {
   }
@@ -210,7 +210,7 @@ strictfp public class SchemaBuilderNGTest
   {
     SchemaBuilder instance = new SchemaBuilder();
     assertEquals(instance.getError(), instance.error);
-    instance.error =2;
+    instance.error = 2;
     assertEquals(instance.getError(), instance.error);
   }
 
@@ -224,5 +224,4 @@ strictfp public class SchemaBuilderNGTest
 //    Object result = SchemaBuilder.notUsed();
 //    assertEquals(result, expResult);
 //  }
-  
 }

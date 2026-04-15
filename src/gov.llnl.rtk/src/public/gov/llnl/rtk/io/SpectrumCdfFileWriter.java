@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/io/SpectrumCdfFileWriter.java ---
 /* 
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.

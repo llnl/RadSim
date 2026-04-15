@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for TokenDef.
  */
-strictfp public class TokenDefNGTest
+public class TokenDefNGTest
 {
-  
+
   public TokenDefNGTest()
   {
   }
@@ -27,7 +27,7 @@ strictfp public class TokenDefNGTest
     TokenDef instance = new TokenDef("Hello");
     assertTrue(instance.pattern.matcher("Hello").matches());
   }
-  
+
   @Test
   public void testEquals()
   {
@@ -35,12 +35,12 @@ strictfp public class TokenDefNGTest
     TokenDef instance_2 = new TokenDef("Hello");
     TokenDef instance_3 = new TokenDef("World");
     Object o = "";
-    
+
     assertEquals(instance_1.equals(instance_2), true);
     assertEquals(instance_1.equals(o), false);
     assertEquals(instance_1.equals(instance_3), false);
     instance_2.pattern = Pattern.compile("");
     assertEquals(instance_1.equals(instance_2), false);
   }
-  
+
 }

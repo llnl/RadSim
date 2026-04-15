@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for SerializableProcessor.
  */
-strictfp public class SerializableProcessorNGTest
+public class SerializableProcessorNGTest
 {
-  
+
   public SerializableProcessorNGTest()
   {
   }
@@ -35,5 +35,5 @@ strictfp public class SerializableProcessorNGTest
   {
     // Processors are used in generation of code, not production.
   }
-  
+
 }

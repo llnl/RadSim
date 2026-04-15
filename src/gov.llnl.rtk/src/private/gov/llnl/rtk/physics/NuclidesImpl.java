@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/NuclidesImpl.java ---
 /*
  * Copyright 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -36,6 +37,7 @@ public final class NuclidesImpl
 
   final Pattern NUCLIDE_PATTERN1 = Pattern.compile("([0-9]+)-?([A-z])([A-z]?)([Mm]?[2-9]?)");
   final Pattern NUCLIDE_PATTERN2 = Pattern.compile("([A-z])([A-z]?)-?([0-9]+)([Mm]?[2-9]?)");
+  final Pattern NUCLIDE_PATTERN4 = Pattern.compile("([A-z])([A-z]?)m([0-9]+)");
   final Pattern NUCLIDE_PATTERN3 = Pattern.compile("([A-z])([A-z]?)");
 
   static
@@ -239,6 +241,19 @@ public final class NuclidesImpl
     matcher = NUCLIDE_PATTERN3.matcher(name);
     if (matcher.matches())
       return natural(Elements.get(name));
+    
+    matcher = NUCLIDE_PATTERN4.matcher(name);
+    if (matcher.matches())
+    {
+      desc = String.format("%s%s%s%s",
+              matcher.group(1).toUpperCase(),
+              matcher.group(2).toLowerCase(),
+              matcher.group(3),
+              "m");
+      nuclide = NUCLIDES_BY_NAME.get(desc);
+      if (nuclide != null)
+        return nuclide;
+    }
 
     return nuclide;
   }
@@ -255,6 +270,7 @@ public final class NuclidesImpl
     String name = element.getSymbol();
     NuclideImpl impl = new NuclideImpl(element.getSymbol(), element);
     impl.atomicMass = element.getMolarMass();
+    impl.atomicNumber = element.getAtomicNumber();
 
     NUCLIDES_BY_NAME.put(name, impl);
     return impl;

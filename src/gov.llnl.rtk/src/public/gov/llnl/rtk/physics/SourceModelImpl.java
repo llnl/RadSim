@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/SourceModelImpl.java ---
 /*
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -22,16 +23,36 @@ public class SourceModelImpl extends ExpandableObject implements SourceModel
   final ArrayList<LayerImpl> layers = new ArrayList<>();
   LayerImpl last = null;
 
+  /**
+   * Set the title for the model.
+   *
+   * This is used by the readers and writers.
+   *
+   * @param title
+   */
   public void setTitle(String title)
   {
     this.title = title;
   }
 
+  /**
+   * Set the geometry of the layer.
+   *
+   * Geometries are limited to simple 1d objects (spherical, cap, cylinder,
+   * slab).
+   *
+   * @param geometry
+   */
   public void setGeometry(Geometry geometry)
   {
     this.geometry = geometry;
   }
 
+  /**
+   * Add a layer to the outside of the object.
+   *
+   * @param layer is the new layer to be added.
+   */
   public void addLayer(Layer layer)
   {
     LayerImpl li;
@@ -57,6 +78,15 @@ public class SourceModelImpl extends ExpandableObject implements SourceModel
     return geometry;
   }
 
+  /**
+   * Get the list of layers.
+   *
+   * The layer list produced is modifiable. If the layers order or properties
+   * are altered, be sure to call normalize() to make sure all the derived
+   * properties are calculated.
+   *
+   * @return the layer list.
+   */
   @Override
   public List<? extends Layer> getLayers()
   {

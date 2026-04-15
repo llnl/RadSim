@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/data/SpectrumWriter.java ---
 /*
  * Copyright 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -34,7 +35,7 @@ public class SpectrumWriter<T extends Spectrum> extends ObjectWriter<T>
   public void contents(T object) throws WriterException
   {
     Predicate<String> exclude = this.getContext()
-            .getProperty(SpectrumAttributes.WRITER_EXCLUDE, Predicate.class, null);
+            .getProperty(AttributesWriter.WRITER_EXCLUDE, Predicate.class, null);
     WriterBuilder wb = newBuilder();
     if (!object.getAttributes().isEmpty())
       wb.element("attributes").writer(new AttributesWriter()).put(object);

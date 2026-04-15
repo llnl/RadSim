@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixRowOpsTriDiagonal.
  */
-strictfp public class MatrixRowOpsTriDiagonalNGTest
+public class MatrixRowOpsTriDiagonalNGTest
 {
 
   public MatrixRowOpsTriDiagonalNGTest()
@@ -105,17 +105,17 @@ strictfp public class MatrixRowOpsTriDiagonalNGTest
     MatrixRowOperations ro = MatrixFactory.createRowOperations(m);
 
     ro.multiplyAssignRow(0, 2);
-    Assert.assertEquals(d[0], 2.0);
-    Assert.assertEquals(u[0], 2.0);
+    Assert.assertEquals(d[0], 2.0, 0.0);
+    Assert.assertEquals(u[0], 2.0, 0.0);
 
     ro.multiplyAssignRow(1, 2);
-    Assert.assertEquals(l[0], 2.0);
-    Assert.assertEquals(d[1], 4.0);
-    Assert.assertEquals(u[1], 4.0);
+    Assert.assertEquals(l[0], 2.0, 0.0);
+    Assert.assertEquals(d[1], 4.0, 0.0);
+    Assert.assertEquals(u[1], 4.0, 0.0);
 
     ro.multiplyAssignRow(4, 2);
-    Assert.assertEquals(l[3], 2.0);
-    Assert.assertEquals(d[4], 10.0);
+    Assert.assertEquals(l[3], 2.0, 0.0);
+    Assert.assertEquals(d[4], 10.0, 0.0);
 
     try
     {

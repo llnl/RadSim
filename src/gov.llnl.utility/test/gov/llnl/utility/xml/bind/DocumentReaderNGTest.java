@@ -25,7 +25,7 @@ import org.xml.sax.InputSource;
 /**
  * Test code for DocumentReader.
  */
-strictfp public class DocumentReaderNGTest
+public class DocumentReaderNGTest
 {
 
   public DocumentReaderNGTest()
@@ -191,7 +191,7 @@ strictfp public class DocumentReaderNGTest
   {
   }
 
-  strictfp public class TestDocReaderImpl implements DocumentReader
+  public class TestDocReaderImpl implements DocumentReader
   {
     @Override
     public void clearContext()

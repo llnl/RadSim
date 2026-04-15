@@ -39,7 +39,7 @@ public class SpectrumWriter extends ObjectWriter<Spectrum>
       String energyCalibRef = WriterUtilities.getObjectReference(object.getEnergyCalibration(), getContext());
       attributes.add("energyCalibrationReference", energyCalibRef);
     }
-    
+
     if (object.getFwhmCalibration() != null)
     {
       String fwhmCalibRef = WriterUtilities.getObjectReference(object.getFwhmCalibration(), getContext());
@@ -86,6 +86,22 @@ public class SpectrumWriter extends ObjectWriter<Spectrum>
 
     builder.writer(new ChannelDataWriter()).put(object.getCountData());
 
+    if (!object.getExtensions().isEmpty())
+    {
+      for (Object obj : object.getExtensions())
+      {
+        try
+        {
+          ObjectWriter<? extends Object> writer = ObjectWriter.create(obj.getClass());
+          builder.writer(writer).put(obj);
+        }
+        catch (WriterException ext)
+        {
+          System.out.println("No extension writer for " + obj.getClass());
+        }
+      }
+
+    }
     // SpectrumExtension
   }
 }

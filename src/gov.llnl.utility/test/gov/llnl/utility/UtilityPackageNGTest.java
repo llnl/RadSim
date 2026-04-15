@@ -10,10 +10,9 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * Test code for UtilityPackage.
- * Implicitly cover PackageResource
+ * Test code for UtilityPackage. Implicitly cover PackageResource
  */
-strictfp public class UtilityPackageNGTest
+public class UtilityPackageNGTest
 {
   public UtilityPackageNGTest()
   {

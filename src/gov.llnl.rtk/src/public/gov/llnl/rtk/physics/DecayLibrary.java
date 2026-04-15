@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/DecayLibrary.java ---
 /* 
  * Copyright 2023, Lawrence Livermore National Security, LLC.
  * All rights reserved.

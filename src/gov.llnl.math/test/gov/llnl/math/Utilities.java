@@ -10,7 +10,7 @@ package gov.llnl.math;
  *
  * @author nelson85
  */
-strictfp public class Utilities
+public class Utilities
 {
   /**
    * Determine if all the values in a vector are in specific ranges.

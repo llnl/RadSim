@@ -34,7 +34,7 @@ class CollectionEncoding<T> implements ProtoEncoding
    */
   public CollectionEncoding(ProtoEncoding encoding, Supplier<Collection<T>> supplier)
   {
-    embedded.name = encoding.getSchemaName();
+    embedded.name = encoding.getClass().getSimpleName();
     embedded.encoding = encoding;
     embedded.setter = setter;
     if (supplier == null)
@@ -46,7 +46,7 @@ class CollectionEncoding<T> implements ProtoEncoding
   public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs)
           throws ProtoException
   {
-    Collection array = (Collection) (context.getState(field));
+    Collection array = (Collection) (context.getState(field, false));
     if (array == null)
     {
       array = supplier.get();
@@ -82,7 +82,7 @@ class CollectionEncoding<T> implements ProtoEncoding
   @Override
   public void parseFinish(ProtoContext context, ProtoField field, Object obj)
   {
-    Object state = context.getState(field);
+    Object state = context.getState(field, false);
     if (state != null)
       ((BiConsumer) field.setter).accept(obj, state);
   }

@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixFactory.
  */
-strictfp public class MatrixFactoryNGTest
+public class MatrixFactoryNGTest
 {
 
   public MatrixFactoryNGTest()

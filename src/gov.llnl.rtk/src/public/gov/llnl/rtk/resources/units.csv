@@ -6,6 +6,8 @@ mass:kg,1
 area:mm2,0.000001
 area:cm2,0.0001
 area:m2,1
+area:barn,1e-28
+area:mb,1e-31
 
 volume:mm3,0.000000001
 volume:cm3,0.000001
@@ -64,9 +66,30 @@ dose_rate:Sv/hr,0.0002777777777777778
 dose_rate:Sv/s,1
 
 energy:J,1
-energy:keV,1.60218e-16
-energy:MeV,1.60218e-13
-energy:eV,1.60218e-19
+energy:keV,1.602176634e-16
+energy:MeV,1.602176634e-13
+energy:eV,1.602176634e-19
 
 cross_section:m2/kg,1
 cross_section:cm2/g,0.1
+
+# Molar Cross Section (used by Constants.K)
+molar_cross_section:m2/mol,1
+molar_cross_section:cm2/mol,0.0001
+
+# Amount of Substance
+amount:mol,1
+
+# Molar Mass
+molar_mass:kg/mol,1
+molar_mass:g/mol,0.001
+
+# Angle
+angle:rad,1
+angle:deg,0.017453292519943295
+
+# Pressure
+pressure:Pa,1
+pressure:hPa,100
+pressure:atm,101325
+pressure:mbar,100

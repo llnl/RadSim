@@ -18,10 +18,10 @@ import gov.llnl.rtk.physics.Quantity;
 public class XrayImpl implements Xray
 {
 
-  public String symbolIUPAC;
+  String symbolIUPAC;
   public String symbolSiegbahn;
-  public Quantity energy;
-  public Quantity intensity;
+  Quantity energy;
+  Quantity intensity;
 
   @Override
   public String getName()

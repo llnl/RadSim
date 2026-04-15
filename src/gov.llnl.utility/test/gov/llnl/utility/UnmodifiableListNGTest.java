@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for UnmodifiableList.
  */
-strictfp public class UnmodifiableListNGTest
+public class UnmodifiableListNGTest
 {
 
   static class TestUnmodifiableList extends UnmodifiableList<Integer>
@@ -94,6 +94,7 @@ strictfp public class UnmodifiableListNGTest
   }
 
   TestUnmodifiableList testUnmodifiableList;
+
   public UnmodifiableListNGTest()
   {
     testUnmodifiableList = new TestUnmodifiableList();

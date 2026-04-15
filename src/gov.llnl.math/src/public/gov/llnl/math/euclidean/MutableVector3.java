@@ -19,6 +19,13 @@ public class MutableVector3 implements Vector3, Serializable
 {
   public double x, y, z;
 
+  public MutableVector3(double x,double y, double z)
+  {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
   public MutableVector3(Vector3 v)
   {
     x = v.getX();

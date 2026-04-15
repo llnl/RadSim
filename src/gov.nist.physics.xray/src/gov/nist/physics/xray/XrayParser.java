@@ -88,12 +88,12 @@ class XrayParser
   private XrayEdgeImpl parseEdge(String header, LinkedList<String> lines)
   {
     String[] parts = header.stripLeading().split("  *");
-    XrayEdgeImpl edge = new XrayEdgeImpl();
-    edge.name = parts[1];
-    edge.energy = Double.parseDouble(parts[2]);
-    edge.fluorescence_yield = Double.parseDouble(parts[3]);
-    edge.ratio_jump = Double.parseDouble(parts[4]);
-
+    String name = parts[1];
+    double energy = Double.parseDouble(parts[2]);
+    double fluorescence_yield = Double.parseDouble(parts[3]);
+    double ratio_jump = Double.parseDouble(parts[4]);
+     XrayEdgeImpl edge = new XrayEdgeImpl(name, energy, fluorescence_yield, ratio_jump);
+   
     while (!lines.isEmpty() && lines.getFirst().startsWith("  "))
     {
       header = lines.removeFirst();

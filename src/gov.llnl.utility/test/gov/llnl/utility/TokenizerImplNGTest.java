@@ -6,20 +6,16 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.TokenDef;
-import gov.llnl.utility.TokenizerImpl;
-import gov.llnl.utility.Tokenizer;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
  * Test code for TokenizerImpl.
  */
-strictfp public class TokenizerImplNGTest
+public class TokenizerImplNGTest
 {
 
   public TokenizerImplNGTest()
@@ -122,22 +118,22 @@ strictfp public class TokenizerImplNGTest
     instance.dump(ps);
     assertEquals(baos.toString(), onemorelight);
   }
-  
+
   @Test
   public void testEquals()
   {
     TokenizerImpl instance_1 = new TokenizerImpl(
             "who", "cares", "if", "one", "more", "light", "goes", "out", "?",
             "well", "i", "do");
-    
+
     TokenizerImpl instance_2 = new TokenizerImpl(
             "who", "cares", "if", "one", "more", "light", "goes", "out", "?",
             "well", "i", "do");
-    
+
     Object o = 1;
-    
+
     assertEquals(instance_1.equals(instance_2), true);
     assertEquals(instance_1.equals(o), false);
   }
- 
+
 }

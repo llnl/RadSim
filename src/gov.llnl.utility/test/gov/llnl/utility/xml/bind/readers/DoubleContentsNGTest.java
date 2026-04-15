@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoubleContents.
  */
-strictfp public class DoubleContentsNGTest
+public class DoubleContentsNGTest
 {
-  
+
   public DoubleContentsNGTest()
   {
   }
@@ -49,11 +49,11 @@ strictfp public class DoubleContentsNGTest
   {
     DoubleContents instance = new DoubleContents();
   }
-  
+
   @Test
   public void testSomeMethod()
   {
     // Tested end to end.
   }
-  
+
 }

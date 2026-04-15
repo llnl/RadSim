@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ArrayEncoding.
  */
-strictfp public class ArrayEncodingNGTest
+public class ArrayEncodingNGTest
 {
 
   public ArrayEncodingNGTest()
@@ -156,12 +156,12 @@ strictfp public class ArrayEncodingNGTest
   {
     double[] values = new double[]
     {
-      -456140859.766920D, -522321888.606352D, -344911454.874654D, -866595362.207846D, 
+      -456140859.766920D, -522321888.606352D, -344911454.874654D, -866595362.207846D,
       -695333209.518432D, -580729553.595671D, -354571538.535899D, -403660656.508311D
     };
     float[] expResult = new float[]
     {
-      (float) -456140859.766920D, (float) -522321888.606352D, (float) -344911454.874654D, (float) -866595362.207846D, 
+      (float) -456140859.766920D, (float) -522321888.606352D, (float) -344911454.874654D, (float) -866595362.207846D,
       (float) -695333209.518432D, (float) -580729553.595671D, (float) -354571538.535899D, (float) -403660656.508311D
     };
 

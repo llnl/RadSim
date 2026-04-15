@@ -12,33 +12,76 @@ import java.util.Map;
 /**
  * Interface for data types that support keyed data.
  *
+ * The {@code Expandable} interface provides a mechanism for objects to store
+ * and manage optional attributes in the form of key-value pairs. Keys are
+ * {@code String}, and values are {@code Serializable} objects.
+ *
+ * <p><b>Design Philosophy:</b></p>
+ * <ul>
+ *   <li><b>Extensibility:</b> Allows dynamic addition of attributes without
+ *       modifying the object structure.</li>
+ *   <li><b>Flexibility:</b> Enables modules to attach custom data to objects for
+ *       use within the same module.</li>
+ *   <li><b>Low Usage Feature:</b> Primarily intended for carrying data between
+ *       modules, often back to the module that added the data.</li>
+ *   <li><b>Locking Requirement:</b> Objects implementing this interface are
+ *       expected to be locked by the party using them to ensure safe access in
+ *       concurrent environments.</li>
+ * </ul>
+ *
+ * <p><b>Usage Guidelines:</b></p>
+ * <ul>
+ *   <li>Use this interface when objects need to carry optional data that is not
+ *       part of their core structure.</li>
+ *   <li>Avoid relying on attributes for critical functionality unless explicitly
+ *       documented.</li>
+ *   <li>Ensure proper locking when accessing or modifying attributes in
+ *       multi-threaded environments.</li>
+ * </ul>
+ *
+ * <p><b>Thread Safety:</b></p>
+ * <ul>
+ *   <li>This interface does <b>not enforce thread safety</b>. Implementations of
+ *       this interface must ensure proper synchronization when accessed or
+ *       modified concurrently.</li>
+ *   <li>External locking or synchronization mechanisms are required if the
+ *       attributes are accessed in multi-threaded environments.</li>
+ *   <li>If thread safety is a concern, consider using a thread-safe implementation
+ *       of the attributes map (e.g., {@code ConcurrentHashMap}).</li>
+ * </ul>
+ *
  * @author nelson85
  */
 public interface Expandable
 {
 
   /**
-   * Access the attributes map. This should support operations to clear(),
-   * get(), and remove().
+   * Access the attributes map.
    *
-   * @return
+   * <p>
+   * This map supports operations such as {@code clear()}, {@code get()}, and
+   * {@code remove()}.</p>
+   *
+   * @return a map containing all attributes as key-value pairs.
    */
   Map<String, Serializable> getAttributes();
 
   /**
-   * Get the attribute.
+   * Get the value of an attribute by its name.
    *
-   * @param name of the attribute
-   * @return the attribute with the name, or null if the object is not set.
+   * @param name the name of the attribute
+   * @return the value of the attribute, or {@code null} if the attribute is not
+   * set
    */
   Serializable getAttribute(String name);
 
   /**
-   * Set the attribute.
+   * Set the value of an attribute.
    *
-   * @param <T>
-   * @param name
-   * @param value
+   * @param <T> the type of the attribute value, which must implement
+   * {@code Serializable}
+   * @param name the name of the attribute
+   * @param value the value of the attribute
    */
   <T extends Serializable> void setAttribute(String name, T value);
 
@@ -131,41 +174,38 @@ public interface Expandable
   /**
    * Check if an attribute is set.
    *
-   * @param key
-   * @return true if the attribute exists.
+   * @param key the name of the attribute
+   * @return {@code true} if the attribute exists, {@code false} otherwise
    */
   default boolean hasAttribute(String key)
   {
     Map<String, Serializable> map = this.getAttributes();
-    if (map == null)
-      return false;
-    return map.containsKey(key);
+    return map != null && map.containsKey(key);
   }
 
   /**
-   * Remove an attribute.
+   * Remove an attribute by its name.
    *
-   * @param key
+   * @param key the name of the attribute to remove
    */
   default void removeAttribute(String key)
   {
     Map<String, Serializable> map = this.getAttributes();
-    if (map == null)
-      return;
-    getAttributes().remove(key);
+    if (map != null)
+      map.remove(key);
   }
-//</editor-fold>
 
   /**
-   * Copy the attributes from one object to another.
+   * Copy all attributes from another {@code Expandable} object.
    *
-   * @param ai
+   * @param ai the source {@code Expandable} object
+   * @throws NullPointerException if the source object is {@code null}
    */
   default void copyAttributes(Expandable ai)
   {
     Map<String, Serializable> attr = ai.getAttributes();
-    if (attr == null)
-      return;
-    getAttributes().putAll(attr);
+    if (attr != null)
+      getAttributes().putAll(attr);
   }
+//</editor-fold>
 }

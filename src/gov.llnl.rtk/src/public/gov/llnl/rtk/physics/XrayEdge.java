@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/XrayEdge.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -31,14 +32,14 @@ public interface XrayEdge
   List<Xray> getXrays();
 
   /**
-   * Get the Florencence Yield.
+   * Get the Fluorescence Yield.
    *
    * FIXME what is the units on this or is it a scalar. The API is subject to
    * change depending on the need to add units.
    *
    * @return
    */
-  double getFlorencenceYield();
+  double getFluorescenceYield();
 
   /**
    * Get the Coster Kronig table for this edge.
@@ -49,4 +50,8 @@ public interface XrayEdge
    * @return the transition table or null if not available.
    */
   Map<String, Double> getCosterKronig();
+
+  Quantity getEnergy();
+
+  double getJumpRatio();
 }

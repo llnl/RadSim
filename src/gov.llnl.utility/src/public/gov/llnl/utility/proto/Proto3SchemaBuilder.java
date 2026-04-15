@@ -67,21 +67,37 @@ public class Proto3SchemaBuilder
   public String build()
   {
     StringBuilder sb = new StringBuilder();
-    String name = "unnamed";
-    sb.append("syntax = \"proto3\";\n");
-    sb.append("package ").append(name).append("\n");
+
+    sb.append("syntax = \"proto3\";\n\n");
+
+    // Pick a package name
+    String pkgName = "unnamed";
+    Object pkg = null;
+    if (!encodings.isEmpty())
+      pkg = encodings.iterator().next().getPackage();
+    if (pkg != null)
+      pkgName = pkg.toString();
+
+    sb.append("package ").append(pkgName).append(";\n\n");
+
     for (Map.Entry<String, String> entry : options.entrySet())
     {
-      sb.append("option ").append(entry.getKey()).append(" = \"").append(entry.getValue()).append("\"\n");
+      sb.append("option ").append(entry.getKey())
+              .append(" = \"").append(entry.getValue()).append("\";\n");
     }
+    if (!options.isEmpty())
+      sb.append("\n");
+
     for (String include : includes)
     {
-      sb.append("include \"").append(include).append("\"\n");
+      sb.append("import \"").append(include).append("\";\n");
     }
+    if (!includes.isEmpty())
+      sb.append("\n");
+
     for (MessageEncoding e : this.encodings)
     {
-      sb.append("\n");
-      sb.append("message ").append(e.getSchemaName()).append("{\n");
+      sb.append("message ").append(e.getSchemaName()).append(" {\n");
       for (ProtoField field : e.getFields())
       {
         if (field.id == -1)
@@ -93,9 +109,10 @@ public class Proto3SchemaBuilder
         sb.append(field.name);
         sb.append(" = ");
         sb.append(field.id);
-        sb.append(field.encoding.getSchemaOptions()).append(";\n");
+        sb.append(field.encoding.getSchemaOptions());
+        sb.append(";\n");
       }
-      sb.append("}\n");
+      sb.append("}\n\n");
     }
     return sb.toString();
   }

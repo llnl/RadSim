@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DataContentFactoryReader.
  */
-strictfp public class DataContentFactoryReaderNGTest
+public class DataContentFactoryReaderNGTest
 {
 
   /**

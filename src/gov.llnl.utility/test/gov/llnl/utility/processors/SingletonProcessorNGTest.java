@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for SingletonProcessor.
  */
-strictfp public class SingletonProcessorNGTest
+public class SingletonProcessorNGTest
 {
-  
+
   public SingletonProcessorNGTest()
   {
   }
@@ -35,5 +35,5 @@ strictfp public class SingletonProcessorNGTest
   {
     // Processors are used to generate code and not production.
   }
-  
+
 }

@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for CoreDump.
  */
-strictfp public class CoreDumpNGTest
+public class CoreDumpNGTest
 {
 
   public CoreDumpNGTest()

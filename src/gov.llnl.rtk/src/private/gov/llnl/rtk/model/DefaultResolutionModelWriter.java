@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/model/DefaultResolutionModelWriter.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved

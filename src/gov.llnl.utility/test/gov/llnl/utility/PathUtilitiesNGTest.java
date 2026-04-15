@@ -19,9 +19,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for PathUtilities.
  */
-strictfp public class PathUtilitiesNGTest
+public class PathUtilitiesNGTest
 {
-  
+
   public PathUtilitiesNGTest()
   {
   }
@@ -36,8 +36,11 @@ strictfp public class PathUtilitiesNGTest
     collection.add(Paths.get("test1.txt"));
     collection.add(Paths.get("test2.txt"));
     collection.add(Paths.get("test3.txt"));
-    String er = Arrays.toString(new String[]{"test1.txt", "test2.txt", "test3.txt"});
-    String expResult = er.substring(1, er.length()-1);
+    String er = Arrays.toString(new String[]
+    {
+      "test1.txt", "test2.txt", "test3.txt"
+    });
+    String expResult = er.substring(1, er.length() - 1);
     String result = PathUtilities.joinStrings(collection);
     assertEquals(result, expResult);
   }
@@ -49,7 +52,7 @@ strictfp public class PathUtilitiesNGTest
   public void testGetComponents()
   {
     Path p = Paths.get("/a/b/c/test.txt");
-    List expResult = Arrays.asList("a","b","c","test.txt");
+    List expResult = Arrays.asList("a", "b", "c", "test.txt");
     List result = PathUtilities.getComponents(p);
     assertEquals(result, expResult);
   }
@@ -89,7 +92,7 @@ strictfp public class PathUtilitiesNGTest
     int result = PathUtilities.getFileExtensionPosition(path);
     assertEquals(result, expResult);
   }
-  
+
   /**
    * Test of getFileExtension method, of class PathUtilities.
    */
@@ -101,8 +104,8 @@ strictfp public class PathUtilitiesNGTest
     String result = PathUtilities.getFileExtension(path);
     assertEquals(result, expResult);
   }
-  
-   /**
+
+  /**
    * Test of getFileExtension method, of class PathUtilities.
    */
   @Test
@@ -196,9 +199,9 @@ strictfp public class PathUtilitiesNGTest
   @Test
   public void testFindPaths_Path_String() throws Exception
   {
-     Path directory = Paths.get("src");
-     assertEquals(PathUtilities.findPaths(directory, "**/public"), Arrays.asList(Paths.get("src/public")));
-     assertEquals(PathUtilities.findPaths(directory, "**/built"), Arrays.asList());
+    Path directory = Paths.get("src");
+    assertEquals(PathUtilities.findPaths(directory, "**/public"), Arrays.asList(Paths.get("src/public")));
+    assertEquals(PathUtilities.findPaths(directory, "**/built"), Arrays.asList());
   }
 
   /**
@@ -213,7 +216,7 @@ strictfp public class PathUtilitiesNGTest
     List<String> expResult = Arrays.asList(Paths.get("src/private/gov").toString(), Paths.get("src/public/gov").toString());
     Collections.sort(expResult);
     List<String> result = new ArrayList<>();
-    for(Path p : PathUtilities.findPaths(directory, pattern, recursive))
+    for (Path p : PathUtilities.findPaths(directory, pattern, recursive))
     {
       result.add(p.toString());
     }
@@ -233,5 +236,5 @@ strictfp public class PathUtilitiesNGTest
     Path result = PathUtilities.findFileRecursive(directory, filename);
     assertEquals(result, expResult);
   }
-  
+
 }

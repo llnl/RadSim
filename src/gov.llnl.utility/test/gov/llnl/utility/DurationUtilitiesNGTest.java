@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for DurationUtilities.
  */
-strictfp public class DurationUtilitiesNGTest
+public class DurationUtilitiesNGTest
 {
-  
+
   public DurationUtilitiesNGTest()
   {
   }
@@ -55,7 +55,7 @@ strictfp public class DurationUtilitiesNGTest
     assertEquals(result, expResult);
   }
 
-   /**
+  /**
    * Test of format method, of class DurationUtilities.
    */
   @Test

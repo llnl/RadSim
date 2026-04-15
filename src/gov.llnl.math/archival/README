@@ -1,2 +1,0 @@
-This contains useful but otherwise deprecated versions of the math library.  These function 
-are intented to be borrowed when we need to port a limited (no math dependency)

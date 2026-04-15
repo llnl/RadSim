@@ -14,7 +14,7 @@ import org.xml.sax.Attributes;
 /**
  * Test code for QuadraticFunctionReader.
  */
-strictfp public class QuadraticFunctionReaderNGTest
+public class QuadraticFunctionReaderNGTest
 {
   
   public QuadraticFunctionReaderNGTest()

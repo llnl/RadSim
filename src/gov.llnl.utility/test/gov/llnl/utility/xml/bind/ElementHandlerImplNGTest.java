@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ElementHandlerImpl.
  */
-strictfp public class ElementHandlerImplNGTest
+public class ElementHandlerImplNGTest
 {
 
   public ElementHandlerImplNGTest()

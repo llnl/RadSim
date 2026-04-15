@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for Serializer.
  */
-strictfp public class SerializerNGTest
+public class SerializerNGTest
 {
 
   public SerializerNGTest()
@@ -72,6 +72,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of load method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testLoad() throws Exception
@@ -86,6 +87,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of save method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testSave() throws Exception
@@ -98,6 +100,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of convert method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testConvert() throws Exception
@@ -110,6 +113,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of pack method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testPack() throws Exception
@@ -139,6 +143,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of unpack method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testUnpack() throws Exception
@@ -163,6 +168,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of encode method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testEncode() throws Exception
@@ -179,6 +185,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of decode method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testDecode() throws Exception
@@ -191,6 +198,7 @@ strictfp public class SerializerNGTest
 
   /**
    * Test of copy method, of class Serializer.
+   * @throws java.lang.Exception
    */
   @Test
   public void testCopy() throws Exception

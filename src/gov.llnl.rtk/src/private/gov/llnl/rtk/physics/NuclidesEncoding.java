@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/NuclidesEncoding.java ---
 /*
  * Copyright 2025, Lawrence Livermore National Security, LLC. 
  * All rights reserved

@@ -19,7 +19,7 @@ import org.xml.sax.InputSource;
 /**
  * Test code for Transform.
  */
-strictfp public class TransformNGTest
+public class TransformNGTest
 {
 
   /**

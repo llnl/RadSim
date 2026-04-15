@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for AnyReader.
  */
-strictfp public class AnyReaderNGTest
+public class AnyReaderNGTest
 {
 
   public AnyReaderNGTest()

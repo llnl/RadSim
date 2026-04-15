@@ -6,7 +6,6 @@
  */
 package gov.llnl.utility;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import java.util.logging.Logger;
 import java.util.logging.ConsoleHandler;
@@ -15,9 +14,9 @@ import java.util.logging.Level;
 /**
  * Test code for LogFormatter.
  */
-strictfp public class LogFormatterNGTest
+public class LogFormatterNGTest
 {
-  
+
   public LogFormatterNGTest()
   {
   }
@@ -29,14 +28,13 @@ strictfp public class LogFormatterNGTest
   public void testFormat()
   {
     Logger logger = Logger.getLogger("TestLogFormatter");
-    logger.setUseParentHandlers(false); 
+    logger.setUseParentHandlers(false);
     LogFormatter lf = new LogFormatter();
-    ConsoleHandler ch = new ConsoleHandler();    
+    ConsoleHandler ch = new ConsoleHandler();
     ch.setFormatter(lf);
     ch.setLevel(Level.ALL);
     logger.addHandler(ch);
-    
-    
+
     logger.log(Level.SEVERE, "BottleCaps!", new Exception("FALLOUT!"));
     logger.log(Level.WARNING, "Warning");
     logger.log(Level.CONFIG, "CONFIG");
@@ -44,8 +42,8 @@ strictfp public class LogFormatterNGTest
     logger.log(Level.FINE, "FINE");
     logger.log(Level.FINER, "FINER");
     logger.log(Level.FINEST, "FINEST");
-    
+
     ch.close();
   }
-  
+
 }

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for HashUtilities.
  */
-strictfp public class HashUtilitiesNGTest
+public class HashUtilitiesNGTest
 {
 
   public HashUtilitiesNGTest()

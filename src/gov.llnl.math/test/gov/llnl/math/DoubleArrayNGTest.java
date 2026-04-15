@@ -20,7 +20,7 @@ import support.MatrixTestGenerator;
 /**
  * Test code for DoubleArray.
  */
-strictfp public class DoubleArrayNGTest
+public class DoubleArrayNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
 
@@ -1065,9 +1065,9 @@ strictfp public class DoubleArrayNGTest
     {
       1, 2, 3, 4, 5
     };
-    assertEquals(DoubleArray.accumulateRange(source, 0, 4, (p) -> 2 * p), 20.0);
-    assertEquals(DoubleArray.accumulateRange(source, 1, 4, (p) -> 2 * p), 18.0);
-    assertEquals(DoubleArray.accumulateRange(source, 0, 3, (p) -> 2 * p), 12.0);
+    assertEquals(DoubleArray.accumulateRange(source, 0, 4, (p) -> 2 * p), 20.0, 0.0);
+    assertEquals(DoubleArray.accumulateRange(source, 1, 4, (p) -> 2 * p), 18.0, 0.0);
+    assertEquals(DoubleArray.accumulateRange(source, 0, 3, (p) -> 2 * p), 12.0, 0.0);
   }
 
   /**

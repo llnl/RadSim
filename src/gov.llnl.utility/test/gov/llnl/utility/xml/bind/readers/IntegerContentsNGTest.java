@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for IntegerContents.
  */
-strictfp public class IntegerContentsNGTest
+public class IntegerContentsNGTest
 {
-  
+
   public IntegerContentsNGTest()
   {
   }
@@ -48,5 +48,5 @@ strictfp public class IntegerContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

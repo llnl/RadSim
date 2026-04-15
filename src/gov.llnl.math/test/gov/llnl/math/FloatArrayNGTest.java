@@ -84,7 +84,7 @@ public class FloatArrayNGTest
     assertNotNull(x);
     for(int i = 0; i < x.length; ++i)
     {
-      assertEquals(x[i], value);
+      assertEquals(x[i], value, 0.0);
     }
   }
 

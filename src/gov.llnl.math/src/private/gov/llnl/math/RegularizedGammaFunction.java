@@ -6,8 +6,6 @@
  */
 package gov.llnl.math;
 
-import gov.llnl.math.SpecialFunctions;
-
 /**
  * Utility class for computation of the regularized gamma functions which are
  * defined by the incomplete gamma functions over the gamma function. Because
@@ -20,7 +18,7 @@ import gov.llnl.math.SpecialFunctions;
  *
  * @author nelson85
  */
-class RegularizedGammaFunction
+public class RegularizedGammaFunction
 {
   public RegularizedGammaFunction()
   {
@@ -55,37 +53,14 @@ class RegularizedGammaFunction
       return true;
     }
 
-    // different regions of the parameter space require different policies
+    q_ = 99;
+    p_ = 99;
     double lambda = x / a;
-    if ((lambda < 0.5) || (x < 1))
-    {
-      return evaluateContinuedFraction1(a, x, 5);
-    }
-    if ((lambda > 2.5) && (x > 10))
-    {
-      return evaluateContinuedFraction2(a, x, 5);
-    }
-    if ((lambda > 1.4) && (x > 4))
-    {
-      return evaluateContinuedFraction2(a, x, 10);
-    }
-    if ((x < 2) && (a < 2))
-    {
-      return evaluatePowerSeries(a, x, 20);
-    }
-    if (lambda < 0.95)
-    {
-      return evaluateContinuedFraction1(a, x, 20);
-    }
-    if ((x > 100000) && (lambda < 0.98))
-    {
-      return evaluateContinuedFraction1(a, x, 40);
-    }
-    if (x < 10)
-    {
-      return evaluateContinuedFraction2(a, x, 20);
-    }
-    return evaluateUniformAsymptoticExpansions(a, x);
+    if (lambda >= 0.8 && lambda < 2 && a > 20)
+      return evaluateUniformAsymptoticExpansions(a, x);
+    if (x > 1 && lambda > 1)
+      return evaluateContinuedFraction2(a, x, (int) (100 / Math.min(x, 50) + 2 + Math.min(a, 20)));
+    return evaluateContinuedFraction1(a, x, (int) (Math.max(10 * x + 5, 20)));
   }
 
   /**
@@ -128,13 +103,16 @@ class RegularizedGammaFunction
     {
       f = f * x / (a + i);
       M = M + f;
-      if (f < M * 1e-10)
+      if (f < M * 1e-16)
         break;
     }
     lngamma_ = SpecialFunctions.gammaln(a);
     lnk_ = a * Math.log(x) - x - lngamma_;
     p_ = Math.exp(Math.log(M / a) + lnk_);
-    q_ = 1.0 - p_;
+    if (p_ > 0.5)
+      q_ = -Math.expm1(Math.log(M / a) + lnk_);
+    else
+      q_ = 1 - p_;
     return true;
   }
 
@@ -180,13 +158,14 @@ class RegularizedGammaFunction
     }
 
     // "tempered" gamma function
-    double loga = Math.log(a);
     lngamma_ = SpecialFunctions.gammaln(a);
-    double lntgamma = lngamma_ + a - a * loga;
-    double Ra = Sa * Math.exp(-a * eta * eta / 2 - lntgamma - loga);
-
+    double lntgamma = lngamma_ + a - a * Math.log(a);
+    double Ra = Sa * Math.exp(-a * eta * eta / 2 - lntgamma) / a;
     q_ = 0.5 * efQ + Ra;
     p_ = 0.5 * efP - Ra;
+    double t = q_ + p_;
+    q_ /= t;
+    p_ /= t;
     return true;
   }
 
@@ -209,10 +188,12 @@ class RegularizedGammaFunction
     double cf = 1 / (a - a * x / (a + 1 + f));
     lngamma_ = SpecialFunctions.gammaln(a);
     lnk_ = a * Math.log(x) - x - lngamma_;
-    p_ = Math.exp(lnk_ + Math.log(cf));
-    q_ = 1.0 - p_;
+    p_ = cf * Math.exp(lnk_);
+    if (p_ > 0.5)
+      q_ = -Math.expm1(lnk_ + Math.log(cf));
+    else
+      q_ = 1 - p_;
     return true;
-
   }
 
   /**
@@ -235,16 +216,14 @@ class RegularizedGammaFunction
     double cf = 1.0 / (1 + x - a + f);
     lngamma_ = SpecialFunctions.gammaln(a);
     lnk_ = a * Math.log(x) - x - lngamma_;
-    q_ = Math.exp(Math.log(cf) + lnk_);
-    p_ = 1.0 - q_;
+    q_ = cf * Math.exp(lnk_);
+    if (q_ > 0.5)
+      p_ = -Math.expm1(lnk_ + Math.log(cf));
+    else
+      p_ = 1.0 - q_;
     return true;
   }
 
-//  public static void main(String[] args)
-//  {
-//    System.out.println(SpecialFunctions.gammaP(78.892, 76.6147));
-//    System.out.println(SpecialFunctions.gammaP(1.0638e+04, 1.0543e+04));
-//  }
   double p_;
   double q_;
   double lngamma_;

@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/GeometryImpl.java ---
 /* 
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -23,7 +24,7 @@ public class GeometryImpl implements Serializable, Geometry
   {
   }
 
-  private GeometryImpl(Type type, Quantity e1, Quantity e2)
+  GeometryImpl(Type type, Quantity e1, Quantity e2)
   {
     this.type = type;
     this.extent1 = e1;

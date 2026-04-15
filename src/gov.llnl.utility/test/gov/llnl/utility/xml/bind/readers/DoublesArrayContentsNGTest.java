@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for DoublesArrayContents.
  */
-strictfp public class DoublesArrayContentsNGTest
+public class DoublesArrayContentsNGTest
 {
-  
+
   public DoublesArrayContentsNGTest()
   {
   }
@@ -80,5 +80,5 @@ strictfp public class DoublesArrayContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

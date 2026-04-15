@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * Test code for UnmodifiableListIterator.
  */
 public class UnmodifiableListIteratorNGTest
-{ 
+{
   static class TestUnmodifiableListIterator extends UnmodifiableListIterator<Integer>
   {
     @Override
@@ -53,15 +53,17 @@ public class UnmodifiableListIteratorNGTest
   }
 
   TestUnmodifiableListIterator testUnmodifiableListIterator;
+
   public UnmodifiableListIteratorNGTest()
   {
     testUnmodifiableListIterator = new TestUnmodifiableListIterator();
   }
-  
+
   /**
    * Test of remove method, of class UnmodifiableListIterator.
    */
-  @Test (expectedExceptions = {
+  @Test(expectedExceptions =
+  {
     UnsupportedOperationException.class
   })
   public void testRemove()
@@ -72,7 +74,8 @@ public class UnmodifiableListIteratorNGTest
   /**
    * Test of set method, of class UnmodifiableListIterator.
    */
-  @Test (expectedExceptions = {
+  @Test(expectedExceptions =
+  {
     UnsupportedOperationException.class
   })
   public void testSet()
@@ -83,12 +86,13 @@ public class UnmodifiableListIteratorNGTest
   /**
    * Test of add method, of class UnmodifiableListIterator.
    */
-  @Test (expectedExceptions = {
+  @Test(expectedExceptions =
+  {
     UnsupportedOperationException.class
   })
   public void testAdd()
   {
     testUnmodifiableListIterator.add(1);
   }
-  
+
 }

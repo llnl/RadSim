@@ -40,6 +40,7 @@ class SInt32Encoding extends Int32Encoding
 
   @Override
   public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+          throws ProtoException
   {
     int result;
     if (field.getter instanceof Function)
@@ -59,13 +60,12 @@ class SInt32Encoding extends Int32Encoding
 
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3));
+      ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     // contents
     Int32Encoding.encodeVInt32(baos, result);
   }
-  
-  
-    @Override
+
+  @Override
   public String getSchemaName()
   {
     return "sint32";

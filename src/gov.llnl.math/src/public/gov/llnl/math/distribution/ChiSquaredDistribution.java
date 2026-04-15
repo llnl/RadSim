@@ -23,6 +23,7 @@ public class ChiSquaredDistribution implements Distribution
     k = d;
   }
 
+  @Override
   public String toString()
   {
     return "ChiSquared Distribution df=" + k;
@@ -33,6 +34,17 @@ public class ChiSquaredDistribution implements Distribution
   {
     if (x < 0)
       return 0;
+
+    if (x == 0)
+    {
+      if (k < 2)
+        return Double.POSITIVE_INFINITY; // Limit approaches infinity
+      if (k == 2)
+        return 0.5;                      // f(0; 2) = 0.5 * e^0
+      return 0;                          // For k > 2
+    }
+
+    // Standard calculation for x > 0
     return Math.exp(
             -Math.log(2) * k / 2
             - SpecialFunctions.gammaln(k / 2)
@@ -64,15 +76,4 @@ public class ChiSquaredDistribution implements Distribution
     throw new UnsupportedOperationException("Not supported yet.");
   }
 
-//  static public void main(String[] args)
-//  {
-//    ChiSquaredDistribution chi2 = new ChiSquaredDistribution(4);
-//    System.out.println(chi2.pdf(0.5));
-//    System.out.println(chi2.pdf(1));
-//    System.out.println(chi2.pdf(2));
-//    
-//    System.out.println(chi2.cdf(0.5));
-//    System.out.println(chi2.cdf(1));
-//    System.out.println(chi2.cdf(2));
-//  }
 }

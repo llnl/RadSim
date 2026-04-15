@@ -70,11 +70,4 @@ public class GammaDistribution implements Distribution
     throw new UnsupportedOperationException("Not supported yet.");
   }
 
-//  static public void main(String[] args)
-//  {
-//    GammaDistribution gd = new GammaDistribution(2, 4);
-//    System.out.println(gd.cdf(0.5));
-//    System.out.println(gd.cdf(1));
-//    System.out.println(gd.cdf(2));
-//  }
 }

@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxSpectrum.java ---
 /*
  * Copyright 2022, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -52,7 +53,7 @@ public class FluxSpectrum extends ExpandableObject implements Flux, Serializable
   {
     // Sanity checks
     if (photonScale != null && photonScale.getChannels() != photonCounts.length)
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(String.format("Size mismatch between scale and counts %d!=%d", photonScale.getChannels(), photonCounts.length));
     if (neutronScale != null && neutronScale.getChannels() != neutronCounts.length)
       throw new IllegalArgumentException();
     if (photonScale == null)

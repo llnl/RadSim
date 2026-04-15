@@ -9,10 +9,10 @@ package gov.llnl.utility.proto;
 import java.io.ByteArrayOutputStream;
 
 /**
- *  Special encoding that includes one of a given type.
- * 
+ * Special encoding that includes one of a given type.
+ *
  * All types must derive from a common base.
- * 
+ *
  * @author nelson85
  * @param <T>
  */
@@ -34,7 +34,7 @@ public class OneOfEncoding<T> extends MessageEncoding<T>
   {
     builder.field("c" + code, code, () -> new ClassField(cls))
             .encoding(encoding)
-            .as(o->o, (o,v)->((Object[])o)[0]=v);
+            .as(o -> o, (o, v) -> ((Object[]) o)[0] = v);
   }
 
   private static class ClassField extends ProtoField
@@ -47,34 +47,67 @@ public class OneOfEncoding<T> extends MessageEncoding<T>
     }
   }
 
-  /**
-   * Serialize a double[][][] into bytes.
-   *
-   * @param values are the array to serialize, may be null.
-   * @return the byte representation for this.
-   */
   @Override
   public byte[] serializeContents(ProtoContext context, T values) throws ProtoException
   {
     if (values == null)
-    {
       return null;
-    }
     // Figure out which encoding is best
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    for (ProtoField f : getFields())
+    ClassField closestField = null;
+    int closestDistance = Integer.MAX_VALUE;
+    Class<?> valueClass = values.getClass();
+
+    ProtoField[] list = this.getFields();
+    for (ProtoField f : list)
     {
       if (f instanceof ClassField)
       {
-        var u = (ClassField) f;
+        ClassField u = (ClassField) f;
         if (u.cls.isInstance(values))
         {
-          u.encoding.serializeField(f, baos, values);
-          return baos.toByteArray();
+          int distance = getInheritanceDistance(valueClass, u.cls);
+          if (distance < closestDistance)
+          {
+            closestDistance = distance;
+            closestField = u;
+          }
         }
       }
     }
+
+    if (closestField != null)
+    {
+      closestField.encoding.serializeField(closestField, baos, values);
+      return baos.toByteArray();
+    }
+
     return baos.toByteArray();
+  }
+
+  private static int getInheritanceDistance(Class<?> candidate, Class<?> target)
+  {
+    if (!target.isAssignableFrom(candidate))
+      return Integer.MAX_VALUE;
+    if (candidate.equals(target))
+      return 0;
+    int distance = 0;
+    Class<?> current = candidate;
+    while (current != null && !current.equals(target))
+    {
+      if (target.isInterface())
+      {
+        // Check all interfaces
+        for (Class<?> iface : current.getInterfaces())
+        {
+          if (iface.equals(target))
+            return distance + 1;
+        }
+      }
+      current = current.getSuperclass();
+      distance++;
+    }
+    return distance;
   }
 
   @Override

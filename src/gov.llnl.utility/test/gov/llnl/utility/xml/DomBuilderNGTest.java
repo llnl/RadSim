@@ -19,17 +19,17 @@ import org.w3c.dom.Element;
 /**
  * Test code for DomBuilder.
  */
-strictfp public class DomBuilderNGTest
+public class DomBuilderNGTest
 {
-  
-  public static DomBuilder newInstance() 
+
+  public static DomBuilder newInstance()
   {
     try
     {
       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
       DocumentBuilder builder = dbf.newDocumentBuilder();
       Document doc = builder.newDocument();
-      
+
       // create the root element node
       Element element = doc.createElement("root");
       doc.appendChild(element);
@@ -51,7 +51,7 @@ strictfp public class DomBuilderNGTest
     String value = "value";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.attr(name, value);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root name=\"value\"/>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root name=\"value\"/>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -67,7 +67,7 @@ strictfp public class DomBuilderNGTest
     String value = "1";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.attrNS(namespaceURI, qualifiedName, value);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root xmlns:foo=\"http://llnl.gov\" foo:bar=\"1\"/>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root xmlns:foo=\"http://llnl.gov\" foo:bar=\"1\"/>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -82,7 +82,7 @@ strictfp public class DomBuilderNGTest
     String name = "test";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.elementNS(pkg, name);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <util:test xmlns:util=\"http://utility.llnl.gov\"/></root>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <util:test xmlns:util=\"http://utility.llnl.gov\"/></root>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -96,7 +96,7 @@ strictfp public class DomBuilderNGTest
     String name = "foo";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.element(name);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <foo/></root>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <foo/></root>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -112,7 +112,7 @@ strictfp public class DomBuilderNGTest
     DomBuilder instance = newInstance();
     instance.element("foo");
     DomBuilder result = instance.element(name, first);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <bar/>  <foo/></root>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <bar/>  <foo/></root>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -126,7 +126,7 @@ strictfp public class DomBuilderNGTest
     String string = "text";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.comment(string);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <!--text--></root>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>  <!--text--></root>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -140,7 +140,7 @@ strictfp public class DomBuilderNGTest
     String value = "text";
     DomBuilder instance = newInstance();
     DomBuilder result = instance.text(value);
-    String expResult="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>text</root>";
+    String expResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root>text</root>";
     String strResult = DomUtilities.printXmlToString(result.toElement().getOwnerDocument()).replaceAll(System.lineSeparator(), "");
     assertEquals(strResult, expResult);
   }
@@ -155,5 +155,5 @@ strictfp public class DomBuilderNGTest
     Element result = instance.toElement();
     assertNotNull(result);
   }
-  
+
 }

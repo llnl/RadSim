@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for LongContents.
  */
-strictfp public class LongContentsNGTest
+public class LongContentsNGTest
 {
-  
+
   public LongContentsNGTest()
   {
   }
@@ -48,5 +48,5 @@ strictfp public class LongContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

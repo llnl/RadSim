@@ -20,9 +20,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for IteratorInputStream.
  */
-strictfp public class IteratorInputStreamNGTest
+public class IteratorInputStreamNGTest
 {
-  
+
   public IteratorInputStreamNGTest()
   {
   }
@@ -65,7 +65,7 @@ strictfp public class IteratorInputStreamNGTest
   @Test
   public void testCreate_Iterable() throws IOException
   {
-    Iterable<String> src = new ArrayList<>(Arrays.asList("a","b","c"));
+    Iterable<String> src = new ArrayList<>(Arrays.asList("a", "b", "c"));
     InputStream expResult = new IteratorInputStream<>(src.iterator(), (String s) -> s.getBytes());
     InputStream result = IteratorInputStream.create(src);
     byte[] contents = result.readAllBytes();
@@ -102,10 +102,10 @@ strictfp public class IteratorInputStreamNGTest
     int expResult = 4;
     int result = instance.read(b, off, len);
     assertEquals(result, expResult);
-    assertEquals(b[0],'a');
-    assertEquals(b[1],'b');
-    assertEquals(b[2],'c');
-    assertEquals(b[3],'d');
+    assertEquals(b[0], 'a');
+    assertEquals(b[1], 'b');
+    assertEquals(b[2], 'c');
+    assertEquals(b[3], 'd');
   }
-  
+
 }

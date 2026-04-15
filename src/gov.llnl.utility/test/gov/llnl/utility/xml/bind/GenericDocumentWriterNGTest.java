@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for GenericDocumentWriter.
  */
-strictfp public class GenericDocumentWriterNGTest
+public class GenericDocumentWriterNGTest
 {
-  
+
   public GenericDocumentWriterNGTest()
   {
   }
@@ -28,5 +28,5 @@ strictfp public class GenericDocumentWriterNGTest
   {
     // Tested end to end.
   }
-  
+
 }

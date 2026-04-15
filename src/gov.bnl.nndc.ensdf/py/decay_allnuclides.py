@@ -69,12 +69,12 @@ for i,child in enumerate(root):
         e_values_sandia = gamma_record_sandia['E']
         i_values_sandia = gamma_record_sandia['I']
         if(len(e_values_bnl)<1 and len(e_values_sandia)<1): continue
-        #plt.clf()
-        #plt.vlines(e_values_bnl, ymin=0, ymax=i_values_bnl, color='blue', linewidth=3, label="BNL", alpha=0.7)
-        #plt.vlines(e_values_sandia, ymin=0, ymax=i_values_sandia, color='orange', linewidth=3, linestyle='--', label="Sandia", alpha=0.7)
-        #plt.xlabel('Energy (keV)')
-        #plt.ylabel('Intensity')
-        #plt.yscale('log')
-        #plt.title(child.attrib['symbol']+" (1 Ci)")
-        #plt.legend()
-        #plt.savefig('figures/decay_results/'+child.attrib['symbol']+'.png')
+        plt.clf()
+        plt.vlines(e_values_bnl, ymin=0, ymax=i_values_bnl, color='blue', linewidth=3, label="BNL", alpha=0.7)
+        plt.vlines(e_values_sandia, ymin=0, ymax=i_values_sandia, color='orange', linewidth=3, linestyle='--', label="Sandia", alpha=0.7)
+        plt.xlabel('Energy (keV)')
+        plt.ylabel('Intensity')
+        plt.yscale('log')
+        plt.title(child.attrib['symbol']+" (1 Ci)")
+        plt.legend()
+        plt.savefig('figures/decay_results/'+child.attrib['symbol']+'.png')

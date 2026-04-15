@@ -6,22 +6,21 @@
  */
 package gov.llnl.utility.io;
 
-import java.nio.file.Path;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
  * Test code for SerializationObjectStreamFactory.
  */
-strictfp public class SerializationObjectStreamFactoryNGTest
+public class SerializationObjectStreamFactoryNGTest
 {
-  
+
   public SerializationObjectStreamFactoryNGTest()
   {
   }
 
   /**
-   * Test of createInputStream method, of class SerializationObjectStreamFactory.
+   * Test of createInputStream method, of class
+   * SerializationObjectStreamFactory.
    */
   @Test
   public void testCreateInputStream() throws Exception
@@ -30,12 +29,13 @@ strictfp public class SerializationObjectStreamFactoryNGTest
   }
 
   /**
-   * Test of createOutputStream method, of class SerializationObjectStreamFactory.
+   * Test of createOutputStream method, of class
+   * SerializationObjectStreamFactory.
    */
   @Test
   public void testCreateOutputStream() throws Exception
   {
     // Tested end-to-end
   }
-  
+
 }

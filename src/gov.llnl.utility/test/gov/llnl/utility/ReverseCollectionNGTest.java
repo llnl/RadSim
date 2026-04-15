@@ -6,7 +6,6 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.ReverseCollection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -17,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReverseCollection.
  */
-strictfp public class ReverseCollectionNGTest
+public class ReverseCollectionNGTest
 {
   public ReverseCollectionNGTest()
   {
@@ -29,7 +28,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testIterator()
   {
-    List<Integer> testList = new ArrayList(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList(Arrays.asList(0, 1, 2, 3));
     ReverseCollection rc = new ReverseCollection(testList);
     Iterator<Integer> iterator = rc.iterator();
     assertNotNull(iterator);
@@ -53,7 +52,7 @@ strictfp public class ReverseCollectionNGTest
   {
     assertEquals(new ReverseCollection(new ArrayList()).size(), 0);
 
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     assertEquals(new ReverseCollection(testList).size(), 4);
   }
 
@@ -64,7 +63,7 @@ strictfp public class ReverseCollectionNGTest
   public void testIsEmpty()
   {
     assertTrue(new ReverseCollection(new ArrayList()).isEmpty());
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     assertEquals(new ReverseCollection(testList).isEmpty(), false);
   }
 
@@ -74,7 +73,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testContains()
   {
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     ReverseCollection rc = new ReverseCollection(testList);
     assertEquals(rc.contains(4), false);
     assertEquals(rc.contains(0), true);
@@ -86,7 +85,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testToArray_0args()
   {
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     ReverseCollection rc = new ReverseCollection(testList);
     Object[] objArray = rc.toArray();
     assertEquals(objArray.length, testList.size());
@@ -105,7 +104,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testToArray_GenericType()
   {
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     ReverseCollection<Integer> rc = new ReverseCollection<>(testList);
     Integer[] intArray = new Integer[testList.size()];
     intArray = rc.toArray(intArray);
@@ -154,7 +153,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testRemove()
   {
-    List<Integer> testList = Arrays.asList(0,1,2,3);
+    List<Integer> testList = Arrays.asList(0, 1, 2, 3);
     ReverseCollection<Integer> rc = new ReverseCollection<>(new ArrayList(testList));
     int testSize = testList.size();
     assertEquals(rc.size(), testSize);
@@ -175,7 +174,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testContainsAll()
   {
-    List<Integer> testList = new ArrayList(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList(Arrays.asList(0, 1, 2, 3));
     ReverseCollection<Integer> rc = new ReverseCollection<>(new ArrayList());
     assertEquals(rc.containsAll(testList), false);
     rc.add(0);
@@ -195,7 +194,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testAddAll()
   {
-    List<Integer> testList = new ArrayList<>(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
     ReverseCollection<Integer> rc = new ReverseCollection<>(new ArrayList());
     rc.addAll(testList);
     assertEquals(rc.size(), testList.size());
@@ -213,11 +212,11 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testRemoveAll()
   {
-    List<Integer> testList = new ArrayList<>(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
     ReverseCollection<Integer> rc = new ReverseCollection<>(new ArrayList(testList));
     assertTrue(rc.removeAll(testList));
     assertEquals(rc.size(), 0);
-    
+
     rc.add(4);
     rc.add(5);
     rc.addAll(testList);
@@ -231,7 +230,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testRetainAll()
   {
-    List<Integer> testList = new ArrayList<>(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
     ReverseCollection<Integer> rc = new ReverseCollection<>(new ArrayList(testList));
     rc.add(4);
     rc.add(5);
@@ -246,7 +245,7 @@ strictfp public class ReverseCollectionNGTest
     {
       assertEquals((Integer) obj, testValue);
       --testValue;
-    }    
+    }
   }
 
   /**
@@ -255,7 +254,7 @@ strictfp public class ReverseCollectionNGTest
   @Test
   public void testClear()
   {
-    List<Integer> testList = new ArrayList<>(Arrays.asList(0,1,2,3));
+    List<Integer> testList = new ArrayList<>(Arrays.asList(0, 1, 2, 3));
     ReverseCollection<Integer> rc = new ReverseCollection<>(testList);
     assertEquals(rc.size(), 4);
     rc.clear();

@@ -65,7 +65,7 @@ public class FixedInt32EncodingNGTest
 
     static
     {
-      ProtoBuilder<A, A> builder = newBuilder(null,"A",A::new);
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", A::new);
       builder.field("i", 1).type(Type.FixedInt32).asInt(A::getI, A::setI);
       builder.field("j", 2).type(Type.FixedInt32).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
@@ -144,7 +144,7 @@ public class FixedInt32EncodingNGTest
   }
 
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

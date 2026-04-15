@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for ContentWriters.
  */
-strictfp public class ContentWritersNGTest
+public class ContentWritersNGTest
 {
-  
+
   public ContentWritersNGTest()
   {
   }
@@ -48,5 +48,5 @@ strictfp public class ContentWritersNGTest
   {
     // Tested end to end.
   }
-  
+
 }

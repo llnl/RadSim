@@ -21,7 +21,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for ContentsReader.
  */
-strictfp public class ContentsReaderNGTest
+public class ContentsReaderNGTest
 {
 
   /**

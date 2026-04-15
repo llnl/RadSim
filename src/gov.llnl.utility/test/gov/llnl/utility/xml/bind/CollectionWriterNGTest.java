@@ -9,14 +9,14 @@ package gov.llnl.utility.xml.bind;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * Test code for CollectionWriter.
- * 
+ *
  * ObjectWriters are not currently tested.
  */
-strictfp public class CollectionWriterNGTest
+public class CollectionWriterNGTest
 {
-  
+
   public CollectionWriterNGTest()
   {
   }
@@ -55,5 +55,5 @@ strictfp public class CollectionWriterNGTest
 //    CollectionWriter instance = null;
 //    instance.contents(object);
   }
-  
+
 }

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.10.14
+Created-By: 17.0.12+8-LTS-286 (Oracle Corporation)
+Built-By: hangal1
+Built-Date: 2026-04-15 16:03:26
+Specification-Title: LLNL N42 reader
+Specification-Version: ${version.num}
+Specification-Vendor: Lawrence Livermore National Laboratory
+Implementation-Title: gov.nist.physics.n42
+Implementation-Vendor: Lawrence Livermore National Laboratory
+Implementation-Version: 2
+Release-Class-Path: ${release.classpath}
+

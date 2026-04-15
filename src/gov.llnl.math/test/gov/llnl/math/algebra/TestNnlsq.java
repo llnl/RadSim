@@ -21,7 +21,7 @@ import java.util.Collection;
  *
  * @author nelson85
  */
-strictfp public class TestNnlsq
+public class TestNnlsq
 {
 
   /**

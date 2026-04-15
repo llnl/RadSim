@@ -24,6 +24,7 @@ public class MCNP_Utils {
         MCNP_Material.resetCount();
         MCNP_Tally.resetCount();
         MCNP_Transformation.resetCount();
+        MCNP_Distribution.resetCount();
     }
 
     public static double getContainingRadius(Section section) {

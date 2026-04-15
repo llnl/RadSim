@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  *
  * @author nelson85
  */
-strictfp public class TestProbabilityGraph
+public class TestProbabilityGraph
 {
   public static void main(String[] args) throws ReaderException, IOException
   {

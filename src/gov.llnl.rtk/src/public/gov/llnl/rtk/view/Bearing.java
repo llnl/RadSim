@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/view/Bearing.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -41,14 +42,4 @@ public class Bearing
     return Math.atan2(sin, cos);
   }
 
-//  static public void main(String[] args)
-//  {
-//    System.out.println(compute(Vector3.of(2, 0, 0), Vector3.of(4, 0, 0)));
-//    System.out.println(compute(Vector3.of(2, 0, 0), Vector3.of(0, 4, 0)));
-//    System.out.println(compute(Vector3.of(2, 0, 0), Vector3.of(0, -4, 0)));
-//    
-//        System.out.println(compute(Vector3.of(0, 2, 0), Vector3.of(4, 0, 0)));
-//    System.out.println(compute(Vector3.of(0, 2, 0), Vector3.of(0, 4, 0)));
-//    System.out.println(compute(Vector3.of(0, 2, 0), Vector3.of(0, -4, 0)));
-//  }
 }

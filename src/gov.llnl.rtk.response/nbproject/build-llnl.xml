@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="..">
+
+  <target name="manifest">
+    <property file="nbproject/project.properties"/>
+    <property file="nbproject/version.properties"/>
+    <fail unless="manifest.file" message="'manifest.file' must be set in project.properties"/>
+    <fail unless="application.title" message="'application.title' must be set in project.properties"/>
+    <fail unless="implementation.title" message="'implementation.title' must be set in project.properties"/>
+    <mkdir dir="nbproject/private"/>
+    <buildnumber file="nbproject/private/build.num"/>
+    <tstamp>
+      <format pattern="yyyy-MM-dd HH:mm:ss" property="TODAY"/>
+    </tstamp>
+    <manifest file="${manifest.file}">
+      <attribute name="Built-By" value="${user.name}"/>
+      <attribute name="Built-Date" value="${TODAY}"/>
+      <attribute name="Specification-Title" value="${application.title}"/>
+      <attribute name="Specification-Version" value="${version.num}"/>
+      <attribute name="Specification-Vendor" value="${application.vendor}"/>
+      <attribute name="Implementation-Title" value="${implementation.title}"/>
+      <attribute name="Implementation-Vendor" value="${application.vendor}"/>
+      <attribute name="Implementation-Version" value="${build.number}"/>
+      <attribute name="Release-Class-Path" value="${release.classpath}"/>
+    </manifest>
+    <mkdir dir="${build.classes.dir}/META-INF/"/>
+    <copy file="${manifest.file}" todir="${build.classes.dir}/META-INF"/>
+  </target>
+
+  <target name="eol">
+    <property file="nbproject/project.properties"/>
+    <fixcrlf srcdir="${src.dir}" includes="**/*.java" eol="unix"/>
+    <fixcrlf srcdir="${src.dir}" includes="**/*.xml"  eol="unix"/>
+    <fixcrlf srcdir="${src.dir}" includes="**/*.xsd"  eol="unix"/>
+  </target>
+
+  <target name="schema">
+    <property file="nbproject/project.properties"/>
+    <fail unless="schema.class" message="'schema.class' must be set in project.properties"/>
+    <fail unless="schema.dir" message="'schema.dir' must be set in project.properties"/>
+    <fail unless="schema.name" message="'schema.name' must be set in project.properties"/>
+    <echo message="Schema class ${schema.class}" />
+    <echo message="Class path ${run.classpath}" />
+    <echo message="Module path ${run.modulepath}" />
+    <java classname="gov.llnl.utility.xml.bind.SchemaBuilder" dir="${basedir}" failonerror="true" fork="true">
+      <classpath>
+        <!--<path path="../gov.llnl.utility/dist/gov.llnl.utility.jar"/>-->
+        <path path="${run.classpath}"/>
+      </classpath>
+      <modulepath>
+        <path path="${run.modulepath}"/>
+      </modulepath>
+      <arg value="${schema.class}" />
+      <arg value="${build.classes.dir}" />
+      <arg value="${src.dir}" />
+      <arg value="${schema.name}" />
+    </java>
+    <copy todir="${build.classes.dir}" verbose="true">
+      <fileset dir="${src.dir}">
+        <include name="${schema.dir}/**/*.xsd"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="javadoc.mathjax">
+    <property name="javadoc.additionalparam"  value="-header &quot;&lt;script type=&apos;text/javascript&apos; src=&apos;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&apos;&gt;&lt;/script&gt;&quot;"/>
+  </target>
+
+</project>

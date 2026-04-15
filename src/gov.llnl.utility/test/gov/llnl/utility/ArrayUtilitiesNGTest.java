@@ -6,14 +6,13 @@
  */
 package gov.llnl.utility;
 
-import java.util.function.Supplier;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.Test;
 
 /**
  * Test for for ArrayUtilities.
  */
-strictfp public class ArrayUtilitiesNGTest
+public class ArrayUtilitiesNGTest
 {
 
   public ArrayUtilitiesNGTest()
@@ -25,7 +24,7 @@ strictfp public class ArrayUtilitiesNGTest
   {
     ArrayUtilities instance = new ArrayUtilities();
   }
-  
+
   /**
    * Test of parseDoubleFromString method, of class ArrayUtilities.
    */
@@ -85,7 +84,10 @@ strictfp public class ArrayUtilitiesNGTest
   @Test
   public void testParseDoubleArray()
   {
-    double[] expResult = new double[]{0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0};
+    double[] expResult = new double[]
+    {
+      0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0
+    };
     assertEquals(ArrayUtilities.parseDoubleArray("0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0", 10, ','), expResult);
   }
 
@@ -104,8 +106,14 @@ strictfp public class ArrayUtilitiesNGTest
   @Test
   public void testFastSplit()
   {
-    assertEquals(ArrayUtilities.fastSplit("\t1\t2\t3"), new String[]{"","1","2","3"});
-    assertEquals(ArrayUtilities.fastSplit("0\t1\t2\t3"), new String[]{"0","1","2","3"});
+    assertEquals(ArrayUtilities.fastSplit("\t1\t2\t3"), new String[]
+    {
+      "", "1", "2", "3"
+    });
+    assertEquals(ArrayUtilities.fastSplit("0\t1\t2\t3"), new String[]
+    {
+      "0", "1", "2", "3"
+    });
   }
 
   /**
@@ -114,7 +122,10 @@ strictfp public class ArrayUtilitiesNGTest
   @Test
   public void testParseIntArray()
   {
-    int[] expResult = new int[]{0,1,2,3,4,5,6,7,8,9};
+    int[] expResult = new int[]
+    {
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    };
     assertEquals(ArrayUtilities.parseIntArray("0,1,2,3,4,5,6,7,8,9", 10, ','), expResult);
   }
 

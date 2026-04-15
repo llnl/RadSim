@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for QuadraticFunction.
  */
-strictfp public class QuadraticFunctionNGTest
+public class QuadraticFunctionNGTest
 {
   
   public QuadraticFunctionNGTest()

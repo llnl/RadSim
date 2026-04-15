@@ -17,9 +17,9 @@ import org.xml.sax.Attributes;
 /**
  * Test code for AttributeHandlers.
  */
-strictfp public class AttributeHandlersNGTest
+public class AttributeHandlersNGTest
 {
-  
+
   public AttributeHandlersNGTest()
   {
   }
@@ -77,5 +77,5 @@ strictfp public class AttributeHandlersNGTest
   {
     // Tested end to end.
   }
-  
+
 }

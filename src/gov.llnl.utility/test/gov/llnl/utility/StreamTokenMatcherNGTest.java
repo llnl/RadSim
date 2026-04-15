@@ -6,9 +6,6 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.TokenDef;
-import gov.llnl.utility.StreamTokenMatcher;
-import gov.llnl.utility.Tokenizer;
 import gov.llnl.utility.StreamTokenMatcher.TokenIterator;
 import java.io.ByteArrayInputStream;
 import java.util.Iterator;
@@ -18,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for StreamTokenMatcher.
  */
-strictfp public class StreamTokenMatcherNGTest
+public class StreamTokenMatcherNGTest
 {
 
   /**

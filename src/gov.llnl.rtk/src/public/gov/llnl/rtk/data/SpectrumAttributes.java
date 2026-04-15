@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/data/SpectrumAttributes.java ---
 /*
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -69,8 +70,6 @@ public class SpectrumAttributes
   /**
    * Option to writer to prevent fields from being written
    */
-  public static final String WRITER_EXCLUDE = URN + "#exclude"; // Predicate
-
   @Deprecated
 
   @Reader.ElementDeclaration(pkg = RtkPackage.class, name = "gammaFluxLines", type = Quantity.class)

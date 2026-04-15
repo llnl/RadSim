@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for WaveletTransformFactory.
  */
-strictfp public class WaveletTransformFactoryNGTest
+public class WaveletTransformFactoryNGTest
 {
 
   public WaveletTransformFactoryNGTest()

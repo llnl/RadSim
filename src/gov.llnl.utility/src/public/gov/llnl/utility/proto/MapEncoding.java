@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 /**
  * Encoding for a map of key value pairs.
- * 
+ *
  * By default this will produce a HashMap.
  *
  * @author nelson85
@@ -32,7 +32,7 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
   public MapEncoding(ProtoEncoding<T1> m1, ProtoEncoding<T2> m2, Supplier<Map<T1, T2>> supplier)
   {
     field1.name = "key";
-    field1.name = "value";
+    field2.name = "value";
     field1.id = 1;
     field2.id = 2;
     field1.setter = lambda1;
@@ -50,11 +50,11 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
   public void parseField(ProtoContext context, ProtoField field, int type, Object obj, ByteSource bs)
           throws ProtoException
   {
-    if (type != 2)
+    if (type != WIRE_LEN)
       throw new ProtoException("bad wire type", bs.position());
 
     // Store a map for state
-    Map map = (Map) context.getState(field);
+    Map map = (Map) context.getState(field, false);
     if (map == null)
     {
       map = this.supplier.get();
@@ -66,19 +66,23 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
     Object[] ref = new Object[2];
     while (bs2.hasRemaining())
     {
-      int tag = bs2.get();
-      if (tag == -1)
+      int key = ProtoEncoding.decodeTag(bs2);  // validated varint key
+      if (key == -1)  // EOF inside a length-delimited submessage is unusual, but safe guard
         break;
-      switch (tag >> 3)
+
+      int id = key >>> 3;
+      int type2 = key & 0x7;
+
+      switch (id)
       {
         case 1:
-          field1.encoding.parseField(context, field1, tag & 0x7, ref, bs2);
+          field1.encoding.parseField(context, field1, type2, ref, bs2);
           break;
         case 2:
-          field2.encoding.parseField(context, field2, tag & 0x7, ref, bs2);
+          field2.encoding.parseField(context, field2, type2, ref, bs2);
           break;
         default:
-          MessageEncoding.ignoreField(tag & 0x7, bs2);
+          MessageEncoding.ignoreField(type2, bs2);
           break;
       }
     }
@@ -93,6 +97,8 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
   public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     Map<Object, Object> map = (Map) ((Function) field.getter).apply(obj);
+    if (map == null)
+      return;
     ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
     for (Map.Entry entry : map.entrySet())
     {
@@ -101,7 +107,7 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
         baos2.reset();
         field1.encoding.serializeField(field1, baos2, entry);
         field2.encoding.serializeField(field2, baos2, entry);
-        baos.write((field.id << 3) | 2);
+        ProtoEncoding.encodeTag(baos, field, WIRE_LEN);
         Int32Encoding.encodeVInt32(baos, baos2.size());
         baos2.writeTo(baos);
       }
@@ -120,7 +126,7 @@ class MapEncoding<T1, T2> implements ProtoEncoding<Map<T1, T2>>
   @Override
   public void parseFinish(ProtoContext context, ProtoField field, Object obj)
   {
-    Object value = context.getState(field);
+    Object value = context.getState(field, false);
     if (value != null)
       ((BiConsumer) field.setter).accept(obj, value);
   }

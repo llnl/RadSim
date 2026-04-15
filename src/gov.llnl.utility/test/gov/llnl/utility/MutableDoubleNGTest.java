@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for MutableDouble.
  */
-strictfp public class MutableDoubleNGTest
+public class MutableDoubleNGTest
 {
-  
+
   /**
    * Test of intValue method, of class MutableDouble.
    */
@@ -22,7 +22,7 @@ strictfp public class MutableDoubleNGTest
   public void testIntValue()
   {
     MutableDouble instance = new MutableDouble(4.1);
-    int expResult = (int)4.1;
+    int expResult = (int) 4.1;
     int result = instance.intValue();
     assertEquals(result, expResult);
   }
@@ -34,7 +34,7 @@ strictfp public class MutableDoubleNGTest
   public void testLongValue()
   {
     MutableDouble instance = new MutableDouble(Long.MAX_VALUE);
-    long expResult = (long)((double)Long.MAX_VALUE);
+    long expResult = (long) ((double) Long.MAX_VALUE);
     long result = instance.longValue();
     assertEquals(result, expResult);
   }
@@ -73,5 +73,5 @@ strictfp public class MutableDoubleNGTest
     instance.setValue(Double.MAX_VALUE);
     assertEquals(instance.doubleValue(), Double.MAX_VALUE);
   }
-  
+
 }

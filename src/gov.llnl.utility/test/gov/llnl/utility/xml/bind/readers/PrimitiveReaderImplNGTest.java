@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for PrimitiveReaderImpl.
  */
-strictfp public class PrimitiveReaderImplNGTest
+public class PrimitiveReaderImplNGTest
 {
-  
+
   public PrimitiveReaderImplNGTest()
   {
   }
@@ -33,8 +33,8 @@ strictfp public class PrimitiveReaderImplNGTest
   public void testContents() throws Exception
   {
     PrimitiveReaderImpl pri = new PrimitiveReaderImpl(ClassUtilities.INTEGER_PRIMITIVE);
-    assertEquals((Integer)pri.contents(null, "360"), Integer.valueOf(360));
-   
+    assertEquals((Integer) pri.contents(null, "360"), Integer.valueOf(360));
+
     // Test ReaderException
     pri.contents(null, "ccggaag");
   }
@@ -60,5 +60,5 @@ strictfp public class PrimitiveReaderImplNGTest
     assertEquals(tc.base(), "xs:long");
     assertEquals(tc.annotationType(), Reader.TextContents.class);
   }
-  
+
 }

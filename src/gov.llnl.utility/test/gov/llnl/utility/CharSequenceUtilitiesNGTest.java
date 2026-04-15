@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 /**
  * Test code for CharSequenceUtilities.
  */
-strictfp public class CharSequenceUtilitiesNGTest
+public class CharSequenceUtilitiesNGTest
 {
-  
+
   public CharSequenceUtilitiesNGTest()
   {
   }
-  
+
   /**
    * Test of substitute method, of class CharSequenceUtilities.
    */
@@ -33,7 +33,7 @@ strictfp public class CharSequenceUtilitiesNGTest
     int occurrenceEnd = -1;
     StringBuilder expResult = new StringBuilder("I felt joy because I saw the others were joy and because I knew I should feel joy, but I wasn’t really joy. - Roberto Bolano, 2666");
     StringBuilder result = CharSequenceUtilities.substitute(str, from, to, occurrenceStart, occurrenceEnd);
-    assertEquals(result.toString(), expResult.toString());    
+    assertEquals(result.toString(), expResult.toString());
     assertNotEquals(result, expResult);
   }
 
@@ -69,7 +69,7 @@ strictfp public class CharSequenceUtilitiesNGTest
     assertEquals(result.toString(), expResult.toString());
     assertEquals(result, str);
     assertEquals(result.toString(), str.toString());
-    
+
     result = CharSequenceUtilities.substituteAssign(str, "joy", null, occurrenceStart, occurrenceEnd);
     assertEquals(result, str);
     assertEquals(result.toString(), str.toString());
@@ -97,7 +97,10 @@ strictfp public class CharSequenceUtilitiesNGTest
   /**
    * Test of translateAll method, of class CharSequenceUtilities.
    */
-  @Test(expectedExceptions = { RuntimeException.class })
+  @Test(expectedExceptions =
+  {
+    RuntimeException.class
+  })
   public void testTranslateAll()
   {
     CharSequence str = "I felt happy because I saw the others were happy and because I knew I should feel happy, but I wasn’t really happy. - Roberto Bolano, 2666";
@@ -107,13 +110,13 @@ strictfp public class CharSequenceUtilitiesNGTest
     StringBuilder result = CharSequenceUtilities.translateAll(str, from, to);
     assertEquals(result.toString(), expResult.toString());
     assertNotEquals(result, str);
-        
+
     result = CharSequenceUtilities.translateAll(str, from, null);
     assertEquals(result.toString(), "I felt  becuse I sw te oters were  nd becuse I knew I sould feel , but I wsn’t rell . - Roberto Bolno, 2666");
-    
+
     // Test RuntimeException
     CharSequenceUtilities.translateAll(str, "happy", "joy");
-    
+
   }
 
   /**
@@ -129,13 +132,13 @@ strictfp public class CharSequenceUtilitiesNGTest
     StringBuilder result = CharSequenceUtilities.translateAllAssign(str, from, to);
     assertEquals(result.toString(), expResult.toString());
     assertEquals(result, str);
-    assertEquals(result.toString(), str.toString());    
-   
+    assertEquals(result.toString(), str.toString());
+
     str = new StringBuilder("I felt happy because I saw the others were happy and because I knew I should feel happy, but I wasn’t really happy. - Roberto Bolano, 2666");
     result = CharSequenceUtilities.translateAllAssign(str, from, null);
     assertEquals(result.toString(), "I felt  becuse I sw te oters were  nd becuse I knew I sould feel , but I wsn’t rell . - Roberto Bolno, 2666");
     assertEquals(result, str);
-    assertEquals(result.toString(), str.toString()); 
+    assertEquals(result.toString(), str.toString());
   }
-  
+
 }

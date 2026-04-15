@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for Singletons.
  */
-strictfp public class SingletonsNGTest
+public class SingletonsNGTest
 {
 
   static class TestSingleton implements Singletons.Singleton
@@ -22,17 +22,17 @@ strictfp public class SingletonsNGTest
     private TestSingleton()
     {
     }
-    
+
     public static TestSingleton getInstance()
     {
-      if(instance == null)
+      if (instance == null)
       {
         instance = new TestSingleton();
       }
       return instance;
     }
   }
-  
+
   static class TestSingletonRequired implements Singletons.SingletonRequired
   {
     private static TestSingletonRequired instance;
@@ -40,31 +40,31 @@ strictfp public class SingletonsNGTest
     private TestSingletonRequired()
     {
     }
-    
+
     public static TestSingletonRequired getInstance()
     {
-      if(instance == null)
+      if (instance == null)
       {
         instance = new TestSingletonRequired();
       }
       return instance;
     }
   }
-  
-  static class MyTest1 
+
+  static class MyTest1
   {
     private static Integer getInstance()
     {
       return 0;
     }
   }
-  
-  static class MyTest2 
+
+  static class MyTest2
   {
     public static MyTest2 getInstance() throws Exception
     {
       throw new Exception("STOP! In the name of LOVE!");
-    }    
+    }
   }
 
   public SingletonsNGTest()
@@ -82,13 +82,13 @@ strictfp public class SingletonsNGTest
   {
     assertEquals(Singletons.getSingleton(TestSingleton.class), TestSingleton.getInstance());
     assertEquals(Singletons.getSingleton(TestSingletonRequired.class), TestSingletonRequired.getInstance());
-  
+
     // Test IllegalAccessException
     Singletons.getSingleton(MyTest1.class);
-    
+
     // Test NoSuchMethodException
     Singletons.getSingleton(Integer.class);
-    
+
     // Test InvocationTargetException
     Singletons.getSingleton(MyTest2.class);
   }

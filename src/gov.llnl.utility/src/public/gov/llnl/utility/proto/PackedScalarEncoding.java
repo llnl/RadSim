@@ -52,7 +52,7 @@ class PackedScalarEncoding extends MessageEncoding<Object>
     ByteSource bs2 = context.enterMessage(bs, size);
 
     // Collect in workspace
-    PackedCollector ws = (PackedCollector) context.getState(field);
+    PackedCollector ws = (PackedCollector) context.getState(field, true);
     if (ws == null)
     {
       ws = newCollector();
@@ -112,7 +112,7 @@ class PackedScalarEncoding extends MessageEncoding<Object>
     byte[] contents = bs2.toByteArray();
 
     // field and wire type
-    baos.write((field.id << 3) | 2);
+    ProtoEncoding.encodeTag(baos, field, WIRE_LEN);
     // size
     Int32Encoding.encodeVInt32(baos, contents.length);
     // place contents
@@ -122,7 +122,7 @@ class PackedScalarEncoding extends MessageEncoding<Object>
   @Override
   public void parseFinish(ProtoContext context, ProtoField field, Object o)
   {
-    PackedCollector ws = (PackedCollector) context.getState(field);
+    PackedCollector ws = (PackedCollector) context.getState(field, true);
     if (ws != null)
       ((BiConsumer) field.setter).accept(o, ws.toObject());
   }

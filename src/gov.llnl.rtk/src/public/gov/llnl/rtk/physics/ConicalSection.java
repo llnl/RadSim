@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/ConicalSection.java ---
 package gov.llnl.rtk.physics;
 
 import gov.llnl.math.euclidean.Vector3;

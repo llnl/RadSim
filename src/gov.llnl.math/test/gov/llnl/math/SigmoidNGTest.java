@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for Sigmoid.
  */
-strictfp public class SigmoidNGTest
+public class SigmoidNGTest
 {
   
   public SigmoidNGTest()

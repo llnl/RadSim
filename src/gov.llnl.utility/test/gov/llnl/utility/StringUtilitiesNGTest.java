@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for StringUtilities.
  */
-strictfp public class StringUtilitiesNGTest
+public class StringUtilitiesNGTest
 {
 
   @Test
@@ -23,7 +23,7 @@ strictfp public class StringUtilitiesNGTest
   {
     StringUtilities instance = new StringUtilities();
   }
-  
+
   /**
    * Test of join method, of class StringUtilities.
    */

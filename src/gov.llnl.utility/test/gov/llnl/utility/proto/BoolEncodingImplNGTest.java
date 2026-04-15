@@ -17,15 +17,16 @@ import org.testng.annotations.Test;
  */
 public class BoolEncodingImplNGTest
 {
-  
-public static class A
+
+  public static class A
   {
     boolean i;
     Boolean j;
-    
+
     public A()
-    {}
-    
+    {
+    }
+
     public A(boolean i)
     {
       this.i = i;
@@ -59,19 +60,19 @@ public static class A
 
     static
     {
-      ProtoBuilder<A, A> builder = newBuilder(null,"A",()->new A());
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", () -> new A());
       builder.field("i", 1).type(Type.Bool).asBool(A::getI, A::setI);
       builder.field("j", 2).type(Type.Bool).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
     }
-    
+
     @Override
     public ProtoField[] getFields()
     {
       return FIELDS;
     }
   }
-  
+
   @Test(expectedExceptions = ProtoException.class)
   public void testParseFieldBadWire() throws Exception
   {
@@ -86,7 +87,7 @@ public static class A
   }
 
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -107,5 +108,5 @@ public static class A
     int result = instance.getWireType();
     assertEquals(result, expResult);
   }
-  
+
 }

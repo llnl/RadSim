@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxWriter.java ---
 /*
  * Copyright 2016, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -10,7 +11,6 @@ import gov.llnl.rtk.data.*;
 import gov.llnl.rtk.RtkPackage;
 import gov.llnl.rtk.physics.SourceModel;
 import gov.llnl.rtk.physics.SourceModelWriter;
-import gov.llnl.rtk.physics.SourceModelImpl;
 import gov.llnl.utility.io.WriterException;
 import gov.llnl.utility.xml.bind.ObjectWriter;
 import java.util.function.Predicate;
@@ -39,7 +39,7 @@ public class FluxWriter extends ObjectWriter<Flux>
   {
     WriterBuilder wb = newBuilder();
     Predicate<String> exclude = (s)-> s.equals(FluxAttributes.MODEL);
-    this.getContext().setProperty(SpectrumAttributes.WRITER_EXCLUDE, exclude);
+    this.getContext().setProperty(AttributesWriter.WRITER_EXCLUDE, exclude);
     if (!object.getAttributes().isEmpty())
       wb.element("attributes").writer(new AttributesWriter()).put(object);
     if (object.hasAttribute(FluxAttributes.MODEL))

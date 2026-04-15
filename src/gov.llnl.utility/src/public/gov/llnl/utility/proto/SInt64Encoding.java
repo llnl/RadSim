@@ -40,6 +40,7 @@ class SInt64Encoding extends Int64Encoding
 
   @Override
   public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+          throws ProtoException
   {
     long result;
     if (field.getter instanceof Function)
@@ -58,7 +59,7 @@ class SInt64Encoding extends Int64Encoding
       result *= 2;
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3));
+      ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     // contents
     Int64Encoding.encodeVInt64(baos, result);
   }

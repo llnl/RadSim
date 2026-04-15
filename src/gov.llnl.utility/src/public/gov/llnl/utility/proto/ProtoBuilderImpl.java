@@ -171,6 +171,8 @@ public class ProtoBuilderImpl extends ProtoBuilder
     @Override
     public ProtoBuilder.AsObject list(ProtoEncoding encoder)
     {
+      if (encoder == null)
+        throw new NullPointerException();
       next.encoding = new CollectionEncoding(encoder, null);
       next.repeated = true;
       return ProtoBuilderImpl.this;
@@ -179,6 +181,8 @@ public class ProtoBuilderImpl extends ProtoBuilder
     @Override
     public ProtoBuilder.AsObject list(ProtoEncoding encoder, Supplier supplier)
     {
+      if (encoder == null)
+        throw new NullPointerException();
       next.encoding = new CollectionEncoding(encoder, supplier);
       next.repeated = true;
       return ProtoBuilderImpl.this;

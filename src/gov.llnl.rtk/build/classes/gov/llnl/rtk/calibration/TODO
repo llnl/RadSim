@@ -1,0 +1,30 @@
+A lot of work has happened in Sigma which is relevant to this unit, some of
+which we may consider back porting to improve capabilities.
+
+1) Operating on less that a full spectrum.   In the sigma code it was meant
+to be embedded in a controller which was memory limited.  To deal with this
+rather than holding the full spectrum in the accumulator instead it holds
+small regions where the peak is expected to be.  So long as the peak is
+in the range then it can fit.  
+
+Structurally this is just defining a region for the peak tracker to operate on.
+The peak fitters don't need to know anything about the spectrum other than the
+data type thus even if the spectrum only represents a fraction of the energy
+channel range all is good.
+
+2) Adjusting the accumulation coefficients based on the count rate in a region.
+Nominally we tune the tracking rate to give the desired noise behavior and 
+stability on a typically data file.   If the count rate goes up the accuracy 
+improves, but if the count rate falls we tend to get worse performance.  We
+could get the same performance if we adjust the accumulator coefficients based
+the the count rate.  
+
+Structurally this is a simple change to the PredictivePeakTracker.   It is has
+a region and an expected count rate, it can use a formula to compute the best
+coefficients for the conditions.   This will increase the lockon time for low
+rates (Florida) but otherwise will not cause any issues.
+
+3) High voltage adjustments.   We are working with more systems that are HV
+controlled.   Out predictive peak tracker is mainly designed to operate on data
+in which the detector is unlocked.   When working with a locked system, we need
+to consider the effects of those shifts on the tracker.  

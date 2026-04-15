@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gov.llnl.rtk.response" default="default" basedir=".">
+  <description>Builds, tests, and runs the project gov.llnl.rtk.response.</description>
+  <property environment="env"/>
+  <!-- WLS support -->
+  <target name="-pre-init" if="env.NETBEANS_USER_PROPERTIES">
+    <property name="user.properties.file" value="${env.NETBEANS_USER_PROPERTIES}"/>
+    <echo message="Use ${user.properties.file}"/>
+  </target>
+
+  <target depends="resolve-test" name="-pre-pre-compile-test"/>
+  <property name="src.dir" value="src/public"/>
+  <import file="nbproject/build-impl.xml"/>
+  <import file="nbproject/build-ivy.xml"/>
+  <import file="nbproject/build-coverage.xml"/>
+  <import file="nbproject/build-llnl.xml"/>
+  <target depends="init,resolve,compile,manifest,-pre-jar,-do-jar,-post-jar" description="Build JAR." name="jar"/>
+</project>

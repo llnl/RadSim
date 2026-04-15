@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for ObjectStringReader.
  */
-strictfp public class ObjectStringReaderNGTest
+public class ObjectStringReaderNGTest
 {
-  
+
   public ObjectStringReaderNGTest()
   {
   }
@@ -30,7 +30,7 @@ strictfp public class ObjectStringReaderNGTest
   public void testStart() throws Exception
   {
     ObjectStringReader instance = new ObjectStringReaderImpl();
-    assertNull(instance.start(null, null));    
+    assertNull(instance.start(null, null));
   }
 
   /**
@@ -80,14 +80,14 @@ strictfp public class ObjectStringReaderNGTest
   }
 
   @Reader.Declaration(pkg = TestSupport.TestPackage.class, name = "ObjectStringReaderImpl")
-  strictfp public class ObjectStringReaderImpl extends ObjectStringReader
+  public class ObjectStringReaderImpl extends ObjectStringReader
   {
     @Override
     public Object contents(ReaderContext context, String textContents) throws ReaderException
     {
       return null;
     }
-    
+
   }
-  
+
 }

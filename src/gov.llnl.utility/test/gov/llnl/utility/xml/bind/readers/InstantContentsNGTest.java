@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for InstantContents.
  */
-strictfp public class InstantContentsNGTest
+public class InstantContentsNGTest
 {
-  
+
   public InstantContentsNGTest()
   {
   }
@@ -50,7 +50,7 @@ strictfp public class InstantContentsNGTest
   {
     InstantContents instance = new InstantContents();
   }
-  
+
   /**
    * Test of getObjectClass method, of class InstantContents.
    */
@@ -68,5 +68,5 @@ strictfp public class InstantContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

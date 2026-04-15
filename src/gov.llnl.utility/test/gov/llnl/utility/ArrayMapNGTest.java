@@ -6,15 +6,12 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.ArrayMap.ArrayEntry;
 import gov.llnl.utility.ArrayMap.EntrySet;
 import gov.llnl.utility.ArrayMap.KeySet;
-import gov.llnl.utility.ArrayMap.SetBase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,7 +21,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ArrayMap.
  */
-strictfp public class ArrayMapNGTest
+public class ArrayMapNGTest
 {
 
   public ArrayMapNGTest()

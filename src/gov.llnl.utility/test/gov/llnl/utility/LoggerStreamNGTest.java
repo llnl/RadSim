@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for LoggerStream.
  */
-strictfp public class LoggerStreamNGTest
+public class LoggerStreamNGTest
 {
 
   public LoggerStreamNGTest()

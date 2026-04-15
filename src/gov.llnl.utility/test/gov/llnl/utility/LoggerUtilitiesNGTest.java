@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for LoggerUtilities.
  */
-strictfp public class LoggerUtilitiesNGTest
+public class LoggerUtilitiesNGTest
 {
-  
+
   public LoggerUtilitiesNGTest()
   {
   }
@@ -51,7 +51,7 @@ strictfp public class LoggerUtilitiesNGTest
   @Test
   public void testFormat()
   {
-    StringBuilder sb= new StringBuilder();
+    StringBuilder sb = new StringBuilder();
     Logger logger = new Logger("Test", UtilityPackage.LOGGER.getResourceBundleName())
     {
       @Override
@@ -59,7 +59,7 @@ strictfp public class LoggerUtilitiesNGTest
       {
         return true;
       }
-      
+
       @Override
       public void log(Level level, String msg)
       {
@@ -71,5 +71,5 @@ strictfp public class LoggerUtilitiesNGTest
     LoggerUtilities.format(logger, level, fmt, 1, "Hello");
     assertEquals(sb.toString(), "log ALL Test 1 Hello");
   }
-  
+
 }

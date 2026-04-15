@@ -144,6 +144,7 @@ public class MCNP_Deck {
         }
 
         // todo: temp
+        /*
         MCNP_Card bremCard = new MCNP_Card("BBREM");
         bremCard.addEntry(1.0);
         bremCard.addEntry(1.0);
@@ -153,6 +154,7 @@ public class MCNP_Deck {
             bremCard.addEntry(material.getId());
         }
         cards.add(bremCard);
+         */
 
         // Source cards
         cards.addAll(source.getCards());

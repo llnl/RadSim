@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for FunctionReader.
  */
-strictfp public class FunctionReaderNGTest
+public class FunctionReaderNGTest
 {
 
   public FunctionReaderNGTest()

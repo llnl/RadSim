@@ -11,13 +11,13 @@ import org.testng.annotations.Test;
 /**
  * Test code for MarshallerOptionsProxy.
  */
-strictfp public class MarshallerOptionsProxyNGTest
+public class MarshallerOptionsProxyNGTest
 {
-  
+
   public MarshallerOptionsProxyNGTest()
   {
   }
-  
+
   /**
    * Test of get method, of class MarshallerOptionsProxy.
    */
@@ -26,5 +26,5 @@ strictfp public class MarshallerOptionsProxyNGTest
   {
     // Tested end to end.
   }
-  
+
 }

@@ -16,7 +16,7 @@ import gov.llnl.math.random.RandomGenerator;
 /**
  * Test code for LongArray.
  */
-strictfp public class LongArrayNGTest
+public class LongArrayNGTest
 {
   long seed = 1L;
   RandomGenerator rg=new Random48(seed);

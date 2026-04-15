@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixTransposeView.
  */
-strictfp public class MatrixTransposeViewNGTest
+public class MatrixTransposeViewNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
 
@@ -61,7 +61,7 @@ strictfp public class MatrixTransposeViewNGTest
         for (int r = 0; r < 3; ++r)
         {
           mt.set(r, c, i);
-          assertEquals(m.get(c, r), (double) i);
+          assertEquals(m.get(c, r), (double) i, 0.0);
           ++i;
         }
       }
@@ -82,7 +82,7 @@ strictfp public class MatrixTransposeViewNGTest
       for (int r = 0; r < 3; ++r)
       {
         m.set(r, c, i);
-        assertEquals(mt.get(c, r), (double) i);
+        assertEquals(mt.get(c, r), (double) i, 0.0);
         ++i;
       }
     }
@@ -147,7 +147,7 @@ strictfp public class MatrixTransposeViewNGTest
     {
       for (int c = 0; c < u.columns(); ++c)
       {
-        assertEquals(u.get(r, c), m.get(c, r));
+        assertEquals(u.get(r, c), m.get(c, r), 0.0);
       }
     }
   }
@@ -207,7 +207,7 @@ strictfp public class MatrixTransposeViewNGTest
       double[] c = mt.copyRowTo(new double[4], 0, j);
       for (int i = 0; i < 4; ++i)
       {
-        assertEquals(m.get(i, j), c[i]);
+        assertEquals(m.get(i, j), c[i], 0.0);
       }
     }
   }

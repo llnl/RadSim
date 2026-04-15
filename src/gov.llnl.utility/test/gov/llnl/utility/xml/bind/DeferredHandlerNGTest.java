@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for DeferredHandler.
  */
-strictfp public class DeferredHandlerNGTest
+public class DeferredHandlerNGTest
 {
 
   /**
@@ -27,6 +27,7 @@ strictfp public class DeferredHandlerNGTest
 
   /**
    * Test of createSchemaElement method, of class DeferredHandler.
+   *
    * @throws java.lang.Exception
    */
   @Test

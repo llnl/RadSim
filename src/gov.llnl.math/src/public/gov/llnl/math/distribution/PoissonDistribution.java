@@ -32,7 +32,7 @@ public class PoissonDistribution implements Distribution
     if (floor(x) != x)
       return 0;
     //return Math.exp(-lambda)*Math.pow(lambda, c)
-    return Math.exp(-lambda + x * Math.log10(lambda) - gammaln(1 + x));
+    return Math.exp(-lambda + x * Math.log(lambda) - gammaln(1 + x));
   }
 
   @Override
@@ -47,6 +47,7 @@ public class PoissonDistribution implements Distribution
     return gammaP(Math.floor(x + 1), lambda);
   }
   
+  @Override
   public double logccdf(double x)
   {
     return Math.log(ccdf(x));

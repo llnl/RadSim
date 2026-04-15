@@ -22,4 +22,60 @@ public class ProtoField
   Object getter;
   boolean repeated;
   Predicate optional;
+
+  /**
+   * @return the id
+   */
+  public int getId()
+  {
+    return id;
+  }
+
+  /**
+   * @return the name
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * @return the encoding
+   */
+  public ProtoEncoding getEncoding()
+  {
+    return encoding;
+  }
+
+  /**
+   * @return the setter
+   */
+  public Object getSetter()
+  {
+    return setter;
+  }
+
+  /**
+   * @return the getter
+   */
+  public Object getGetter()
+  {
+    return getter;
+  }
+
+  /**
+   * @return the repeated
+   */
+  public boolean isRepeated()
+  {
+    return repeated;
+  }
+
+  /**
+   * @return the optional
+   */
+  public Predicate getOptional()
+  {
+    return optional;
+  }
 }

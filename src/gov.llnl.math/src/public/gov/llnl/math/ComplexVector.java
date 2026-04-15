@@ -45,6 +45,7 @@ public interface ComplexVector
    * Create a new complex vector.
    *
    * It is required that at least one of the two input vectors not be null.
+   * This operates on the original arrays.
    *
    * @param real is the real portion or null if it is zero.
    * @param img is the imaginary portion or null if it is zero.
@@ -62,7 +63,7 @@ public interface ComplexVector
     if (img == null)
       img = new double[real.length];
     if (real == null)
-      real = new double[real.length];
+      real = new double[img.length];
     MathAssert.assertEqualLength(real, img);
     return new ComplexVectorImpl(real, img);
   }

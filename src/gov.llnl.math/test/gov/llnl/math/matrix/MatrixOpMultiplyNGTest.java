@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixOpMultiply.
  */
-strictfp public class MatrixOpMultiplyNGTest
+public class MatrixOpMultiplyNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
 

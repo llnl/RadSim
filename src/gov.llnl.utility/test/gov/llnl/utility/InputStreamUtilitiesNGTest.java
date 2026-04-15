@@ -21,9 +21,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for InputStreamUtilities.
  */
-strictfp public class InputStreamUtilitiesNGTest
+public class InputStreamUtilitiesNGTest
 {
-  
+
   public InputStreamUtilitiesNGTest()
   {
   }
@@ -56,7 +56,7 @@ strictfp public class InputStreamUtilitiesNGTest
   {
     Random r = new Random();
     r.setSeed(1);
-    ByteBuffer bb = ByteBuffer.allocate(1024*4);
+    ByteBuffer bb = ByteBuffer.allocate(1024 * 4);
     r.ints().limit(1024).forEach(bb::putInt);
     bb.rewind();
     byte[] contents = bb.array().clone();
@@ -83,10 +83,12 @@ strictfp public class InputStreamUtilitiesNGTest
   @Test
   public void testNewByteChannel()
   {
-    byte[] buffer = new byte[]{};
+    byte[] buffer = new byte[]
+    {
+    };
     SeekableByteChannel expResult = new ByteArrayChannel(buffer);
     SeekableByteChannel result = InputStreamUtilities.newByteChannel(buffer);
     assertEquals(result, expResult);
   }
-  
+
 }

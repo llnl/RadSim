@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 /**
  * Test for the proto encoder.
- * 
+ *
  * @author nelson85
  */
 public class Complex
@@ -23,6 +23,6 @@ public class Complex
   double d;
   String name;
   ArrayList<String> strs = new ArrayList<>();
-  Map<String,Integer> map = new java.util.HashMap<>();
+  Map<String, Integer> map = new java.util.HashMap<>();
   float[] f;
 }

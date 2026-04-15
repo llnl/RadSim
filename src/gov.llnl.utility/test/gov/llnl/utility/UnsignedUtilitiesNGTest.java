@@ -9,16 +9,15 @@ package gov.llnl.utility;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  * Test code for UnsignedUtilities.
  */
-strictfp public class UnsignedUtilitiesNGTest
+public class UnsignedUtilitiesNGTest
 {
-  
+
   public UnsignedUtilitiesNGTest()
   {
   }
@@ -73,5 +72,5 @@ strictfp public class UnsignedUtilitiesNGTest
     result = UnsignedUtilities.getUnsignedInt(i);
     assertEquals(result, 4294967295L);
   }
-  
+
 }

@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for SectionHandler.
  */
-strictfp public class SectionHandlerNGTest
+public class SectionHandlerNGTest
 {
 
   /**
@@ -147,7 +147,7 @@ strictfp public class SectionHandlerNGTest
 
     for (Reader.Option opt : flags)
     {
-      if (opt.getKey()==null)
+      if (opt.getKey() == null)
         continue;
       assertNotNull(testElement.getAttribute(opt.getKey()));
       assertSame(testElement.getAttribute(opt.getKey()), opt.getValue());

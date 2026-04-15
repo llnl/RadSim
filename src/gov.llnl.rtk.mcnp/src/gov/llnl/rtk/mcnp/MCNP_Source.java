@@ -12,10 +12,11 @@ public class MCNP_Source {
     private int numParticles;
 
     // todo: implement other distributions
-    private Vector3 position, axis;
+    private Vector3 vector, position, axis;
     private MCNP_Distribution radialDistribution;
     private MCNP_Distribution axialDistribution;
     private MCNP_Distribution energyDistribution;
+    private MCNP_Distribution directionalDistribution;
 
     private MCNP_Cell cell;
 
@@ -61,12 +62,20 @@ public class MCNP_Source {
         this.energyDistribution = energyDistribution;
     }
 
+    public void setDirectionalDistribution(MCNP_Distribution directionalDistribution) {
+        this.directionalDistribution = directionalDistribution;
+    }
+
     public void setPosition(Vector3 position) {
         this.position = position;
     }
 
     public void setAxis(Vector3 axis) {
         this.axis = axis;
+    }
+
+    public void setVector(Vector3 vector) {
+        this.vector = vector;
     }
 
     public void setCell(MCNP_Cell cell) {
@@ -98,6 +107,13 @@ public class MCNP_Source {
             definitionCard.addEntry(axis.getZ());
         }
 
+        if (vector != null) {
+            definitionCard.addEntry("VEC=");
+            definitionCard.addEntry(vector.getX());
+            definitionCard.addEntry(vector.getY());
+            definitionCard.addEntry(vector.getZ());
+        }
+
         if (radialDistribution != null) {
             definitionCard.addEntry("RAD=D" + radialDistribution.getId());
         }
@@ -108,6 +124,10 @@ public class MCNP_Source {
 
         if (energyDistribution != null) {
             definitionCard.addEntry("ERG=D" + energyDistribution.getId());
+        }
+
+        if (directionalDistribution != null) {
+            definitionCard.addEntry("DIR=D" + directionalDistribution.getId());
         }
 
         definitionCard.addComment(name);
@@ -124,6 +144,11 @@ public class MCNP_Source {
         if (energyDistribution != null) {
             cards.addAll(energyDistribution.getCards());
         }
+
+        if (directionalDistribution != null) {
+            cards.addAll(directionalDistribution.getCards());
+        }
+
         return cards;
     }
 

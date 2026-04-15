@@ -27,9 +27,11 @@ public class SInt32EncodingNGTest
   {
     int i;
     Integer j;
+
     public A()
-    {}
-    
+    {
+    }
+
     public A(int i)
     {
       this.i = i;
@@ -63,12 +65,12 @@ public class SInt32EncodingNGTest
 
     static
     {
-      ProtoBuilder<A,A> builder = newBuilder(null,"A",A::new);
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", A::new);
       builder.field("i", 1).type(Type.SInt32).asInt(A::getI, A::setI);
       builder.field("j", 2).type(Type.SInt32).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
     }
-    
+
     @Override
     public ProtoField[] getFields()
     {
@@ -92,7 +94,7 @@ public class SInt32EncodingNGTest
     }
     System.out.println();
     assertEquals(a.i, -12345);
-    assertEquals((long)a.j, 12345);
+    assertEquals((long) a.j, 12345);
   }
 
   @Test
@@ -104,9 +106,9 @@ public class SInt32EncodingNGTest
     A o = new A(0);
     ByteBuffer b = ByteBuffer.allocate(3);
     b.order(ByteOrder.LITTLE_ENDIAN);
-    b.put((byte)0xf1);
-    b.put((byte)0xc0);
-    b.put((byte)0x01);
+    b.put((byte) 0xf1);
+    b.put((byte) 0xc0);
+    b.put((byte) 0x01);
     b.rewind();
     SInt32Encoding instance = new SInt32Encoding();
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
@@ -146,7 +148,7 @@ public class SInt32EncodingNGTest
   }
 
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

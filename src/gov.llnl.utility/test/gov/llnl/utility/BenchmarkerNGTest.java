@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for Benchmarker.
  */
-strictfp public class BenchmarkerNGTest
+public class BenchmarkerNGTest
 {
-  
+
   public BenchmarkerNGTest()
   {
   }
@@ -83,5 +83,5 @@ strictfp public class BenchmarkerNGTest
   {
     // Benchmarking is not used in production code
   }
-  
+
 }

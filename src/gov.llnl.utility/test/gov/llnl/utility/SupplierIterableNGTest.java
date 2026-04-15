@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for SupplierIterable.
  */
-strictfp public class SupplierIterableNGTest
+public class SupplierIterableNGTest
 {
 
   public SupplierIterableNGTest()
@@ -31,10 +31,10 @@ strictfp public class SupplierIterableNGTest
   {
     TestSupplier ts = new TestSupplier();
     SupplierIterable instance = new SupplierIterable(ts);
-    
+
     Iterator<Integer> iterator = instance.iterator();
     Integer value = 0;
-    while(iterator.hasNext())
+    while (iterator.hasNext())
     {
       assertEquals(iterator.next(), value);
       ++value;
@@ -57,9 +57,9 @@ strictfp public class SupplierIterableNGTest
     @Override
     public Integer get()
     {
-      if(intList.isEmpty())
+      if (intList.isEmpty())
         return null;
-      
+
       return intList.remove(intList.size() - 1);
     }
   }

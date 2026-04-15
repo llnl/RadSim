@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for IntegerArray.
  */
-strictfp public class IntegerArrayNGTest
+public class IntegerArrayNGTest
 {
   IntegerTestGenerator tg = new IntegerTestGenerator();
 

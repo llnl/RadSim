@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/PhotonCrossSectionsEvaluator.java ---
 /* 
  * Copyright 2025, Lawrence Livermore National Security, LLC.
  * All rights reserved.
@@ -5,6 +6,8 @@
  * Terms and conditions are given in "Notice" file.
  */
 package gov.llnl.rtk.physics;
+
+import java.util.function.DoubleUnaryOperator;
 
 /**
  *
@@ -45,15 +48,17 @@ public interface PhotonCrossSectionsEvaluator
    * Seek a new energy in the lookup table.
    *
    * @param energy is the value in the desired input unit.
+   * @return 
    */
-  public void seek(double energy);
+  public PhotonCrossSectionsEvaluator seek(double energy);
 
   /**
    * Seek a new energy in the lookup table.
    *
    * @param energy is the quantity including the units.
+   * @return 
    */
-  public void seek(Quantity energy);
+  public PhotonCrossSectionsEvaluator seek(Quantity energy);
 
   /**
    * Get the incoherent cross section.
@@ -99,5 +104,86 @@ public interface PhotonCrossSectionsEvaluator
    * @return cross section in specified.
    */
   double getTotal();
+  
+  
+  PhotonCrossSectionsEvaluator newEvaluator();
+  
+    /**
+   * Get the pair cross section.
+   *
+   * Use {@link #setInputUnits(Units) setInputUnits} and
+   * {@link #setOutputUnits(Units) setOutputUnits} prior to this call to select
+   * the units for the function.
+   *
+   * This includes both electron and atomic.
+   *
+   * @return function in units specified by user.
+   */
+  default DoubleUnaryOperator getPairFunction()
+  {
+    PhotonCrossSectionsEvaluator eval = newEvaluator();
+    return (double p) ->
+    {
+      eval.seek(p);
+      return eval.getPair();
+    };
+  }
+
+  /**
+   * Get the photo electric section.
+   *
+   * Use {@link #setInputUnits(Units) setInputUnits} and
+   * {@link #setOutputUnits(Units) setOutputUnits} prior to this call to select
+   * the units for the function.
+   * 
+   * @return function in units specified by user.
+   */
+  default DoubleUnaryOperator getPhotoelectricFunction()
+  {
+    PhotonCrossSectionsEvaluator eval = newEvaluator();
+    return (double p) ->
+    {
+      eval.seek(p);
+      return eval.getPhotoelectric();
+    };
+  }
+
+  /**
+   * Get the total cross section excluding coherent.
+   *
+   * Use {@link #setInputUnits(Units) setInputUnits} and
+   * {@link #setOutputUnits(Units) setOutputUnits} prior to this call to select
+   * the units for the function.
+   *
+   * @return function in units specified by user.
+   */
+  default DoubleUnaryOperator getTotalFunction()
+  {
+    PhotonCrossSectionsEvaluator eval = newEvaluator();
+    return (double p) ->
+    {
+      eval.seek(p);
+      return eval.getTotal();
+    };
+  }
+  /**
+   * Get the incoherent scattering as a function.
+   *
+   * Use {@link #setInputUnits(Units) setInputUnits} and
+   * {@link #setOutputUnits(Units) setOutputUnits} prior to this call to select
+   * the units for the function.
+   *
+   * @return function in units specified by user.
+   */
+  default DoubleUnaryOperator getIncoherentFunction()
+  {
+    PhotonCrossSectionsEvaluator eval = newEvaluator();
+    return (double p) ->
+    {
+      eval.seek(p);
+      return eval.getIncoherent();
+    };
+  }
+
 
 }

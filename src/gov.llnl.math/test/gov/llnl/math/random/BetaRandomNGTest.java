@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for BetaRandom.
  */
-strictfp public class BetaRandomNGTest
+public class BetaRandomNGTest
 {
 
   public BetaRandomNGTest()

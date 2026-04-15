@@ -38,7 +38,7 @@ public class Int32Encoding extends IntEncoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     int result;
     if (field.getter instanceof Function)
@@ -52,7 +52,7 @@ public class Int32Encoding extends IntEncoding
       result = ((ToIntFunction) field.getter).applyAsInt(obj);
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3));
+      ProtoEncoding.encodeTag(baos, field, WIRE_VARINT);
     // contents
     Int32Encoding.encodeVInt32(baos, result);
   }
@@ -72,28 +72,6 @@ public class Int32Encoding extends IntEncoding
       shift += 7;
     }
     return i;
-  }
-
-  static int decodeVInt32(ByteBuffer bs) throws ProtoException
-  {
-    try
-    {
-      int i = 0;
-      int shift = 0;
-      while (true)
-      {
-        int j = bs.get();
-        i |= (j & (0x7f)) << shift;
-        if ((j & 0x80) == 0)
-          break;
-        shift += 7;
-      }
-      return i;
-    }
-    catch (BufferUnderflowException ex)
-    {
-      throw new ProtoException("truncated fixed int field", bs.position());
-    }
   }
 
   static void encodeVInt32(ByteArrayOutputStream baos, int v)

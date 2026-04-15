@@ -18,66 +18,66 @@ import org.testng.annotations.Test;
  */
 public class FloatEncodingImplNGTest
 {
-  
+
   public FloatEncodingImplNGTest() throws ProtoException
   {
   }
-  
+
   public static class A
   {
     float i;
     Float j;
-    
+
     public A()
     {
     }
-    
+
     public A(float i)
     {
       this.i = i;
       this.j = i;
     }
-    
+
     public float getI()
     {
       return i;
     }
-    
+
     public void setI(float i)
     {
       this.i = i;
     }
-    
+
     public Float getJ()
     {
       return j;
     }
-    
+
     public void setJ(Float j)
     {
       this.j = j;
     }
   }
-  
+
   public static class AProto extends MessageEncoding<A>
   {
     final static ProtoField[] FIELDS;
-    
+
     static
     {
-      ProtoBuilder<A, A> builder = newBuilder(null,"A",A::new);
+      ProtoBuilder<A, A> builder = newBuilder(null, "A", A::new);
       builder.field("i", 1).type(Type.Float).asFloat(A::getI, A::setI);
       builder.field("j", 2).type(Type.Float).as(A::getJ, A::setJ);
       FIELDS = builder.toFields();
     }
-    
+
     @Override
     public ProtoField[] getFields()
     {
       return FIELDS;
     }
   }
-  
+
   @Test
   public void testEndToEnd() throws ProtoException
   {
@@ -95,7 +95,7 @@ public class FloatEncodingImplNGTest
     assertEquals(a.i, 12345.0f, 1e-8f);
     assertEquals(a.j, 12345.0f, 1e-8f);
   }
-  
+
   @Test
   public void testParseField() throws Exception
   {
@@ -111,7 +111,7 @@ public class FloatEncodingImplNGTest
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
     assertEquals(o.i, 1.2345f);
   }
-  
+
   @Test(expectedExceptions = ProtoException.class)
   public void testParseFieldUnderflow() throws Exception
   {
@@ -127,7 +127,7 @@ public class FloatEncodingImplNGTest
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
     assertEquals(o.i, 12345);
   }
-  
+
   @Test(expectedExceptions = ProtoException.class)
   public void testParseFieldBadWire() throws Exception
   {
@@ -143,9 +143,9 @@ public class FloatEncodingImplNGTest
     instance.parseField(context, field, type, o, ByteSource.wrap(b));
     assertEquals(o.i, 12345);
   }
-  
+
   @Test
-  public void testSerializeField()
+  public void testSerializeField() throws ProtoException
   {
     ProtoField field = AProto.FIELDS[1];
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -157,7 +157,7 @@ public class FloatEncodingImplNGTest
       0x0d, 0, (byte) 0xe4, 0x40, 0x46
     });
   }
-  
+
   @Test
   public void testGetWireType()
   {
@@ -166,5 +166,5 @@ public class FloatEncodingImplNGTest
     int result = instance.getWireType();
     assertEquals(result, expResult);
   }
-  
+
 }

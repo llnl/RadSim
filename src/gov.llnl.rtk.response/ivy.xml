@@ -1,0 +1,17 @@
+<ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
+  <info organisation="gov.llnl.utility" module="utility"/>
+
+  <configurations>
+    <conf name="deps" description="binary jars"/>
+    <conf name="test" description="test jars"/>
+    <conf name="coverage" description="coverage jars"/>
+  </configurations>
+
+  <dependencies>
+    <dependency org="com.beust" name="jcommander" rev="1.78" conf="test->default"/>
+    <dependency org="org.testng" name="testng" rev="7.0.0" conf="test->default"/>
+    <dependency org="org.jacoco" name="org.jacoco.ant" rev="0.8.5" conf="coverage->default">
+      <artifact name="org.jacoco.ant" e:classifier="nodeps"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

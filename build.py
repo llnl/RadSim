@@ -8,11 +8,13 @@ packages = [
     ('src/gov.llnl.utility',       'src/gov.llnl.utility',       'ant'),
     ('src/gov.llnl.math',          'src/gov.llnl.math',          'ant'),
     ('src/gov.llnl.rtk',           'src/gov.llnl.rtk',           'ant'),
-    ('src/gov.nist.xray',          'src/gov.nist.xray',          'ant'),
+    ('src/gov.nist.physics.xray',  'src/gov.nist.physics.xray',  'ant'),
     ('src/gov.bnl.nndc.ensdf',     'src/gov.bnl.nndc.ensdf',     'ant'),
     ('src/gov.nist.physics.n42',   'src/gov.nist.physics.n42',   'ant'),
-    ('src/gov.llnl.mcnp',          'src/gov.llnl.mcnp',          'ant'),
-    ('src/gov.llnl.geant4',        'src/gov.llnl.geant4',        'ant'),
+    ('src/gov.llnl.rtk.mcnp',      'src/gov.llnl.rtk.mcnp',      'ant'),
+    ('src/gov.llnl.rtk.geant4',    'src/gov.llnl.rtk.geant4',    'ant'),
+    ('src/gov.llnl.rtk.response',  'src/gov.llnl.rtk.response',  'ant'),
+    ('src/gov.nist.physics.xcom',  'src/gov.nist.physics.xcom',  'ant'),
 ]
 
 project = Project()

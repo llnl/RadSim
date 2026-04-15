@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for ContentMarshallers.
  */
-strictfp public class ContentMarshallersNGTest
+public class ContentMarshallersNGTest
 {
-  
+
   public ContentMarshallersNGTest()
   {
   }
@@ -52,5 +52,5 @@ strictfp public class ContentMarshallersNGTest
   {
     // Tested end to end.
   }
-  
+
 }

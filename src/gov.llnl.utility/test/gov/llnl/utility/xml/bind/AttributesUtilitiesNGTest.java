@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for AttributesUtilities.
  */
-strictfp public class AttributesUtilitiesNGTest
+public class AttributesUtilitiesNGTest
 {
-  
+
   public AttributesUtilitiesNGTest()
   {
   }
@@ -47,14 +47,14 @@ strictfp public class AttributesUtilitiesNGTest
   @Test
   public void testGetAttributeType_String()
   {
-    Object s =  "test";
+    Object s = "test";
     Class<?> parameterType = s.getClass();
     String expResult = "xs:string";
     String result = AttributesUtilities.getAttributeType(parameterType);
     assertEquals(result, expResult);
   }
-  
-   /**
+
+  /**
    * Test of getAttributeType method, of class AttributesUtilities.
    */
   @Test
@@ -66,8 +66,8 @@ strictfp public class AttributesUtilitiesNGTest
     String result = AttributesUtilities.getAttributeType(parameterType);
     assertEquals(result, expResult);
   }
-  
-   /**
+
+  /**
    * Test of getAttributeType method, of class AttributesUtilities.
    */
   @Test
@@ -79,8 +79,8 @@ strictfp public class AttributesUtilitiesNGTest
     String result = AttributesUtilities.getAttributeType(parameterType);
     assertEquals(result, expResult);
   }
-  
-   /**
+
+  /**
    * Test of getAttributeType method, of class AttributesUtilities.
    */
   @Test
@@ -92,8 +92,8 @@ strictfp public class AttributesUtilitiesNGTest
     String result = AttributesUtilities.getAttributeType(parameterType);
     assertEquals(result, expResult);
   }
-  
-   /**
+
+  /**
    * Test of getAttributeType method, of class AttributesUtilities.
    */
   @Test
@@ -101,11 +101,11 @@ strictfp public class AttributesUtilitiesNGTest
   {
     // Tested end to end.
   }
-  
-   /**
+
+  /**
    * Test of getAttributeType method, of class AttributesUtilities.
    */
-  @Test (expectedExceptions = RuntimeException.class)
+  @Test(expectedExceptions = RuntimeException.class)
   public void testGetAttributeType()
   {
     Object o = new ArrayList<>();

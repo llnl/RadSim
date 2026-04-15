@@ -6,6 +6,7 @@
  */
 package gov.llnl.utility;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -104,7 +105,8 @@ public class Serializer
     if (PathUtilities.isGzip(file))
     {
       try (InputStream is = Files.newInputStream(file);
-              GZIPInputStream gis = new GZIPInputStream(is);
+            BufferedInputStream bis = new BufferedInputStream(is);
+              GZIPInputStream gis = new GZIPInputStream(bis);
               ObjectInputStream ois = new RevisedObjectInputStream(gis))
       {
         return (Serializable) ois.readObject();
@@ -112,7 +114,8 @@ public class Serializer
     }
 
     try (InputStream is = Files.newInputStream(file);
-            ObjectInputStream ois = new RevisedObjectInputStream(is))
+            BufferedInputStream bis = new BufferedInputStream(is);
+            ObjectInputStream ois = new RevisedObjectInputStream(bis))
     {
       return (Serializable) ois.readObject();
     }

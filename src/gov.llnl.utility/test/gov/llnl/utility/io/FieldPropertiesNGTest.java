@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for FieldProperties.
  */
-strictfp public class FieldPropertiesNGTest
+public class FieldPropertiesNGTest
 {
 
   public FieldPropertiesNGTest()

@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for UUIDUtilities.
  */
-strictfp public class UUIDUtilitiesNGTest
+public class UUIDUtilitiesNGTest
 {
-  
+
   public UUIDUtilitiesNGTest()
   {
   }
@@ -25,7 +25,7 @@ strictfp public class UUIDUtilitiesNGTest
   {
     UUIDUtilities instance = new UUIDUtilities();
   }
-  
+
   /**
    * Test of createUUID method, of class UUIDUtilities.
    */
@@ -43,5 +43,5 @@ strictfp public class UUIDUtilitiesNGTest
   {
     assertEquals(UUIDUtilities.createLong("ToInfinityAndBeyond"), -9041186574123678665L);
   }
-  
+
 }

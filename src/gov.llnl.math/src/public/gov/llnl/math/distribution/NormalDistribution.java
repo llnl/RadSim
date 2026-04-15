@@ -76,7 +76,7 @@ public class NormalDistribution implements Distribution
   @Override
   public double pdf(double x)
   {
-    double d = 1.0 / sigma / MathConstants.SQRT_2PI;
+    double d = sigma * MathConstants.SQRT_2PI;
     double z = (x - mean) * (x - mean) / sigma / sigma / 2;
     return Math.exp(-z) / d;
   }

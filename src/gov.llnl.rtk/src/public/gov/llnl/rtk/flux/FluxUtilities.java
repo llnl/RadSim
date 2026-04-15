@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxUtilities.java ---
 /*
  * Copyright 2022, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -613,9 +614,9 @@ public class FluxUtilities
       iter.next();
       iter.add(group);
       return;
-    }
+    }    
     // Not implemented yet.
-    throw new UnsupportedOperationException();
+    throw new UnsupportedOperationException("Overlapping group requested");
   }
 
   /**
@@ -738,12 +739,13 @@ public class FluxUtilities
     return flux3;
   }
 
-  /** Remove lines that are insignificant.
-   * 
-   * 
+  /**
+   * Remove lines that are insignificant.
+   *
+   *
    * @param binned
    * @param significance
-   * @return 
+   * @return
    */
   public static FluxBinned chop(FluxBinned binned, double significance)
   {
@@ -796,6 +798,16 @@ public class FluxUtilities
   {
     double f = (x - x0) / (x1 - x0);
     return (1 - f) * y0 + f * y1;
+  }
+
+  static FluxGroup findGroup(List<? extends FluxGroup> groups, double energy)
+  {
+    for (FluxGroup g : groups)
+    {
+      if (g.getEnergyLower() <= energy && g.getEnergyUpper() > energy)
+        return g;
+    }
+    return null;
   }
 
 }

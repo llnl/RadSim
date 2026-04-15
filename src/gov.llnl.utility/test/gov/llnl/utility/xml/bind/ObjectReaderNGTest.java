@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for ObjectReader.
  */
-strictfp public class ObjectReaderNGTest
+public class ObjectReaderNGTest
 {
 
   public ObjectReaderNGTest()

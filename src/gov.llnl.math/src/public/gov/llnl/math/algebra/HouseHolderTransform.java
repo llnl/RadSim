@@ -133,7 +133,7 @@ public class HouseHolderTransform
       State state = new State();
       for (int i = 0; i < limit; i++)
       {
-        this.reduceColumn(q, r, i, i, n, m, state);
+        reduceColumn(q, r, i, i, n, m, state);
         state.sign = -state.sign;
       }
       return new Matrix[]
@@ -185,7 +185,7 @@ public class HouseHolderTransform
       State state = new State();
       for (int i = 0; i < limit; i++)
       {
-        this.reduceRow(l, q, i, i, n, m, state);
+        reduceRow(l, q, i, i, n, m, state);
         state.sign = -state.sign;
       }
       return new Matrix[]

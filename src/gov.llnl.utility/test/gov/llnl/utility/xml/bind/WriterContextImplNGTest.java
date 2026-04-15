@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for WriterContextImpl.
  */
-strictfp public class WriterContextImplNGTest
+public class WriterContextImplNGTest
 {
 
   public WriterContextImplNGTest()

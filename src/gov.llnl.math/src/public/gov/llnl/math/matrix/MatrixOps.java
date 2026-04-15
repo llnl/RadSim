@@ -620,7 +620,7 @@ public class MatrixOps
   }
 
   private static void multiplyAssignIterator1(VectorIterator in, VectorView va)
-
+  
   {
     double[] values = va.access();
     int offset = va.offset();
@@ -631,7 +631,7 @@ public class MatrixOps
   }
 
   private static void multiplyAssignIterator2(VectorIterator in, VectorView va)
-
+  
   {
     double[] values = va.access();
     int offset = va.offset();
@@ -708,8 +708,9 @@ public class MatrixOps
   }
 
   /**
-   * Compute the inverse of a matrix. This is cheapest if the result is a Row
-   * matrix.
+   * Compute the inverse of a matrix.
+   *
+   * This is cheapest if the result is a Row matrix.
    *
    * @param <MatrixType>
    * @param result is the output of the matrix.
@@ -939,8 +940,8 @@ public class MatrixOps
   /**
    * Fill a matrix with a value.
    *
-   * The traversal direction depends on the orientation of the matrix.  Some
-   * are filled rowwise and others are columnwise depending on what was the minor
+   * The traversal direction depends on the orientation of the matrix. Some are
+   * filled rowwise and others are columnwise depending on what was the minor
    * direction of the matrix.
    *
    * @param operand is the target matrix.
@@ -977,8 +978,7 @@ public class MatrixOps
 //</editor-fold>
 //</editor-fold>
 //<editor-fold desc="comparison" defaultstate="collapsed">
-
-    /**
+  /**
    * Compares two matrices to see if they are equal within limits of precision.
    *
    * @param a
@@ -1462,7 +1462,6 @@ public class MatrixOps
 
 //</editor-fold>
 //<editor-fold desc="extrema" defaultstate="collapsed">
-
   public static class Extrema
   {
     public int row;

@@ -20,7 +20,7 @@ import support.MatrixTestGenerator;
 /**
  * Test code for MatrixTriDiagonal.
  */
-strictfp public class MatrixTriDiagonalNGTest
+public class MatrixTriDiagonalNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
 

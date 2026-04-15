@@ -16,9 +16,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReaderContextImpl.
  */
-strictfp public class ReaderContextImplNGTest
+public class ReaderContextImplNGTest
 {
-  
+
   public ReaderContextImplNGTest()
   {
   }
@@ -43,6 +43,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of setFile method, of class ReaderContextImpl.
+   *
    * @throws java.net.URISyntaxException
    */
   @Test
@@ -101,18 +102,19 @@ strictfp public class ReaderContextImplNGTest
   {
     ReaderContextImpl instance = new ReaderContextImpl();
     ElementContextImpl curr = instance.currentContext;
-    
+
     // Push new content into the stack
-    ElementContextImpl context = new ElementContextImpl(instance.currentContext, 1, null, "#deferred",null);
+    ElementContextImpl context = new ElementContextImpl(instance.currentContext, 1, null, "#deferred", null);
     context.targetObject = 1;
     instance.currentContext = context;
-    
+
     instance.popTemporaryContext();
     assertEquals(instance.currentContext, curr);
   }
 
   /**
    * Test of addDeferred method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -123,6 +125,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of addDeferred method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -151,6 +154,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of getExternal method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -161,6 +165,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of put method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -180,6 +185,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of get method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -242,9 +248,9 @@ strictfp public class ReaderContextImplNGTest
 //    ElementContextImpl result = instance.getChildContext();
 //    assertSame(result, expResult);
 //  }
-
   /**
    * Test of startElement method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -255,6 +261,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of endElement method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test
@@ -274,6 +281,7 @@ strictfp public class ReaderContextImplNGTest
 
   /**
    * Test of handleException method, of class ReaderContextImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test

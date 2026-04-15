@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for ElementGroupImpl.
  */
-strictfp public class ElementGroupImplNGTest
+public class ElementGroupImplNGTest
 {
 
   public ElementGroupImplNGTest()
@@ -69,7 +69,7 @@ strictfp public class ElementGroupImplNGTest
   @Test
   public void testNewInstance()
   {
-   
+
     assertSame(
             ElementGroupImpl.newInstance(null, Reader.Order.ALL, null).getClass(),
             ElementGroupImpl.AllGroup.class

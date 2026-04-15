@@ -177,8 +177,10 @@ public class RadSim_MCNP_Job {
 
     public void run(int numTasks) throws Exception {
         MCNP_Job job = new MCNP_Job(name, buildDeck(), outputDir, mcnpPath);
-        this.result = job.run(numTasks);
+        this.result = new Result(job.run(numTasks));
     }
+
+
 
     public FluxBinned getTallySpectrum(String key, MCNP_Particle particle, boolean escaping) throws Exception {
         if (!tallyKeys.contains(key)) {

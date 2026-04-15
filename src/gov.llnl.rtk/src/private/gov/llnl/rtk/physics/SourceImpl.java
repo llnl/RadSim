@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/SourceImpl.java ---
 package gov.llnl.rtk.physics;
 
 /**
@@ -13,7 +14,7 @@ public class SourceImpl implements Source
   public SourceImpl(Source s)
   {
     this.nuclide = s.getNuclide();
-    this.activity = s.getActivity();
+    this.activity = s.getActivity(PhysicalProperty.ACTIVITY);
     this.atoms = s.getAtoms();
   }
 
@@ -25,7 +26,7 @@ public class SourceImpl implements Source
   @Override
   public String toString()
   {
-    return String.format("Source(%s,%.3e)", this.getNuclide().getName(), getActivity());
+    return String.format("Source(%s,%.3e)", this.getNuclide().getName(), getActivity(PhysicalProperty.ACTIVITY));
   }
 
   @Override
@@ -41,9 +42,16 @@ public class SourceImpl implements Source
   }
 
   @Override
-  public double getActivity()
+  public double getActivity(Units activityUnits)
   {
-    return activity;
+    activityUnits.require(PhysicalProperty.ACTIVITY);
+    return activityUnits.fromSI(activity);
+  }
+
+  @Override
+  public Quantity getActivityQuantity()
+  {
+    return Quantity.of(activity, PhysicalProperty.ACTIVITY);
   }
 
 }

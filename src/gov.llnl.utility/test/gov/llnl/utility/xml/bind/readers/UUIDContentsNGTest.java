@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for UUIDContents.
  */
-strictfp public class UUIDContentsNGTest
+public class UUIDContentsNGTest
 {
-  
+
   public UUIDContentsNGTest()
   {
   }
@@ -65,5 +65,5 @@ strictfp public class UUIDContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

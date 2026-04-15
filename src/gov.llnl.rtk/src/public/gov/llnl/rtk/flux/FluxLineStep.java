@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/flux/FluxLineStep.java ---
 /* 
  * Copyright 2022, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -60,7 +61,7 @@ public class FluxLineStep implements FluxLine, Serializable
   @Override
   public String toString()
   {
-    return String.format("LineStep(e=%f,i=%f)", this.energy, this.intensity);
+    return String.format("LineStep(e=%.2f,i=%.3e,s=%.3e)", this.energy, this.intensity, this.step);
   }
 
   @Override

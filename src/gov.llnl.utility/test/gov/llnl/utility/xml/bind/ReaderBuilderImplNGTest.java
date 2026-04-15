@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ReaderBuilderImpl.
  */
-strictfp public class ReaderBuilderImplNGTest
+public class ReaderBuilderImplNGTest
 {
 
   public ReaderBuilderImplNGTest()
@@ -372,7 +372,7 @@ strictfp public class ReaderBuilderImplNGTest
     TestReaderMixed trm = TestReaderMixed.of(Double.class);
     ReaderBuilderImpl instance = newInstance(trm);
     instance.lastHandler = handler2;
-    for (Option option:flags)
+    for (Option option : flags)
       instance.options(option);
     assertTrue(handler1.options.equals(flags));
     assertTrue(handler2.options.equals(flags));
@@ -629,6 +629,7 @@ strictfp public class ReaderBuilderImplNGTest
 
   /**
    * Test of callDouble method, of class ReaderBuilderImpl.
+   *
    * @throws java.lang.Exception
    */
   @Test

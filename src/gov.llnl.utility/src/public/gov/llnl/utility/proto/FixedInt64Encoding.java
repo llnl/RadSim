@@ -41,7 +41,7 @@ public class FixedInt64Encoding extends Int64Encoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     long result;
     if (field.getter instanceof Function)
@@ -56,8 +56,7 @@ public class FixedInt64Encoding extends Int64Encoding
 
     // field and wire type
     if (field.id != -1)
-
-      baos.write((field.id << 3) | 1);
+      ProtoEncoding.encodeTag(baos, field, WIRE_FIXED64);
     ByteBuffer bb = ByteBuffer.allocate(Long.BYTES);
     bb.order(ByteOrder.LITTLE_ENDIAN);
     bb.putLong(result);
@@ -69,8 +68,8 @@ public class FixedInt64Encoding extends Int64Encoding
   {
     return 1;
   }
-  
-    @Override
+
+  @Override
   public String getSchemaName()
   {
     return "fixedint64";

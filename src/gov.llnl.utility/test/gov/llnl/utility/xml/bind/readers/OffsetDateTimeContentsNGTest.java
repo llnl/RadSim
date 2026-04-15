@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for OffsetDateTimeContents.
  */
-strictfp public class OffsetDateTimeContentsNGTest
+public class OffsetDateTimeContentsNGTest
 {
-  
+
   public OffsetDateTimeContentsNGTest()
   {
   }
@@ -61,5 +61,5 @@ strictfp public class OffsetDateTimeContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

@@ -16,7 +16,7 @@ import org.xml.sax.Attributes;
 /**
  * Test code for  SaturationFunctionReader.
  */
-strictfp public class SaturationFunctionReaderNGTest
+public class SaturationFunctionReaderNGTest
 {
   
   public SaturationFunctionReaderNGTest()

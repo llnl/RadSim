@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixArrayCollectors.
  */
-strictfp public class MatrixArrayCollectorsNGTest
+public class MatrixArrayCollectorsNGTest
 {
   
   public MatrixArrayCollectorsNGTest()

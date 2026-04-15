@@ -17,7 +17,6 @@ import gov.llnl.utility.CoreDump;
 import gov.llnl.utility.LoggerStream;
 import gov.llnl.utility.LoggerUtilities;
 import gov.llnl.utility.UUIDUtilities;
-import gov.llnl.utility.annotation.Debug;
 import gov.llnl.utility.annotation.Internal;
 import java.io.Serializable;
 import java.util.Collection;
@@ -763,9 +762,9 @@ class NnlsqImpl implements Nnlsq, Serializable
 
           productMatrix = computeProductMatrix();
 
-          // I use CholeskyFactorization inverse with SVD treatment, not using cached values
+          // I use SymmetricLUFactorization inverse with SVD treatment, not using cached values
           // Solve A_P'*W*A_P x_P= A_P'*W*Y or G_P'*W*G_P*u=G_P'*W*H
-          CholeskyFactorization cf = new CholeskyFactorization();
+          SymmetricLUFactorization cf = new SymmetricLUFactorization();
           cf.decompose(productMatrix);
           double[] zPnew = cf.solve(zP);
 

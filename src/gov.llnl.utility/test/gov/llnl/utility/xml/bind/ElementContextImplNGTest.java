@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for ElementContextImpl.
  */
-strictfp public class ElementContextImplNGTest
+public class ElementContextImplNGTest
 {
 
   public ElementContextImplNGTest()
@@ -29,7 +29,7 @@ strictfp public class ElementContextImplNGTest
   {
     ElementContextImpl instance = new ElementContextImpl(null, null, null, null, null);
     assertNull(instance.getNamespaceURI());
-     instance = new ElementContextImpl(null, null, "subjectofymir", null, null);
+    instance = new ElementContextImpl(null, null, "subjectofymir", null, null);
     assertEquals(instance.getNamespaceURI(), "subjectofymir");
   }
 
@@ -39,9 +39,9 @@ strictfp public class ElementContextImplNGTest
   @Test
   public void testGetLocalName()
   {
-     ElementContextImpl instance = new ElementContextImpl(null, null, null, null, null);
+    ElementContextImpl instance = new ElementContextImpl(null, null, null, null, null);
     assertNull(instance.getLocalName());
-     instance = new ElementContextImpl(null, null, null, "subjectofymir", null);
+    instance = new ElementContextImpl(null, null, null, "subjectofymir", null);
     assertEquals(instance.getLocalName(), "subjectofymir");
   }
 
@@ -51,7 +51,7 @@ strictfp public class ElementContextImplNGTest
   @Test
   public void testCharacters()
   {
-   ElementContextImpl instance = new ElementContextImpl(null, null, null, null, null);
+    ElementContextImpl instance = new ElementContextImpl(null, null, null, null, null);
     // textContent is null
     instance.characters(null, 0, 0);
 
@@ -150,10 +150,10 @@ strictfp public class ElementContextImplNGTest
   @Test
   public void testEquals()
   {
-    ElementContextImpl parent = new ElementContextImpl(null,null, null, null, null);
-    ElementContextImpl ancestor = new ElementContextImpl(null,null, null, "elem", null);
-    ElementContextImpl child = new ElementContextImpl(ancestor,null, null, null, null);
-    ElementContextImpl other = new ElementContextImpl(ancestor,null, null, null, null);
+    ElementContextImpl parent = new ElementContextImpl(null, null, null, null, null);
+    ElementContextImpl ancestor = new ElementContextImpl(null, null, null, "elem", null);
+    ElementContextImpl child = new ElementContextImpl(ancestor, null, null, null, null);
+    ElementContextImpl other = new ElementContextImpl(ancestor, null, null, null, null);
     Object o = 1;
 
     assertTrue(child.equals(other));

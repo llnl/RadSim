@@ -6,7 +6,6 @@
  */
 package gov.llnl.utility;
 
-import gov.llnl.utility.TokenImpl;
 import java.util.regex.Pattern;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for TokenImpl.
  */
-strictfp public class TokenImplNGTest
+public class TokenImplNGTest
 {
 
   public TokenImplNGTest()
@@ -273,7 +272,7 @@ strictfp public class TokenImplNGTest
     assertEquals(instance.group(0), "Why");
     assertEquals(instance.group(1), null);
     assertEquals(instance.group(2), null);
-    
+
     // Test IllegalStateException
     instance.matcher = p.matcher(str);
     try
@@ -284,7 +283,7 @@ strictfp public class TokenImplNGTest
     {
       // Expected exception
     }
-    
+
     // Test IndexoutOutOfBound
     // Let the test capture it
     instance.matcher.find();

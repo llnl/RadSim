@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/PhysicalProperty.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC.
  * All rights reserved
@@ -161,7 +162,15 @@ public enum PhysicalProperty implements Units, UnitType
   
   
   CROSS_SECTION("cross_section:m2/kg"),
-  CROSS_SECTION_MICRO("cross_section_micro:barns");
+  
+  /**
+   * Derived unit for molar cross section (SI m^2/mol)
+   */
+  MOLAR_CROSS_SECTION("molar_cross_section:m2/mol"),
+  
+  MOLAR_MASS("molar_mass:kg/mol"),
+  
+  ANGLE("angle:rad");
 
   private final String unit;
   private final String measure;

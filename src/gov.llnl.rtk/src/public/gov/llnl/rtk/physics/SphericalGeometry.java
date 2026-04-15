@@ -1,3 +1,4 @@
+// --- file: gov/llnl/rtk/physics/SphericalGeometry.java ---
 /*
  * Copyright 2019, Lawrence Livermore National Security, LLC. 
  * All rights reserved
@@ -6,11 +7,13 @@
  */
 package gov.llnl.rtk.physics;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nelson85
  */
-class SphericalGeometry implements Geometry
+class SphericalGeometry implements Geometry, Serializable
 {
   public SphericalGeometry()
   {

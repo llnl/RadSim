@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for FunctionFactory.
  */
-strictfp public class FunctionFactoryNGTest
+public class FunctionFactoryNGTest
 {
   
   public FunctionFactoryNGTest()
@@ -49,8 +49,8 @@ strictfp public class FunctionFactoryNGTest
     double slope = 2.0;
     double accel = 3.0;
     QuadraticFunction result = FunctionFactory.newQuadratic(offset, slope, accel);
-    assertEquals(result.applyAsDouble(0), 1.0);
-    assertEquals(result.applyAsDouble(1), 6.0);
+    assertEquals(result.applyAsDouble(0), 1.0, 0.0);
+    assertEquals(result.applyAsDouble(1), 6.0, 0.0);
   }
 
   /**
@@ -61,8 +61,8 @@ strictfp public class FunctionFactoryNGTest
   {
     double[] a = new double[]{1,2,3};
     PolynomialFunction result = FunctionFactory.newPolynomial(a);
-    assertEquals(result.applyAsDouble(0), 3.0);
-    assertEquals(result.applyAsDouble(1), 6.0);
+    assertEquals(result.applyAsDouble(0), 3.0, 0.0);
+    assertEquals(result.applyAsDouble(1), 6.0, 0.0);
   }
 
   /**
@@ -75,9 +75,9 @@ strictfp public class FunctionFactoryNGTest
     double p = 2.0;
     PowerFunction expResult = null;
     PowerFunction result = FunctionFactory.newPower(k, p);
-    assertEquals(result.applyAsDouble(0), 0.0);
-    assertEquals(result.applyAsDouble(1), 1.0);
-    assertEquals(result.applyAsDouble(2), 4.0);
+    assertEquals(result.applyAsDouble(0), 0.0, 0.0);
+    assertEquals(result.applyAsDouble(1), 1.0, 0.0);
+    assertEquals(result.applyAsDouble(2), 4.0, 0.0);
   }
   
 }

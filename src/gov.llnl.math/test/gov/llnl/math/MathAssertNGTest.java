@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MathAssert.
  */
-strictfp public class MathAssertNGTest
+public class MathAssertNGTest
 {
   
   public MathAssertNGTest()

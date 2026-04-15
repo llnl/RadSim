@@ -37,6 +37,10 @@ public class MCNP_Distribution {
         this.id = totalDistributions;
     }
 
+    public static void resetCount(){
+        totalDistributions = 0;
+    }
+
     public void setNodes(NodeType type, Object ... nodes) {
         nodeType = type;
         this.nodes = nodes;

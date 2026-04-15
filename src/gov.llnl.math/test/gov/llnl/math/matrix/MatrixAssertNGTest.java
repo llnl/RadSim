@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for MatrixAssert.
  */
-strictfp public class MatrixAssertNGTest
+public class MatrixAssertNGTest
 {
   MatrixTestGenerator tg = new MatrixTestGenerator();
 

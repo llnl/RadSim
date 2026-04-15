@@ -6,20 +6,14 @@
  */
 package gov.llnl.utility.io;
 
-import gov.llnl.utility.io.DataContentFactoryImpl;
-import gov.llnl.utility.io.DataFileReader;
-import gov.llnl.utility.io.DataFileWriter;
-import gov.llnl.utility.io.DataStreamReader;
-import gov.llnl.utility.io.DataStreamWriter;
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
  * Test code for DataContentFactory.
  */
-strictfp public class DataContentFactoryImplNGTest
+public class DataContentFactoryImplNGTest
 {
-  
+
   public DataContentFactoryImplNGTest()
   {
   }
@@ -90,5 +84,5 @@ strictfp public class DataContentFactoryImplNGTest
 //    DataStreamWriter result = instance.getDataStreamWriter(uri, cls);
 //    assertEquals(result, expResult);
   }
-  
+
 }

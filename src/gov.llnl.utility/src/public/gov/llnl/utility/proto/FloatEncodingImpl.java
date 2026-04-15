@@ -30,6 +30,8 @@ class FloatEncodingImpl extends FloatEncoding
     if (type != 5)
       throw new ProtoException("bad wire type", bs.position());
     ByteBuffer b = bs.request(Float.BYTES);
+    if (b.remaining()!=Float.BYTES)
+      throw new ProtoException("truncated float", bs.position());
     b.order(ByteOrder.LITTLE_ENDIAN);
     if (field.setter instanceof BiConsumer)
       ((BiConsumer) field.setter).accept(o, b.getFloat());
@@ -38,7 +40,7 @@ class FloatEncodingImpl extends FloatEncoding
   }
 
   @Override
-  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj)
+  public void serializeField(ProtoField field, ByteArrayOutputStream baos, Object obj) throws ProtoException
   {
     float result;
     if (field.getter instanceof Function)
@@ -52,7 +54,7 @@ class FloatEncodingImpl extends FloatEncoding
       result = ((ToFloatFunction) field.getter).applyAsFloat(obj);
     // field and wire type
     if (field.id != -1)
-      baos.write((field.id << 3) | 5);
+      ProtoEncoding.encodeTag(baos, field, WIRE_FIXED32);
     ByteBuffer bb = ByteBuffer.allocate(4);
     bb.order(ByteOrder.LITTLE_ENDIAN);
     bb.putFloat(result);

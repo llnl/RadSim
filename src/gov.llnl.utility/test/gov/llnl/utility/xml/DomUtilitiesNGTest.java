@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 /**
  * Test code for DomUtilities.
  */
-strictfp public class DomUtilitiesNGTest
+public class DomUtilitiesNGTest
 {
 
   public DomUtilitiesNGTest()

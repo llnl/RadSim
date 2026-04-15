@@ -18,9 +18,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for FileContents.
  */
-strictfp public class FileContentsNGTest
+public class FileContentsNGTest
 {
-  
+
   public FileContentsNGTest()
   {
   }
@@ -50,7 +50,7 @@ strictfp public class FileContentsNGTest
   {
     FileContents instance = new FileContents();
   }
-  
+
   /**
    * Test of getObjectClass method, of class FileContents.
    */
@@ -68,5 +68,5 @@ strictfp public class FileContentsNGTest
   {
     // Tested end to end.
   }
-  
+
 }

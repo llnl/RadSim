@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 /**
  * Test code for GammaRandom.
  */
-strictfp public class GammaRandomNGTest
+public class GammaRandomNGTest
 {
   
   public GammaRandomNGTest()

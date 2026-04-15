@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
 /**
  * Test code for DoubleArrayContents.
  */
-strictfp public class DoubleArrayContentsNGTest
+public class DoubleArrayContentsNGTest
 {
 
   public DoubleArrayContentsNGTest()
@@ -57,6 +57,7 @@ strictfp public class DoubleArrayContentsNGTest
 
   /**
    * Test of createSchemaType method, of class DoubleArrayContents.
+   *
    * @throws java.lang.Exception
    */
   @Test

@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
 /**
  * Test code for URIUtilities.
  */
-strictfp public class URIUtilitiesNGTest
+public class URIUtilitiesNGTest
 {
-  
+
   public URIUtilitiesNGTest()
   {
   }
@@ -26,7 +26,7 @@ strictfp public class URIUtilitiesNGTest
   {
     URIUtilities instance = new URIUtilities();
   }
-  
+
   /**
    * Test of resolve method, of class URIUtilities.
    */
@@ -36,17 +36,17 @@ strictfp public class URIUtilitiesNGTest
   })
   public void testResolve() throws URISyntaxException
   {
-    URI uri = new URI("https://computing-int.llnl.gov/");    
+    URI uri = new URI("https://computing-int.llnl.gov/");
     URI expResult = new URI("https://computing-int.llnl.gov/about-our-organization");
     URI result = URIUtilities.resolve(uri, "about-our-organization");
     assertEquals(result, expResult);
-    
+
     // jar scheme
     uri = new URI("jar:file:/../../jars/gov.llnl.utility.jar!/gov/llnl/utility/");
     expResult = new URI("jar:file:/../../jars/gov.llnl.utility.jar!/gov/llnl/utility/URIUtilities.class");
     result = URIUtilities.resolve(uri, "URIUtilities.class");
     assertEquals(result, expResult);
-    
+
     // Test RuntimeException
     URIUtilities.resolve(new URI("jar:file:/it/runs/deep/share/it/with/me!"), "\\");
   }
@@ -62,7 +62,7 @@ strictfp public class URIUtilitiesNGTest
   {
     URI uri = new URI("file:/src/public/gov/llnl/utility/URIUtilities.java");
     assertEquals(URIUtilities.getFileName(uri), "URIUtilities.java");
-    
+
     // jar scheme
     uri = new URI("jar:file:/../../jars/gov.llnl.utility.jar!/gov/llnl/utility/URIUtilities.class");
     assertEquals(URIUtilities.getFileName(uri), "URIUtilities.class");
@@ -79,9 +79,9 @@ strictfp public class URIUtilitiesNGTest
   public void testExists() throws URISyntaxException
   {
     URI uri = new URI("file:./src/public/gov/llnl/utility/URIUtilities.java");
-    assertEquals(URIUtilities.exists(uri), true);    
+    assertEquals(URIUtilities.exists(uri), true);
     assertEquals(URIUtilities.exists(new URI("file:./src/happy/birthday")), false);
     assertEquals(URIUtilities.exists(new URI("jar:file:jar:file./rm/-rf")), false);
   }
-  
+
 }
