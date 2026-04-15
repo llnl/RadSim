@@ -6,6 +6,10 @@ RadSim is a comprehensive, modular, open-source framework for rapid simulation o
 2. **Flux Transport**: Multiple methods to simulate radiation transport through materials
 3. **Detector Response**: Fast, physics-based simulation of detector interactions and output
 
+## RadSim Workshop and Newsletter Signup
+
+If you’d like to sign up for the RadSim newsletter and receive regular updates, please send an email to hangal1@llnl.gov  with your name and institutional affiliation. We are also planning a virtual RadSim tutorial workshop in August 2026, let us know in your email if you’re interested in attending.
+
 ## Key Features
 
 - **Fully Open Source**: Completely free for open-source use
